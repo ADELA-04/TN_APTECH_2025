@@ -1,0 +1,3 @@
+date	size'/'remotesize	flags(request:Update,Range state:File response:Modified,Chunked,gZipped)	statuscode	status ('servermsg')	MIME	Etag|Date	URL	localfile	(from URL)
+10:59:28	31/31	---M--	200	added ('OK')	text/plain	date:Sun,%2017%20Jan%202016%2005:00:01%20GMT	https://demo.theme-sky.com/robots.txt		(from )
+10:59:29	204884/204884	---M-Z	200	added ('OK')	text/html	etag:%228503-62f3f5ed5d933%22	https://demo.theme-sky.com/emall/	C:/Users/adela04/Desktop/ammall/amall/demo.theme-sky.com/emall/index.html	(from )

@@ -1,0 +1,67 @@
+.road-map {
+    display: flex;
+    justify-content: space-between; /* Căn đều các phần tử theo chiều ngang */
+    align-items: flex-start; /* Căn giữa theo chiều dọc */
+    width: 100%;
+    position: relative;
+}
+
+.road-map .road-map-item {
+    flex: 1; /* Mỗi phần tử chiếm đều không gian */
+    text-align: center;
+    position: relative;
+}
+
+.road-map .road-map-item:not(:last-child)::after { /* Đường kẻ giữa các phần tử */
+    position: absolute;
+    content: "";
+    width: calc(100% + 30px); /* Chiều rộng lớn hơn để trải dài */
+    height: 4px;
+    top: 23px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ccc; /* Màu xám cho đường kẻ chưa active */
+    z-index: 1; /* Đảm bảo đường kẻ nằm dưới các phần tử khác */
+}
+
+.road-map .road-map-item.active:not(:last-child)::after {
+    background-color: #4CAF50; /* Màu xanh cho đường kẻ active */
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #4CAF50; /* Màu nền cho biểu tượng active */
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #fff;
+    position: relative;
+    z-index: 2; /* Đảm bảo biểu tượng nằm trên đường kẻ */
+}
+
+.road-map .road-map-item:not(.active) .icon {
+    background: #ccc; /* Màu xám cho biểu tượng chưa active */
+    color: #666; /* Màu xám cho biểu tượng chưa active */
+}
+
+.body-text,
+h6 {
+    color: var(--Note);
+}
+
+.road-map .road-map-item.active .icon {
+    background: #388E3C; /* Màu nền cho biểu tượng active */
+}
+
+.road-map .road-map-item.active .body-text {
+    color: var(--Body-Text);
+}
+
+.road-map .road-map-item.active h6 {
+    color: var(--Heading);
+}
