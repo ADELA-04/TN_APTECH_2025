@@ -107,20 +107,47 @@
 
                                             </fieldset>
                                         </div>
-                                        {{-- <div class="gap22 cols">
-                                        <fieldset class="category">
-                                            <div class="body-title mb-10">Atribute <span class="tf-color-1">*</span></div>
-                                            <input class="mb-10" type="text" placeholder="Enter atribute name" name="text" tabindex="0" value="" aria-required="true" required="">
+                                        <fieldset>
+                                            <div class="body-title mb-10">Atribute Product<a href=""><span
+                                                        class="" style="color:#22C55E;margin-left: 10px; font-size:small;">+ Add
+                                                        atribute</span></a>
 
                                         </fieldset>
-                                        <fieldset class="male">
-                                            <div class="body-title mb-10">Value <span class="tf-color-1">*</span></div>
-                                            <input class="mb-10" type="text" placeholder="Enter atribute values" name="text" tabindex="0" value="" aria-required="true" required="">
 
+                                        <div class="gap22 cols" style="margin-bottom: 5px">
+                                            <fieldset class="category">
+                                                {{-- <div class="body-title mb-10">Atribute <span class="tf-color-1">*</span>
+                                                </div> --}}
+
+                                                <input class="mb-10" type="text" placeholder="Enter atribute name"
+                                                    name="text" tabindex="0" value="Màu sắc" aria-required="true"
+                                                    required="" readonly>
+
+                                            </fieldset>
+                                            <fieldset class="male">
+
+
+                                                <input class="mb-10" type="text" placeholder="Enter atribute values"
+                                                    name="text" tabindex="0" value="Xanh Đỏ Vàng"
+                                                    aria-required="true" required="" readonly>
+                                                    <div class="body-title mb-10 " style="text-align: right">
+                                                        <a href=""> <span class="tf-color-1" >- Delete</span></a>
+
+                                                </div>
+
+                                            </fieldset>
+
+                                        </div>
+                                        <fieldset class="name">
+                                            <div class="body-title mb-10">Weigh (kg) <span class="tf-color-1">*</span>
+                                            </div>
+                                            <input class="mb-10" type="text" placeholder="Enter product name"
+                                                name="text" tabindex="0" value="" aria-required="true"
+                                                required="">
+                                            <div class="text-tiny">Do not exceed 20 characters when entering the Weigh.
+                                            </div>
                                         </fieldset>
-                                    </div>
- --}}
-                                        <fieldset class="brand">
+                                        {{-- <fieldset class="brand">
                                             <div class="body-title mb-10">Status <span class="tf-color-1">*</span></div>
                                             <div class="select">
                                                 <select class="">
@@ -129,10 +156,10 @@
 
                                                 </select>
                                             </div>
-                                        </fieldset>
-
+                                        </fieldset> --}}
                                     </div>
                                     <div class="wg-box">
+
                                         <fieldset>
                                             <div class="body-title mb-10">Upload images</div>
                                             <div class="upload-image mb-16">
@@ -157,15 +184,16 @@
                                                 Pictures must be in certain dimensions. Notice that the product shows all
                                                 the details</div>
                                         </fieldset>
-                                        <fieldset class="brand">
-                                            <div class="body-title mb-10">Status <span class="tf-color-1">*</span></div>
-                                            <div class="select">
-                                                <select class="">
-                                                    <option>Out of stok</option>
-                                                    <option>In stok</option>
 
-                                                </select>
+                                        <fieldset class="name">
+                                            <div class="body-title mb-10">Amount Inventory <span
+                                                    class="tf-color-1">*</span>
                                             </div>
+                                            <input class="mb-10" type="text" placeholder="Enter product name"
+                                                name="text" tabindex="0" value="" aria-required="true"
+                                                required="">
+                                            <div class="text-tiny">Do not exceed 20 characters when entering Amount
+                                                Inventory.</div>
                                         </fieldset>
                                         <fieldset class="brand">
                                             <div class="body-title mb-10">Is visible <span class="tf-color-1">*</span>

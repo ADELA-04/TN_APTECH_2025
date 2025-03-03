@@ -66,7 +66,7 @@ Route::get('/', function () {
 });
 
 Route::get('/cart', function () {
-    return view('managers.order.cod.cod_ct');
+    return view('managers.Inven');
 })->name('cart');
 // Route::get('/cart', function () {
 //     return view('products.reviews_custom');
