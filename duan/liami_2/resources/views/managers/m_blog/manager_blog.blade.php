@@ -108,7 +108,7 @@
                     </div>
                     <div class="divider"></div>
                     <div class="flex items-center justify-between flex-wrap gap10">
-                        <div class="text-tiny">Hiện {{ $blogs->count() }} mục</div>
+                        <div class="text-tiny">Hiện {{ $blogs->count() }}/10 mục</div>
                         <ul class="wg-pagination flex items-center">
                             <li>
                                 @if ($blogs->onFirstPage())

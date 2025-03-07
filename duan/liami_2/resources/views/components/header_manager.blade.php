@@ -41,11 +41,11 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="header-user wg-user">
                                 <span class="image">
-                                    <img src="images/avatar/user-1.png" alt="">
+                                    <img src="{{ asset(Auth::user()->Avartar) }}" alt="" >
                                 </span>
                                 <span class="flex flex-column">
-                                    <span class="body-title mb-2">Kristin Watson</span>
-                                    <span class="text-tiny">Admin</span>
+                                    <span class="body-title mb-2">{{ Auth::user()->Username }}</span>
+                                    <span class="text-tiny">{{ Auth::user()->Role }}</span>
                                 </span>
                             </span>
                         </button>
@@ -53,12 +53,20 @@
                             <li>
                                 <a href="#" class="user-item">
                                     <div class="icon">
-                                        <i class="icon-user"></i>
+                                        <i class="icon-settings"></i>
                                     </div>
-                                    <div class="body-title-2">Account</div>
+                                    <div class="body-title-2">Edit Profile</div>
                                 </a>
                             </li>
-
+                            <li>
+                                <a href="#" class="user-item">
+                                    <div class="icon">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                    <div class="body-title-2">Change Password</div>
+                                </a>
+                            </li>
+{{--
                             <li>
                                 <a href="setting.html" class="user-item">
                                     <div class="icon">
@@ -66,7 +74,7 @@
                                     </div>
                                     <div class="body-title-2">Setting</div>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li>
                                 <a href="login.html" class="user-item">

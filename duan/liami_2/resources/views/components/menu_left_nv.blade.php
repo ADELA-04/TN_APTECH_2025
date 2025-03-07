@@ -102,7 +102,7 @@
                         </a>
 
                     </li> --}}
-                        <li
+                        {{-- <li
                             class="menu-item {{ request()->is('managers/m_user/manager_user') || request()->is('managers/m_user*') || request()->is('managers/m_user/update_user') ? 'active' : '' }}">
                             <a href="{{ route('managers.m_user.manager_user') }}" class="menu-item-button">
                                 <div class="icon"><i class="icon-user"></i></div>
@@ -115,7 +115,7 @@
                                 <div class="icon"><i class="icon-pie-chart"></i></div>
                                 <div class="text">Report</div>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="center-item">

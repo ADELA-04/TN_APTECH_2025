@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home.index'); // Đường dẫn đến view trang chính
+        return view('managers.manager_2'); // Đường dẫn đến view trang chính
     }
 }

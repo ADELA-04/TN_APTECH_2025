@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        ADD Product
+        ADD Atribute
     </title>
 @endsection
 
@@ -46,6 +46,7 @@
                         <div class="main-content-inner">
                             <!-- main-content-wrap -->
                             <div class="main-content-wrap">
+
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
                                     <h3>Add Product</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
@@ -71,23 +72,26 @@
                                     </ul>
                                 </div>
                                 <!-- form-add-product -->
-                                <form class=" form-add-product">
+                                <form class=" form-add-product" method="POST" action="{{ route('attributes.store') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
                                     <div class="wg-box">
+
                                         <div class="gap22 cols" style="margin-bottom: 5px">
                                             <fieldset class="category">
                                                 <div class="body-title mb-10">Atribute <span class="tf-color-1">*</span>
                                                 </div>
                                                 <input class="mb-10" type="text" placeholder="Enter atribute name"
-                                                    name="text" tabindex="0" value="" aria-required="true"
-                                                    required="">
+                                                    name="AttributeName" tabindex="0" value="" aria-required="true"
+                                                    required>
 
                                             </fieldset>
                                             <fieldset class="male">
                                                 <div class="body-title mb-10">Value <span class="tf-color-1">*</span>
                                                 </div>
                                                 <input class="mb-10" type="text" placeholder="Enter atribute values"
-                                                    name="text" tabindex="0" value="" aria-required="true"
-                                                    required="">
+                                                    name="Value" tabindex="0" value="" aria-required="true"
+                                                    required>
 
                                             </fieldset>
 
@@ -100,6 +104,22 @@
                                     </div>
 
                                 </form>
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <!-- /form-add-product -->
                             </div>
                             <!-- /main-content-wrap -->
@@ -129,4 +149,22 @@
     <script src="{{ asset('assets/js2/switcher.js') }}"></script>
     <script src="{{ asset('assets/js2/theme-settings.js') }}"></script>
     <script src="{{ asset('assets/js2/main.js') }}"></script>
+
+    <!-- Các script khác -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
+            const form = document.querySelector('.form-add-product');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Ngăn chặn gửi form
+                    console.log('Form is being submitted');
+                    // Nếu bạn muốn gửi form, gọi form.submit() ở đây
+                    form.submit(); // Gửi form
+                });
+            } else {
+                console.log('Form not found');
+            }
+        });
+    </script>
 @endsection

@@ -27,7 +27,7 @@
         <div class="lg-rg-form d-flex flex-wrap align-items-center justify-content-center position-relative">
 
             <div class="lg-rg-form-inner w-100">
-                <h2 class="mb-0">Forgot Password?</h2>
+                <h2 class="mb-0">Enter New Password?</h2>
 
                 <form>
                     <div class="field-box v2 position-relative w-100">

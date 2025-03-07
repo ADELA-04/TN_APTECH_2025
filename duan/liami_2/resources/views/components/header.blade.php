@@ -32,9 +32,9 @@
                     <div class="topbar-right">
                         <ul class="links-list d-flex flex-wrap align-items-center mb-0 list-unstyled">
 
-                            <li><a href="{{ asset('acounts/login') }}" title="">Sign In</a></li>
+                            <li><a href="{{ route('login') }}" title="">Sign In</a></li>
 
-                            <li><a href="{{ asset('acounts/login') }}" title="">Sign In</a></li>
+                            {{-- <li><a href="{{ asset('acounts/login') }}" title="">Sign In</a></li> --}}
                         </ul>
                     </div><!-- Top Right -->
                 </div><!-- Topbar Inner -->
@@ -217,50 +217,9 @@
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col">
-                                                                    <div class="megamenu-item w-100">
-                                                                        <h4>Đồ bộ</h4>
-                                                                        <ul class="list-unstyled mb-0 w-100">
-                                                                            <li><a href="" title="">Mùa
-                                                                                    hè</a></li>
-                                                                            <li><a href="" title="">Mùa
-                                                                                    đông</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="megamenu-item w-100">
-                                                                        <h4>Giày</h4>
-                                                                        <ul class="list-unstyled mb-0 w-100">
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Giày thể thao</a>
-                                                                            </li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Giày cao gót</a>
-                                                                            </li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Giày sandal</a></li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Dép</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col">
-                                                                    <div class="megamenu-item w-100">
-                                                                        <h4>Phụ kiện</h4>
-                                                                        <ul class="list-unstyled mb-0 w-100">
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Phụ kiện tóc</a>
-                                                                            </li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Trang sức</a></li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Kính</a></li>
-                                                                            <li><a href="product-detail.html"
-                                                                                    title="">Dây lưng</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
+
+
+
                                                             </div>
                                                         </div><!-- Megamenu Box Wrap -->
                                                     </div>
@@ -289,9 +248,9 @@
                                     <input type="search" placeholder="Search">
                                 </form>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a class="cart-trigger d-inline-block" href="javascript:void(0);" title=""><i class="fi fi-rr-shopping-bag"></i></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -536,9 +495,9 @@
                             </form>
 
                         </li>
-                        <li>
+                        {{-- <li>
                             <a class="cart-trigger d-inline-block" href="javascript:void(0);" title=""><i class="fi fi-rr-shopping-bag"></i></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

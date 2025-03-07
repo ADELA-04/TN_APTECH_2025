@@ -83,7 +83,7 @@ input[type="password"] {
                     </div>
                     <div class="field-btn d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
                         <button class="theme-btn bg-color1" type="submit">Sign In<span></span><span></span><span></span><span></span></button>
-                        <a class="d-inline-block simple-btn" href="{{ asset('forgot-password.html') }}" title="">Forgot password?</a>
+                        {{-- <a class="d-inline-block simple-btn" href="{{ asset('forgot-password.html') }}" title="">Forgot password?</a> --}}
                     </div>
                 </form>
             </div>

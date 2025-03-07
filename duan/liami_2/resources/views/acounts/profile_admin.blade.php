@@ -72,9 +72,14 @@
                             <form class="tf-section-2 form-add-product" >
                                 <div class="wg-box">
                                     <fieldset class="name">
-                                        <div class="body-title mb-10">Fullname <span class="tf-color-1"></span></div>
+                                        <div class="body-title mb-10">UserName <span class="tf-color-1">*</span></div>
                                         <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the Fullname.</div>
+                                        <div class="text-tiny">entering the username.</div>
+                                    </fieldset>
+                                    <fieldset class="name">
+                                        <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
+                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
+                                        <div class="text-tiny">entering the Email.</div>
                                     </fieldset>
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Phone <span class="tf-color-1"></span></div>
@@ -82,10 +87,13 @@
                                         <div class="text-tiny">entering the Phone.</div>
                                     </fieldset>
                                     <fieldset class="name">
-                                        <div class="body-title mb-10">Address <span class="tf-color-1"></span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the Address.</div>
+                                        <div class="body-title mb-10">Role <span class="tf-color-1"></span></div>
+                                        <input class="mb-10" type="text" placeholder="" name="text" tabindex="0" value="" aria-required="true" required="" readonly>
+
                                     </fieldset>
+                                </div>
+                                <div class="wg-box">
+
                                     <fieldset>
                                         <div class="body-title mb-10">Upload images</div>
                                         <div class="upload-image mb-16">
@@ -104,20 +112,6 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                </div>
-                                <div class="wg-box">
-                                    <fieldset class="name">
-                                        <div class="body-title mb-10">UserName <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the username.</div>
-                                    </fieldset>
-
-                                    <fieldset class="name">
-                                        <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the Email.</div>
-                                    </fieldset>
-
                                     <div class="cols gap10">
                                         <button class="tf-button w-full" type="submit">Save </button>
                                         <button class="tf-button style-1 w-full" type="submit">Cancel</button>

@@ -107,10 +107,33 @@
                             @endif
                         </ul>
                     </div>
-                    {{-- <div class="flex items-center justify-between flex-wrap gap10">
-                        <div class="text-tiny">Showing {{ $categories->count() }} entries</div>
-                        {{ $categories->links() }} <!-- Thêm phân trang -->
-                    </div> --}}
+                    <div class="divider"></div>
+                    <div class="flex items-center justify-between flex-wrap gap10">
+                        <div class="text-tiny">Hiện {{ $categories->count() }}/10 mục</div>
+                        <ul class="wg-pagination flex items-center">
+                            <li>
+                                @if ($categories->onFirstPage())
+                                    <span class="disabled"><i class="icon-chevron-left"></i></span>
+                                @else
+                                    <a href="{{ $categories->previousPageUrl() }}"><i class="icon-chevron-left"></i></a>
+                                @endif
+                            </li>
+
+                            @for ($i = 1; $i <= $categories->lastPage(); $i++)
+                                <li class="{{ ($categories->currentPage() == $i) ? 'active' : '' }}">
+                                    <a href="{{ $categories->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+
+                            <li>
+                                @if ($categories->hasMorePages())
+                                    <a href="{{ $categories->nextPageUrl() }}"><i class="icon-chevron-right"></i></a>
+                                @else
+                                    <span class="disabled"><i class="icon-chevron-right"></i></span>
+                                @endif
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
