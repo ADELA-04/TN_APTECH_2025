@@ -3,6 +3,7 @@
     <title>Cart</title>
 @endsection
 @section('css')
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/uicons-regular-rounded.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
@@ -19,87 +20,82 @@
     <section>
         <div class="w-100 pt-60 pb-120 position-relative">
             <div class="container">
+                @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
                 <div class="sec-title2 d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
-                    <h3 class="mb-0">Your Cart</h3>
-                    <a class="d-inline-block text-color4" href="javascript:void(0);" title="">Clear Shopping Cart</a>
+                    <h3 class="mb-0" style="font-family: 'Roboto';">Giỏ hàng của bạn</h3>
                 </div><!-- Section Title 2 -->
                 <div class="cart-wrap position-relative w-100">
-                    <form>
+                    <form class="text-center" action="{{ route('checkout') }}" method="POST" id="checkout-form">
+                        @csrf
+                        <input type="hidden" name="products" id="selected-products">
                         <table class="cart-table w-100">
                             <thead>
                                 <tr>
-
-                                    <th>Product</th>
-                                    <th>Atribute</th>
-
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
+                                    <th style="font-family: 'Roboto';">Sản phẩm</th>
+                                    <th style="font-family: 'Roboto';">Thuộc tính</th>
+                                    <th style="font-family: 'Roboto';">Đơn giá</th>
+                                    <th style="font-family: 'Roboto';">Số lượng</th>
+                                    <th style="font-family: 'Roboto';">Thành tiền</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="cart-item">
+                                @foreach ($cartItems as $item)
+                                    <tr class="cart-item" data-product-id="{{ $item->ProductID }}">
+                                        <input type="hidden" class="cart-item-id" value="{{ $item->CartItemID }}">
 
-                                    <td class="d-flex align-items-center">
-                                        <div style="margin-right: 20px; transform: scale(1.5);">
-                                            <input type="checkbox">
-                                        </div>
-                                        <div class="cart-product-box d-flex flex-wrap align-items-center">
-                                            <div class="cart-product-img overflow-hidden">
-                                                <a href="product-detail.html" title="">
-                                                    <img class="img-fluid w-50"
-                                                        src="assets/images/resources/cart-img1-1.jpg" alt="Cart Image 1">
-                                                </a>
+                                        <td class="d-flex align-items-center">
+                                            <div style="margin-right: 20px;">
+                                                <input type="checkbox" class="product-select">
                                             </div>
-                                            <h5 class="mb-0">
-                                                <a href="product-detail.html" title="">Commodo Blown Lamp</a>
-                                            </h5>
-                                        </div>
-                                    </td>
-
-                                    <td>
-                                        <span class="">Color: </span>
-                                        <select name="" id="">
-                                            <option value="">Xanh</option>
-                                        </select>
-                                    </td>
-                                    <td><span class="price">$124.00</span></td>
-                                    <td>
-                                        <div class="product-quanty"><input type="number" class="qty" value="01">
-                                        </div>
-                                    </td>
-                                    <td><span class="price text-color1">$275.00</span></td>
-                                    <td>
-                                        <a class="remove-product d-inline-block rounded-circle" href="javascript:void(0);"
-                                            title=""><i class="fi fi-rr-cross-small"></i></a>
-                                    </td>
-                                </tr>
-
-
+                                            <div class="cart-product-box d-flex flex-wrap align-items-center">
+                                                <div class="cart-product-img overflow-hidden">
+                                                    <a href="{{ route('product.detail', $item->ProductID) }}">
+                                                        <img class="img-fluid w-50"
+                                                            src="{{ asset($item->product->Image) }}" alt="Cart Image">
+                                                    </a>
+                                                </div>
+                                                <h5 class="mb-0">
+                                                    <a
+                                                        href="{{ route('product.detail', $item->ProductID) }}">{{ Str::limit($item->product->ProductName, 20, '...') }}</a>
+                                                </h5>
+                                            </div>
+                                        </td>
+                                        <td><span>{{ $item->Color }}</span></td>
+                                        <td><span class="price">{{ number_format($item->product->SalePrice, 0) }}
+                                                VNĐ</span></td>
+                                        <td><span class="product-quanty">{{ $item->Quantity }}</span></td>
+                                        <td><span
+                                                class="price text-color1">{{ number_format($item->Quantity * $item->product->SalePrice, 0) }}
+                                                VNĐ</span></td>
+                                        <td>
+                                            <form action="{{ route('cart.remove', $item->CartItemID) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                <button type="submit" class="remove-product" title="">
+                                                    <i class="fi fi-rr-cross-small"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
 
                         <div class="cart-totals d-flex flex-wrap justify-content-end">
                             <div class="cart-total">
-                                <h4>Order Summary</h4>
+                                <h4 style="font-family: 'Roboto';">Thông tin đơn hàng</h4>
                                 <table>
                                     <tr>
-                                        <td>Subtotal</td>
-                                        <td><span class="price">$117.00</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shipping</td>
-                                        <input type="text" name="" id="" value="$30.00">
-                                    </tr>
-
-                                    <tr>
-                                        <td>Total</td>
-                                        <td><strong class="price">$125.00</strong></td>
+                                        <td style="font-family: 'Roboto';">Thành tiền</td>
+                                        <td><strong>{{ number_format($totalAmount, 0) }} VNĐ</strong></td>
                                     </tr>
                                 </table>
-                                <button class="theme-btn bg-color1" type="submit">
-                                    Checkout<span></span><span></span><span></span><span></span></button>
+                                <button class="theme-btn bg-color1 mt-10" type="submit">
+                                    Mua hàng<span></span><span></span><span></span><span></span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -120,4 +116,29 @@
     <script src="{{ asset('assets/js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            function calculateSelectedTotals() {
+    let selectedProducts = [];
+
+    $('.cart-item').each(function() {
+        const isSelected = $(this).find('.product-select').is(':checked');
+        if (isSelected) {
+            const cartItemId = $(this).find('.cart-item-id').val(); // CartItemID
+            const quantity = parseInt($(this).find('.product-quanty').text());
+
+            selectedProducts.push({
+                id: cartItemId,
+                quantity: quantity
+            });
+        }
+    });
+
+    $('#selected-products').val(JSON.stringify(selectedProducts));
+}
+            $('.product-select').on('change', function() {
+                calculateSelectedTotals();
+            });
+        });
+    </script>
 @endsection

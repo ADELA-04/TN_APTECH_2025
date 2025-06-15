@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       ADD User
+       Thêm mới tài khoản
     </title>
 @endsection
 
@@ -33,7 +33,11 @@
                     <div class="main-content-inner">
                         <div class="main-content-wrap">
                             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                                <h3>Add User</h3>
+                                <h3>Thêm mới tài khoản</h3>
+                                <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                                    <li><i class="icon-chevron-left"></i></li>
+                                    <li><a href="{{ route('managers.m_user.manager_user') }}"><div class="text-tiny">Quay lại</div></a></li>
+                                </ul>
                             </div>
 
                             @if (session('success'))
@@ -42,62 +46,54 @@
                                 </div>
                             @endif
 
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                             <form class="form-add-product" action="{{ route('managers.m_user.store_user') }}" method="POST">
                                 @csrf
                                 <div class="wg-box">
                                     <fieldset>
-                                        <div class="body-title mb-10">Username <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" name="Username" required>
-                                        <div class="text-tiny">Do not exceed 20 characters when entering the username.</div>
+                                        <div class="body-title mb-10">Tên tài khoản <span class="tf-color-1">*</span></div>
+                                        <input class="mb-10" type="text" name="Username" required placeholder="Nhập tên tài khoản..." value="{{ old('Username') }}">
+                                        @if ($errors->has('Username'))
+                                        <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Username') }}</div>
+                                    @endif
                                     </fieldset>
                                     <fieldset>
-                                        <div class="body-title mb-10">Password</div>
+                                        <div class="body-title mb-10">Mật khẩu <span class="tf-color-1">*</span></div>
                                         <div class="password-wrapper">
-                                            <input class="mb-10" type="password" name="Password" id="password" placeholder="Enter password">
+                                            <input class="mb-10" type="password" name="Password" id="password" placeholder="Nhập mật khẩu...">
                                             <button type="button" id="toggle-password" class="toggle-password"><i class="icon-eye"></i></button>
                                         </div>
-                                        <div class="text-tiny">Leave blank to keep the current password.</div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="body-title mb-10">Confirm Password</div>
-                                        <div class="password-wrapper">
-                                            <input class="mb-10" type="password" name="Password_confirmation" id="password-confirmation" placeholder="Confirm password">
-                                            <button type="button" id="toggle-confirm-password" class="toggle-password"><i class="icon-eye"></i></button>
-                                        </div>
-                                        <div class="text-tiny">Please confirm your password.</div>
+                                        @if ($errors->has('Password'))
+                                        <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Password') }}</div>
+                                    @endif
                                     </fieldset>
                                     <fieldset>
                                         <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="email" name="Email" required>
-                                        <div class="text-tiny">Please enter a valid email address.</div>
+                                        <input class="mb-10" value="{{ old('Email') }}" type="email" name="Email" required placeholder="Nhập email...">
+                                        @if ($errors->has('Email'))
+                                        <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Email') }}</div>
+                                    @endif
                                     </fieldset>
                                     <fieldset>
-                                        <div class="body-title mb-10">Phone</div>
-                                        <input class="mb-10" type="text" name="Phone">
-                                        <div class="text-tiny">Optional, up to 20 characters.</div>
+                                        <div class="body-title mb-10">Điện thoại</div>
+                                        <input class="mb-10" value="{{ old('Phone') }}" type="text" name="Phone" placeholder="Nhập điện thoại...">
+                                        <div class="text-tiny"></div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="body-title mb-10">Role <span class="tf-color-1">*</span></div>
-                                        <select name="Role" required>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Staff">Staff</option>
-                                        </select>
-                                        <div class="text-tiny">Select the role for the user.</div>
+                                        <div class="body-title mb-10">Phân quyền <span class="tf-color-1">*</span></div>
+
+                                            <select name="Role" required class="mb-10">
+                                                <option value="Admin" {{ old('Role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                                <option value="Staff_Order" {{ old('Role') == 'Staff_Order' ? 'selected' : '' }}>Quản trị đơn hàng</option>
+                                                <option value="Staff_Product" {{ old('Role') == 'Staff_Product' ? 'selected' : '' }}>Quản trị bài đăng và sản phẩm</option>
+                                            </select>
+
+                                        @if ($errors->has('Role'))
+                                        <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Role') }}</div>
+                                    @endif
                                     </fieldset>
                                     <div class="cols gap10">
-                                        <button class="tf-button w-full" type="submit">Save</button>
-                                        <a href="{{ route('managers.m_user.manager_user') }}" class="tf-button style-1 w-full">Cancel</a>
+                                        <button class="tf-button w-full" type="submit">Lưu</button>
+                                        <a href="{{ route('managers.m_user.manager_user') }}" class="tf-button style-1 w-full">Hủy</a>
                                     </div>
                                 </div>
                             </form>

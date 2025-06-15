@@ -2,7 +2,7 @@
 
 {{-- title --}}
 @section('title')
-    <title>Blog Manager</title>
+    <title>Quản lí tin tức</title>
 @endsection
 
 {{-- css --}}
@@ -29,16 +29,31 @@
             <!-- main-content-wrap -->
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Blog Manager</h3>
+                    <h3>Quản lí tin tức</h3>
                 </div>
+                 @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                 <!-- product-list -->
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
+                            <form class="form-search" method="GET" action="{{ route('managers.m_blog.manager_blog') }}">
 
-                            <form class="form-search">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." name="name" required>
+                                    <input type="text" placeholder="Nhập tên bài đăng muốn tìm..." name="name" value="{{ request('name') }}" required>
                                 </fieldset>
                                 <div class="button-submit">
                                     <button type="submit"><i class="icon-search"></i></button>
@@ -46,31 +61,34 @@
                             </form>
                         </div>
                         <a class="tf-button style-1 w208" href="{{ route('managers.m_blog.add_blog') }}"><i
-                                class="icon-plus"></i>Add new</a>
+                                class="icon-plus"></i>Thêm mới</a>
                     </div>
 
                     <div class="wg-table table-product-list">
                         <ul class="table-title flex gap20 mb-14">
                             <li>
-                                <div class="body-title">Blog</div>
+                                <div class="body-title">Tin tức</div>
                             </li>
                             <li>
-                                <div class="body-title">Author</div>
+                                <div class="body-title">Người đăng</div>
                             </li>
                             <li>
-                                <div class="body-title">Created At</div>
+                                <div class="body-title">Ngày tạo</div>
                             </li>
                             <li>
-                                <div class="body-title">Is Visible</div>
+                                <div class="body-title">Hiển thị</div>
                             </li>
                             <li>
-                                <div class="body-title">View</div>
+                                <div class="body-title">Lượt xem</div>
                             </li>
                             <li>
-                                <div class="body-title">Action</div>
+                                <div class="body-title">Hành động</div>
                             </li>
                         </ul>
                         <ul class="flex flex-column">
+                            @if ($blogs->isEmpty())
+                            <li class="no-results">Không tìm thấy bài viết nào phù hợp với từ khóa "{{ $search }}".</li>
+                        @else
                             @foreach ($blogs as $blog)
                                 <li class="product-item gap14">
                                     <div class="image no-bg">
@@ -92,7 +110,7 @@
                                                 </a>
                                             </div>
                                             <div class="user-item">
-                                                <form action="{{ route('managers.m_blog.delete_blog', $blog->PostID) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                <form action="{{ route('managers.m_blog.delete_blog', $blog->PostID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" style="border: none; background: none;">
@@ -104,6 +122,7 @@
                                     </div>
                                 </li>
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                     <div class="divider"></div>

@@ -13,33 +13,25 @@ class UsersTableSeeder extends Seeder
             $users = [
 
                 [
-                    'Username' => 'Nguyễn Văn A',
-                    'Email' => 'nguyenvana@example.com',
-                    'Password' => bcrypt('password1'),
-                    'Role' => 'User',
+                    'Username' => 'Admin2',
+                    'Email' => 'dothom07082005@gmail.com',
+                    'Password' => bcrypt('12345678'),
+                    'Role' => 'Admin',
                     'Phone' => '0123456780',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ],
                 [
-                    'Username' => 'Trần Thị B',
-                    'Email' => 'tranb@example.com',
-                    'Password' => bcrypt('password2'),
-                    'Role' => 'User',
-                    'Phone' => '0123456781',
+                    'Username' => 'Nhân viên 2',
+                    'Email' => 'nvmoi@gmail.com',
+                    'Password' => bcrypt('12345678'),
+                    'Role' => 'Admin',
+                    'Phone' => '0123456780',
+                    'created_at' => now(),
+                    'updated_at' => now(),
                 ],
-                [
-                    'Username' => 'Lê Văn C',
-                    'Email' => 'levanc@example.com',
-                    'Password' => bcrypt('password3'),
-                    'Role' => 'User',
-                    'Phone' => '0123456782',
-                ],
-                [
-                    'Username' => 'Phạm Thị D',
-                    'Email' => 'phamthid@example.com',
-                    'Password' => bcrypt('password4'),
-                    'Role' => 'User',
-                    'Phone' => '0123456783',
-                ],
+
+
             ];
 
             foreach ($users as $user) {

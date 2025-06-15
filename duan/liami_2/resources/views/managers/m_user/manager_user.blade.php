@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        User Manager
+       Quản lí tài khoản
     </title>
 @endsection
 
@@ -39,7 +39,7 @@
         <!-- main-content-wrap -->
         <div class="main-content-wrap">
             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>All User</h3>
+                <h3>Tất cả tài khoản</h3>
             </div>
             <!-- all-user -->
             <div class="wg-box">
@@ -57,35 +57,37 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                        <form class="form-search">
-                            <fieldset class="name">
-                                <input type="text" placeholder="Search here..." class="" name="name"
-                                    tabindex="2" value="" aria-required="true" required="">
-                            </fieldset>
-                            <div class="button-submit">
-                                <button class="" type="submit"><i class="icon-search"></i></button>
-                            </div>
-                        </form>
+                    <form class="form-search" method="GET" action="{{ route('managers.m_user.manager_user') }}">
+                        <fieldset class="name">
+                            <input type="text" placeholder="Nhập email để tìm kiếm..." name="email" required value="{{ request('email') }}">
+                        </fieldset>
+                        <div class="button-submit">
+                            <button type="submit"><i class="icon-search"></i></button>
+                        </div>
+                    </form>
                     </div>
                     <a class="tf-button style-1 w208" href="{{ route('managers.m_user.add_user') }}"><i
-                            class="icon-plus"></i>Add new</a>
+                            class="icon-plus"></i>Thêm mới</a>
                 </div>
                 <div class="wg-table table-all-user">
                     <ul class="table-title flex gap20 mb-14">
                         <li>
-                            <div class="body-title">Username</div>
+                            <div class="body-title">Tên tài khoản</div>
                         </li>
                         <li>
-                            <div class="body-title">Phone</div>
+                            <div class="body-title">Điện thoại</div>
                         </li>
                         <li>
                             <div class="body-title">Email</div>
                         </li>
                         <li>
-                            <div class="body-title">Action</div>
+                            <div class="body-title">Hành động</div>
                         </li>
                     </ul>
                     <ul class="flex flex-column">
+                        @if ($users->isEmpty())
+                        <li class="no-results">Không tìm thấy người dùng nào với từ khóa "{{ $search }}".</li>
+                    @else
                         @foreach ($users as $user)
                             <li class="user-item gap14">
                                 <div class="flex items-center justify-between gap20 flex-grow">
@@ -94,7 +96,7 @@
                                             class="body-title-2">{{ $user->Username ?? 'N/A' }}</a>
                                         <div class="text-tiny mt-3">{{ $user->Role ?? 'N/A' }}</div>
                                     </div>
-                                    <div class="body-text">{{ $user->Phone ?? 'N/A' }}</div>
+                                    <div class="body-text" style=" text-align: left;">{{ $user->Phone ?? 'N/A' }}</div>
                                     <div class="body-text">{{ $user->Email ?? 'N/A' }}</div>
                                     <div class="list-icon-function">
                                         <div class="item edit">
@@ -102,7 +104,7 @@
                                                     class="icon-edit-3"></i></a>
                                         </div>
                                         <div class="user-item">
-                                            <form action="{{ route('managers.m_user.delete_user', $user->UserID) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                            <form action="{{ route('managers.m_user.delete_user', $user->UserID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" style="border: none; background: none;">
@@ -114,6 +116,7 @@
                                 </div>
                             </li>
                         @endforeach
+                        @endif
                     </ul>
                 </div>
                 <div class="divider"></div>

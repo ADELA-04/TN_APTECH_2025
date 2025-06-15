@@ -24,6 +24,7 @@ $(document).ready(function() {
     });
 });
 
+
 function previewImage(event) {
     const input = event.target;
     const preview = document.getElementById('previewImage');

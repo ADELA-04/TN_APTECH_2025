@@ -18,17 +18,18 @@ class Product extends Model
     // Fillable attributes for mass assignment
     protected $fillable = [
         'ProductName',
+        'Summary',
         'Description',
         'Price',
         'SalePrice',
         'Size',
         'Color',
+        'Material',
         'Image',
         'Weigh',
         'Brand',
         'View',
         'CategoryID',
-        'IsVisible',
         'CreatedBy'
     ];
 
@@ -36,10 +37,6 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'CategoryID', 'CategoryID');
-    }
-    public function attributeMappings()
-    {
-        return $this->hasMany(ProductAttributeMapping::class, 'ProductID','ProductID' );
     }
 
     // Define the relationship with the User model

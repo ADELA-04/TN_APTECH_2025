@@ -1,27 +1,27 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Customer extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Customer extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,Notifiable;
 
     protected $table = 'customers';
     protected $primaryKey = 'CustomerID';
     protected $fillable = [
-        'Username',
-        'FullName',
         'Email',
+        'FullName',
         'PasswordHash',
         'Gender',
         'ProfilePicture',
+
     ];
 
-    public function shippingAddress()
-    {
-        return $this->hasMany(ShippingAddress::class, 'CustomerID', 'CustomerID');
+
+      public function getAuthPassword() {
+        return $this->PasswordHash;
     }
 }

@@ -8,16 +8,18 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
      */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id('UserID');
             $table->string('Username')->unique(); // Cột Username
             $table->string('Email')->unique(); // Cột Email
             $table->string('Password'); // Cột Password
             $table->string('Role'); // Cột Role
-            $table->string('Phone')->nullable(); // Cột Phone, có thể để trống
+            $table->string('Phone')->nullable();
+            $table->string('Avartar')->nullable(); // Cột Phone, có thể để trống
             $table->rememberToken(); // Cột để lưu thông tin nhớ đăng nhập
             $table->timestamps(); // Cột thời gian tạo và cập nhật
         });

@@ -89,7 +89,7 @@ class CustomerController extends Controller
             'IsPickupAddress' => 1,
         ]);
 
-        return redirect()->route('customer.create')->with('success', 'Khách hàng đã được thêm thành công.');
+        return redirect()->route('customer.create')->with('success', 'Thêm thành công.');
     }
     public function edit($CustomerID)
     {
@@ -100,16 +100,7 @@ class CustomerController extends Controller
     // Cập nhật thông tin khách hàng
     public function update(Request $request, $CustomerID)
     {
-        // DB::listen(function ($query) {
-        //     Log::info("Query Executed: " . $query->sql);
-        // });
-        // $exists = Customer::where('Username', $request->Username)
-        //     ->where('CustomerID', '<>', $CustomerID) // Đảm bảo sử dụng CustomerID
-        //     ->exists();
 
-        // if ($exists) {
-        //     return redirect()->back()->with('error', 'Tên người dùng đã tồn tại.');
-        // }
 
         $request->validate([
             'Username' => 'required|unique:customers,Username,' . $CustomerID . ',CustomerID',
@@ -157,7 +148,7 @@ class CustomerController extends Controller
         $shippingAddress->AddressDetail = $request->AddressDetail;
         $shippingAddress->save();
 
-        return redirect()->route('customers.edit', $CustomerID)->with('success', 'Khách hàng đã được cập nhật thành công.');
+        return redirect()->route('customers.edit', $CustomerID)->with('success', 'Sưae thành công.');
     }
     public function destroy($CustomerID)
 {
@@ -165,7 +156,7 @@ class CustomerController extends Controller
 
     if ($customer) {
         $customer->delete();
-        return redirect()->route('managers.m_customer.manager_customer')->with('success', 'Product deleted successfully!');
+        return redirect()->route('managers.m_customer.manager_customer')->with('success', 'Xóa thành công!');
     }
 
     return redirect()->route('managers.m_customer.manager_customer')->with('error', 'Product does not exist.');

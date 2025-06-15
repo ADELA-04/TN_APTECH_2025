@@ -2,65 +2,109 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class CategoriesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run()
     {
-        // Thêm danh mục cha
-        $electronics = DB::table('categories')->insertGetId([
-            'CategoryName' => 'Electronics',
+        // Thời trang nữ
+        $womenFashionId = DB::table('categories')->insertGetId([
+            'CategoryName' => 'Thời trang nữ',
             'IsVisible' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $clothing = DB::table('categories')->insertGetId([
-            'CategoryName' => 'Clothing',
-            'IsVisible' => true,
-        ]);
-
-        // Thêm danh mục con của Clothing
-        $womenClothing = DB::table('categories')->insertGetId([
-            'CategoryName' => 'Women Clothing',
-            'IsVisible' => true,
-            'parent_id' => $clothing,
-        ]);
-
-        $pants = DB::table('categories')->insertGetId([
-            'CategoryName' => 'Pants',
-            'IsVisible' => true,
-            'parent_id' => $womenClothing,
-        ]);
-
-        // Thêm các danh mục con của Pants
+        // Các danh mục con của Thời trang nữ
         DB::table('categories')->insert([
             [
-                'CategoryName' => 'Jeans',
+                'CategoryName' => 'Áo',
                 'IsVisible' => true,
-                'parent_id' => $pants,
+                'parent_id' => $womenFashionId,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'CategoryName' => 'Kakis',
+                'CategoryName' => 'Quần nữ',
                 'IsVisible' => true,
-                'parent_id' => $pants,
+                'parent_id' => $womenFashionId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'CategoryName' => 'Váy',
+                'IsVisible' => true,
+                'parent_id' => $womenFashionId,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
 
-        // Thêm các danh mục con khác của Women Clothing
+        // Phụ kiện cho nữ
+        $womenAccessoriesId = DB::table('categories')->insertGetId([
+            'CategoryName' => 'Phụ kiện cho nữ',
+            'IsVisible' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Các danh mục con của Phụ kiện cho nữ
         DB::table('categories')->insert([
             [
-                'CategoryName' => 'Tops',
+                'CategoryName' => 'Dây lưng',
                 'IsVisible' => true,
-                'parent_id' => $womenClothing,
+                'parent_id' => $womenAccessoriesId,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'CategoryName' => 'Shoes',
+                'CategoryName' => 'Trang sức',
                 'IsVisible' => true,
-                'parent_id' => $womenClothing,
+                'parent_id' => $womenAccessoriesId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'CategoryName' => 'Mũ nón',
+                'IsVisible' => true,
+                'parent_id' => $womenAccessoriesId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'CategoryName' => 'Kính mắt',
+                'IsVisible' => true,
+                'parent_id' => $womenAccessoriesId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+
+        // Thời trang trẻ em
+        $kidsFashionId = DB::table('categories')->insertGetId([
+            'CategoryName' => 'Thời trang trẻ em',
+            'IsVisible' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Các danh mục con của Thời trang trẻ em
+        DB::table('categories')->insert([
+            [
+                'CategoryName' => 'Áo cho bé',
+                'IsVisible' => true,
+                'parent_id' => $kidsFashionId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'CategoryName' => 'Đồ bộ',
+                'IsVisible' => true,
+                'parent_id' => $kidsFashionId,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

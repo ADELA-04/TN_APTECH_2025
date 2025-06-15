@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('Content'); // Nội dung bài viết
             $table->text('Summary')->nullable(); // Tóm tắt bài viết
             $table->string('ImageURL')->nullable(); // URL hình ảnh
-            $table->boolean('IsVisible')->default(true); // Trạng thái hiển thị
             $table->integer('views')->default(0); // Trường để lưu số lượt xem
             $table->timestamps(); // Thời gian tạo và cập nhật
             $table->foreignId('AuthorID')->constrained('users', 'UserID'); // Khóa ngoại đến bảng Users

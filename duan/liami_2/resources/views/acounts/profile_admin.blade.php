@@ -47,74 +47,69 @@
                     <!-- main-content-wrap -->
                     <div class="main-content-inner">
                         <!-- main-content-wrap -->
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                         <div class="main-content-wrap">
                             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                                <h3>Profile User</h3>
-                                <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
-                                    <li>
-                                        <a href="index.html"><div class="text-tiny">Dashboard</div></a>
-                                    </li>
-                                    <li>
-                                        <i class="icon-chevron-right"></i>
-                                    </li>
-                                    <li>
-                                        <a href="#"><div class="text-tiny">User</div></a>
-                                    </li>
-                                    <li>
-                                        <i class="icon-chevron-right"></i>
-                                    </li>
-                                    <li>
-                                        <div class="text-tiny">Profile User</div>
-                                    </li>
-                                </ul>
+                                <h3>Chỉnh sửa cá nhân </h3>
+
+
                             </div>
                             <!-- form-add-product -->
-                            <form class="tf-section-2 form-add-product" >
+                            <form class="tf-section-2 form-add-product" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="wg-box">
                                     <fieldset class="name">
-                                        <div class="body-title mb-10">UserName <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the username.</div>
+                                        <div class="body-title mb-10">Tên đang nhập <span class="tf-color-1">*</span></div>
+                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Username" tabindex="0" value="{{ $user->Username }}" aria-required="true" required="">
+
                                     </fieldset>
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the Email.</div>
-                                    </fieldset>
-                                    <fieldset class="name">
-                                        <div class="body-title mb-10">Phone <span class="tf-color-1"></span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="text" tabindex="0" value="" aria-required="true" required="">
-                                        <div class="text-tiny">entering the Phone.</div>
-                                    </fieldset>
-                                    <fieldset class="name">
-                                        <div class="body-title mb-10">Role <span class="tf-color-1"></span></div>
-                                        <input class="mb-10" type="text" placeholder="" name="text" tabindex="0" value="" aria-required="true" required="" readonly>
+                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Email" tabindex="0" value="{{ $user->Email }}" aria-required="true" required="">
 
                                     </fieldset>
+                                    <fieldset class="name">
+                                        <div class="body-title mb-10">Điện thoại <span class="tf-color-1"></span></div>
+                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Phone" tabindex="0" value="{{ $user->Phone }}" aria-required="true" required="">
+
+                                    </fieldset>
+
                                 </div>
                                 <div class="wg-box">
-
-                                    <fieldset>
-                                        <div class="body-title mb-10">Upload images</div>
-                                        <div class="upload-image mb-16">
-                                            <div class="item">
-                                                <img src="{{ asset('assets/images/avatar.jpg') }}" alt="">
-                                            </div>
-
+                                    <fieldset class="title mb-24">
+                                        <div class="body-title mb-10">Ảnh đại diện</div>
+                                        <div class="upload-image style-2">
                                             <div class="item up-load">
-                                                <label class="uploadfile" for="myFile">
-                                                    <span class="icon">
-                                                        <i class="icon-upload-cloud"></i>
-                                                    </span>
-                                                    <span class="text-tiny">Drop your images here or select <span class="tf-color">click to browse</span></span>
-                                                    <input type="file" id="myFile" name="filename">
+                                                <label class="uploadfile" for="logoFile">
+                                                    <span class="icon"><i class="icon-upload-cloud"></i></span>
+                                                    <span class="text-tiny">Drop your images here or select <span
+                                                            class="tf-color">click to browse</span></span>
+                                                    <input type="file" id="logoFile" name="Avartar" accept="image/*"
+                                                        style="display: none;">
                                                 </label>
+                                            </div>
+                                            <div class="item mb-24">
+                                                <img id="previewImage" src="{{ asset($user->Avartar) }}" alt="Logo Preview"
+                                                    style=" max-width: 100%; height: auto;">
                                             </div>
                                         </div>
                                     </fieldset>
                                     <div class="cols gap10">
-                                        <button class="tf-button w-full" type="submit">Save </button>
-                                        <button class="tf-button style-1 w-full" type="submit">Cancel</button>
+                                        <button class="tf-button w-full" type="submit">Lưu </button>
+                                        <button class="tf-button style-1 w-full" type="button" onclick="window.location='{{ route('managers.manager') }}'">Hủy</button>
 
                                     </div>
                                 </div>
@@ -148,4 +143,41 @@
    <script src="{{ asset('assets/js2/switcher.js') }}"></script>
    <script src="{{ asset('assets/js2/theme-settings.js') }}"></script>
    <script src="{{ asset('assets/js2/main.js') }}"></script>
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const logoInput = document.getElementById('logoFile');
+        const logoPreview = document.getElementById('previewImage');
+
+        const faviconInput = document.getElementById('faviconFile');
+        const faviconPreview = document.getElementById('previewImage2');
+
+        logoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                logoPreview.src = reader.result;
+                logoPreview.style.display = 'block'; // Hiển thị ảnh
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); // Đọc ảnh
+            }
+        });
+
+        faviconInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                faviconPreview.src = reader.result;
+                faviconPreview.style.display = 'block'; // Hiển thị ảnh
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); // Đọc ảnh
+            }
+        });
+    });
+</script>
 @endsection

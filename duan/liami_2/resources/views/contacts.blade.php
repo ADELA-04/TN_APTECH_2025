@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-<title>
-    Contacts
-</title>
+<title>Liên hệ</title>
 @endsection
 @section('css')
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/all.min.css">
 <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/uicons-regular-rounded.css') }}">
@@ -18,24 +17,23 @@
 <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
 @endsection
 @section('content')
 <section>
-    <div class="page-top-wrap w-100 pt-30 bg-color22 pb-110 position-relative">
-        <div class="fixed-bg" style="background-image: url(assets/images/top-banner-bg.jpg);"></div>
+    <div class="page-top-wrap w-100 pt-20 bg-color22 pb-20 position-relative">
         <div class="container">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="index.html" title="">Home</a></li>
-                <li class="breadcrumb-item active">Contact</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}" style="font-family: 'Roboto';" title="">Trang chủ</a></li>
+                <li class="breadcrumb-item active" style="font-family: 'Roboto';">Liên hệ</li>
             </ol>
-            <div class="page-title w-100">
-                <span class="d-block text-color4">- Contact</span>
-                <h2 class="mb-0">Contact Us</h2>
-            </div><!-- Page Title -->
         </div>
     </div>
 </section>
 <section>
+    @foreach ($settings as $setting)
+
+
     <div class="w-100 pt-120 pb-120 position-relative">
         <div class="container">
             <div class="contact-wrap position-relative w-100">
@@ -43,31 +41,34 @@
                     <div class="row mrg">
                         <div class="col-md-12 col-sm-12 col-lg-6">
                             <div class="contact-info position-relative w-100">
-                                <h3>Hà Nội</h3>
+                                <h3 style="font-family: 'Roboto';">Thông tin cửa hàng</h3>
                                 <ul class="contact-info-list d-flex flex-wrap list-unstyled mb-0">
                                     <li>
-                                        <span class="d-block">Phone</span>
-                                        <p class="mb-0"><a href="tel:(302) 555-0107" title="">84+ 0963215791</a></p>
-                                        <p class="mb-0"><a href="tel:(225) 555-0118" title="">84+ 0963215791</a></p>
+                                        <span class="d-block" style="font-family: 'Roboto';">Tên doanh nghiệp</span>
+                                        <p class="mb-0" style="font-family: 'Roboto';">{{ $setting->BusinessName }}</p>
                                     </li>
                                     <li>
-                                        <span class="d-block">Address</span>
-                                        <p class="mb-0">Soc Son, Ha Noi, Viet Nam</p>
+                                        <span class="d-block" style="font-family: 'Roboto';">Chủ cửa hàng</span>
+                                        <p class="mb-0" style="font-family: 'Roboto';">{{ $setting->BossName }}</p>
+                                    </li>
+                                    <li>
+                                        <span class="d-block" style="font-family: 'Roboto';">Điện thoại</span>
+                                        <p class="mb-0">{{ $setting->Phone }}</p>
+                                    </li>
+                                    <li>
+                                        <span class="d-block" style="font-family: 'Roboto';">Địa chỉ</span>
+                                        <p class="mb-0" style="font-family: 'Roboto';">{{ $setting->Address }}</p>
                                     </li>
                                     <li>
                                         <span class="d-block">Email</span>
-                                        <p class="mb-0"><a href="mailto:dothom07082004@gmail.com" title="">dothom07082004@gmail.com</a></p>
-                                    </li>
-                                    <li>
-                                        <span class="d-block">Social</span>
-                                        <div class="social-links d-flex flex-wrap">
-                                            <a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                                            <a href="https://www.instagram.com/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                                            <a href="https://www.twitter.com/" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                                            <a href="https://www.youtube.com/" title="Youtube" target="_blank"><i class="fab fa-youtube"></i></a>
-                                            <a href="https://www.pinterest.com/" title="Pinterest" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                                        <p class="mb-0">{{ $setting->Email }}</p>
+                                        <span class="d-block mt-20" style="font-family: 'Roboto';">Kết nối xã hội</span>
+                                        <div class=" social-links d-flex flex-wrap">
+                                            <a href="https://www.facebook.com/profile.php?id=100083074215224" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                                            <a href="https://www.instagram.com/liami.designstore/" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                                         </div>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -78,42 +79,11 @@
                         </div>
                     </div>
                 </div><!-- Contact Information & Map -->
-                <div class="contact-form-wrap mt-60 bg-color5 position-relative w-100">
-                    <div class="row mrg">
-                        <div class="col-md-12 col-sm-12 col-lg-6">
-                            <img class="img-fluid w-100" src="assets/images/resources/contact-img.jpg" alt="Contact Image">
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-lg-6">
-                            <div class="contact-form w-100">
-                                <h3>Send us a message</h3>
-                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <form action="#" method="post" id="email-form">
-                                    <div class="form-group w-100">
-                                        <div class="response w-100"></div>
-                                    </div>
-                                    <div class="field-box v2 position-relative w-100">
-                                        <label>Phone *</label>
-                                        <input class="phone" type="tel" name="phone" required>
-                                    </div>
-                                    <div class="field-box v2 position-relative w-100">
-                                        <label>Email Address *</label>
-                                        <input class="email" type="email" name="email" required>
-                                    </div>
-                                    <div class="field-box v2 position-relative w-100">
-                                        <label>Other Notes (optional) *</label>
-                                        <textarea class="contact_message" name="contact_message" placeholder="Notes about your order, e.g. special notes for delivery." required></textarea>
-                                    </div>
-                                    <div class="field-btn w-100">
-                                        <button class="theme-btn bg-color1" id="submit" type="submit">Submit Now<span></span><span></span><span></span><span></span></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- Contact Form Wrap -->
+
             </div><!-- Contact Wrap -->
         </div>
     </div>
+    @endforeach
 </section>
 
 @endsection

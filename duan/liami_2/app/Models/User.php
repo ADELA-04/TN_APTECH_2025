@@ -13,7 +13,7 @@ class User extends Model implements AuthenticatableContract
 
     protected $table = 'users';
     protected $primaryKey = 'UserID';
-    protected $fillable = ['Username', 'Password', 'Role', 'Email', 'Phone'];
+    protected $fillable = ['Username', 'Password', 'Role', 'Email', 'Phone','Avartar'];
 
     public function personalProfile()
     {

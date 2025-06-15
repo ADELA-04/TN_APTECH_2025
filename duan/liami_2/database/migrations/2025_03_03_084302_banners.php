@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id('BannerID');
             $table->string('Title');
+             $table->string('subTitle');
             $table->string('ImageURL');
             $table->string('Link')->nullable();
-            $table->dateTime('StartDate')->nullable();
-            $table->dateTime('EndDate')->nullable();
             $table->timestamps(0);
         });
     }

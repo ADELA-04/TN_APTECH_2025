@@ -12,6 +12,7 @@ class Category extends Model
     protected $table = 'categories';
     protected $primaryKey = 'CategoryID';
     protected $fillable = ['CategoryName', 'IsVisible','parent_id'];
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');

@@ -19,8 +19,12 @@ class ShippingAddress extends Model
         'District',
         'Comune',
         'AddressDetail',
+        'Email',
         'IsPickupAddress',
     ];
 
-
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'CustomerID');
+    }
 }

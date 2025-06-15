@@ -7,23 +7,24 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 
-    <link rel="icon" href="assets/images/favicon.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="{{ asset('assets/images/favicon.png') }}" sizes="32x32" type="image/png">
     <!-- Theme Style -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate2.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/animation.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-select.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animation.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style2.css') }}">
 
     <!-- Font -->
-    <link rel="stylesheet" href="assets/font/fonts.css">
+    <link rel="stylesheet" href="{{ asset('assets/font/fonts.css') }}">
 
     <!-- Icon -->
-    <link rel="stylesheet" href="assets/icon/style.css">
+    <link rel="stylesheet" href="{{ asset('assets/icon/style.css') }}">
 
-    <!-- Favicon and Touch Icons  -->
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/images/favicon.png">
+    <!-- Favicon and Touch Icons -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
+
     @yield('title')
     @yield('css')
 </head>
@@ -35,15 +36,15 @@
         <div id="page" class="">
             <!-- layout-wrap -->
             <div class="layout-wrap">
-                <!-- preload -->
-                <div id="preload" class="preload-container">
-                    <div class="preloading">
-                        <span></span>
-                    </div>
-                </div>
-                <!-- /preload -->
                 {{-- menu_left --}}
-                @include('components.menu_left')
+                @if (Auth::check() && (Auth::user()->Role ?? '') == 'Admin')
+                    @include('components.menu_left')
+                @elseif(Auth::check() && (Auth::user()->Role ?? '') == 'Staff_Product')
+                    @include('components.menu_left_nvsp')
+                @else
+                    @include('components.menu_left_nv')
+                @endif
+
                 <!-- section-content-right -->
                 <div class="section-content-right">
                     @include('components.header_manager')
@@ -56,6 +57,7 @@
         <!-- /#page -->
     </div>
     <!-- /#wrapper -->
+
     @yield('script')
 </body>
 

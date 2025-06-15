@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id('CustomerID');
             $table->string('Username')->unique();
             $table->string('FullName')->nullable();
-            $table->string('Email')->unique();
-            $table->string('Phone', 15)->nullable();
             $table->string('PasswordHash');
             $table->enum('Gender', ['Male', 'Female', 'Other'])->nullable();
             $table->string('ProfilePicture')->nullable();

@@ -3,6 +3,7 @@
     <title>management order</title>
 @endsection
 @section('css')
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/uicons-regular-rounded.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
@@ -19,8 +20,11 @@
     <section>
         <div class="w-100 pt-60 pb-120 position-relative">
             <div class="container">
+                 @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
                 <div class="sec-title2 d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
-                    <h3 class="mb-0">Your Oder</h3>
+                    <h3 class="mb-0" style="font-family: 'Roboto';">Đơn hàng của bạn</h3>
 
                 </div><!-- Section Title 2 -->
                 <div class="cart-wrap position-relative w-100">
@@ -29,68 +33,47 @@
                             <thead>
                                 <tr>
 
-                                    <th>Product</th>
-                                    <th>Atribute</th>
-
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
-
+                                    <th class="text-center" style="font-family: 'Roboto';">Mã đơn hàng</th>
+                                    <th class="text-center" style="font-family: 'Roboto';">Ngày đặt</th>
+                                    <th class="text-center" style="font-family: 'Roboto';">Thành tiền</th>
+                                    <th class="text-center" style="font-family: 'Roboto';">Trạng thái đơn</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($orders as $order)
+
                                 <tr class="cart-item">
-
-                                    <td class="d-flex align-items-center">
-
-                                        <div class="cart-product-box d-flex flex-wrap align-items-center">
-                                            <div class="cart-product-img overflow-hidden">
-                                                <a href="product-detail.html" title="">
-                                                    <img class="img-fluid w-100"
-                                                        src="assets/images/resources/cart-img1-1.jpg" alt="Cart Image 1">
-                                                </a>
-                                            </div>
-                                            <h5 class="mb-0">
-                                                <a href="product-detail.html" title="">Commodo Blown Lamp</a>
-                                            </h5>
-                                        </div>
-
+                                    <td class=" text-center">
+                                         <span>{{  $order->OrderID }}</span>
+                                    </td>
+                                    <td class=" text-center">
+                                        <span class="">{{  $order->created_at}}</span>
 
                                     </td>
-
-                                    <td>
-                                        <span class="">Color: </span>
-                                        <span class="">Xanh </span>
+                                    <td class="text-center"><span class="price ">{{  number_format($order->TotalAmount,0)}} VNĐ</span></td>
+                                    <td class="text-center">
+                                        <span class="">{{ $order->OrderStatus }}</span>
                                     </td>
-                                    <td><span class="price">$124.00</span></td>
-                                    <td>
-                                        <span class="">01 </span>
-                                    </td>
-                                    <td><span class="price text-color1">$275.00</span></td>
-
-
+                                    <td class="text-center"><a href="{{ route('orders.detail',$order->OrderID) }}" class="text-color21">Chi tiết</a></td>
                                 </tr>
+
+                            @endforeach
                             </tbody>
 
                         </table>
-                        <div class="checkout-wrap position-relative w-100">
+                        {{-- <div class="checkout-wrap position-relative w-100">
                             <div class="row mrg30 ">
                                 <div class="col-md-12 col-sm-12 mb-3 ho " >
                                     <div class="not-bar bg-color5 w-100 " style="border-radius:0px; text-align: right;">
-                                        <p style="color: #ff5700">Complete</p>
-                                        <p><span>Total: </span> <span>$335.00</span></p>
-                                        <a href="javascript:void(0);" title="">Detail </a>
                                                 <div style="text-align: center">
                                                     <button class="theme-btn bg-color1"
                                                     type="submit">Review<span></span><span></span><span></span><span></span></button>
                                                 </div>
                                     </div>
                                 </div>
-
-
-
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div><!-- Cart Wrap -->
             </div>

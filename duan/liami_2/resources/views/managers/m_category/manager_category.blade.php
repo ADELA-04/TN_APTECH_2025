@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Category Manager
+       Quản lí danh mục sản phẩm
     </title>
 @endsection
 
@@ -33,7 +33,7 @@
         <div class="main-content-inner">
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Category Manager</h3>
+                    <h3>Quản lí danh mục sản phẩm</h3>
                 </div>
 {{-- Thông báo thành công --}}
 @if (session('success'))
@@ -56,9 +56,9 @@
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
-                            <form class="form-search">
+                            <form class="form-search" method="GET" action="{{ route('managers.m_category.manager_category') }}">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." name="name" required>
+                                    <input type="text" placeholder="Nhập tên danh mục cần tìm..." name="name" required value="{{ request('name') }}">
                                 </fieldset>
                                 <div class="button-submit">
                                     <button type="submit"><i class="icon-search"></i></button>
@@ -66,17 +66,20 @@
                             </form>
                         </div>
                         <a class="tf-button style-1 w208" href="{{ route('category.create') }}">
-                            <i class="icon-plus"></i>Add new
+                            <i class="icon-plus"></i>Thêm mới
                         </a>
                     </div>
 
                     <div class="wg-table table-product-list">
                         <ul class="table-title flex gap20 mb-14">
-                            <li><div class="body-title">Category</div></li>
-                            <li><div class="body-title">Action</div></li>
+                            <li><div class="body-title">Danh mục sản phẩm</div></li>
+                            <li><div class="body-title">Hành động</div></li>
                         </ul>
                         <ul class="flex flex-column">
                             @if(isset($categories) && $categories->isNotEmpty())
+                              @if ($categories->isEmpty())
+            <li class="no-results">Không tìm thấy danh mục nào với từ khóa "{{ $search }}".</li>
+        @else
                                 @foreach ($categories as $category)
                                     <li class="product-item gap14">
                                         <div class="flex items-center justify-between gap20 flex-grow">
@@ -90,7 +93,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="user-item">
-                                                    <form action="{{ route('category.destroy', $category->CategoryID) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                    <form action="{{ route('category.destroy', $category->CategoryID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" style="border:none; background:none;">
@@ -102,6 +105,7 @@
                                         </div>
                                     </li>
                                 @endforeach
+                                @endif
                             @else
                                 <li class="product-item">Không có danh mục nào.</li>
                             @endif

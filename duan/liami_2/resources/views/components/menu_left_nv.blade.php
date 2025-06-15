@@ -21,134 +21,60 @@
                 <i class="icon-menu-left"></i>
             </div>
         </div>
-        <div class="section-menu-left-wrap" >
+        <div class="section-menu-left-wrap">
             <div class="center">
                 <div class="center-item">
-                    <div class="center-heading">Main Home</div>
+                    <div class="center-heading">Tổng quan</div>
                     <ul class="menu-list">
-                        <li class="menu-item {{ request()->is('admin')|| request()->is('managers') ? 'active' : '' }}">
+                        <li class="menu-item {{ request()->is('admin') || request()->is('managers') ? 'active' : '' }}">
                             <a href="{{ route('managers.manager') }}" class="">
                                 <div class="icon"><i class="icon-grid"></i></div>
-                                <div class="text">Dashboard</div>
+                                <div class="text">Tổng quan hệ thống</div>
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="center-item">
-                    <div class="center-heading">Manager</div>
+                    <div class="center-heading">Quản lí</div>
                     <ul class="menu-list">
-                        {{-- <li class="menu-item has-children">
-                            <a href="javascript:void(0);" class="menu-item-button">
-                                <div class="icon"><i class="icon-file-plus"></i></div>
-                                <div class="text">Order</div>
-                            </a>
-                            <ul class="sub-menu">
-                                <li class="sub-menu-item">
-                                    <a href="oder-list.html" class="active">
-                                        <div class="text">Order list</div>
-                                    </a>
-                                </li>
-                                <li class="sub-menu-item">
-                                    <a href="oder-detail.html" class="">
-                                        <div class="text">Managerment COD</div>
-                                    </a>
-                                </li>
-                                <li class="sub-menu-item">
-                                    <a href="oder-tracking.html" class="">
-                                        <div class="text">Transaction management
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li> --}}
-                        <li class="menu-item has-children {{ request()->is('managers/m_product*') || request()->is('managers/m_category*')|| request()->is('category/create') || request()->is('managers/m_category/store')|| request()->is('category/*/edit') || request()->is('category/*') ? 'active' : '' }}">
-                            <a href="javascript:void(0);" class="menu-item-button">
+
+                        <li class="menu-item ">
+                            <a href="{{ route('managers.m_product.manager_product') }}" class=""
+                                class="menu-item-button">
                                 <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                <div class="text">Ecommerce</div>
+                                <div class="text">Quản lí đơn hàng</div>
                             </a>
-                            <ul class="sub-menu">
-                                <li class="sub-menu-item">
-                                    <a href="{{ route('managers.m_product.manager_product') }}" class="{{ request()->is('managers/m_product/manager_product') || request()->is('managers/m_product*') || request()->is('managers/m_product/update_product') ? 'active' : '' }}">
-                                        <div class="text">Product</div>
-                                    </a>
-                                </li>
-                                <li class="sub-menu-item ">
-                                    <a href="{{ route('managers.m_category.manager_category') }}" class="{{ request()->is('managers/m_category/manager_category') || request()->is('managers/m_category*') || request()->is('category/create') || request()->is('managers/m_category/store')|| request()->is('category/*/edit') || request()->is('category/*') ? 'active' : '' }}">
-                                        <div class="text">Category</div>
-                                    </a>
-                                </li>
-                                {{-- <li class="sub-menu-item">
-                                    <a href="product-list.html" class="">
-                                        <div class="text">Inventory</div>
-                                    </a>
-                                </li> --}}
-
-                            </ul>
                         </li>
-                        </li>
-                        <li
-                            class="menu-item {{ request()->is('managers/m_blog/manager_blog') || request()->is('managers/m_blog*') || request()->is('managers/m_blog/update_blog') ? 'active' : '' }}">
-                            <a href="{{ route('managers.m_blog.manager_blog') }}" class="menu-item-button">
-                                <div class="icon"><i class="icon-file-plus"></i></div>
-                                <div class="text">Blog</div>
-                            </a>
 
-                        </li>
-                        {{-- <li
-                        class="menu-item {{ request()->is('managers/m_customer*')? 'active' : '' }} }}">
-                        <a href="{{ route('managers.m_customer.manager_customer') }}" class="menu-item-button">
-                            <div class="icon"><i class="icon-user"></i></div>
-                            <div class="text">Customer</div>
-                        </a>
-
-                    </li> --}}
-                        {{-- <li
-                            class="menu-item {{ request()->is('managers/m_user/manager_user') || request()->is('managers/m_user*') || request()->is('managers/m_user/update_user') ? 'active' : '' }}">
-                            <a href="{{ route('managers.m_user.manager_user') }}" class="menu-item-button">
+                        <li class="menu-item {{ request()->is('managers/m_customer*') ? 'active' : '' }} }}">
+                            <a href="{{ route('managers.m_customer.manager_customer') }}" class="menu-item-button">
                                 <div class="icon"><i class="icon-user"></i></div>
-                                <div class="text">Acount Admin</div>
+                                <div class="text">Quản lí khách hàng</div>
                             </a>
 
                         </li>
-                        <li class="menu-item {{ request()->is('') ? 'active' : '' }}">
-                            <a href="report.html" class="">
-                                <div class="icon"><i class="icon-pie-chart"></i></div>
-                                <div class="text">Report</div>
-                            </a>
-                        </li> --}}
+
+
                     </ul>
                 </div>
                 <div class="center-item">
-                    <div class="center-heading">Setting</div>
+                    <div class="center-heading">Cài đặt</div>
                     <ul class="menu-list">
 
-                        <li class="menu-item has-children">
-                            <a href="setting.html" class="">
+                        <li class="menu-item  {{ request()->is('settings/edit') ? 'active' : '' }}">
+                            <a href="{{ route('settings.edit') }}"
+                                class="{{ request()->is('settings/edit') ? 'active' : '' }}">
                                 <div class="icon"><i class="icon-settings"></i></div>
-                                <div class="text">Setting</div>
+                                <div class="text">Cài đặt chung</div>
                             </a>
-                            <ul class="sub-menu">
-                                <li class="sub-menu-item">
-                                    <a href="list-page.html" class="">
-                                        <div class="text">General Setting</div>
-                                    </a>
-                                </li>
-                                <li class="sub-menu-item">
-                                    <a href="edit-page.html" class="">
-                                        <div class="text">Pages</div>
-                                    </a>
-                                </li>
-                                {{-- <li class="sub-menu-item">
-                                    <a href="new-page.html" class="">
-                                        <div class="text">Shop Address</div>
-                                    </a>
-                                </li>
-                                <li class="sub-menu-item">
-                                    <a href="edit-page.html" class="">
-                                        <div class="text">Shipping</div>
-                                    </a>
-                                </li> --}}
-                            </ul>
+
+                        <li
+                            class="menu-item  {{ request()->is('managers/settings/settings_banner') || request()->is('settings/create') || request()->is('settings/*/edit') ? 'active' : '' }}">
+                            <a href="{{ route('managers.settings_banner') }}"
+                                class="{{ request()->is('managers/settings/settings_banner') || request()->is('settings/create') || request()->is('settings/*/edit') ? 'active' : '' }}">
+                                <div class="icon"><i class="icon-settings"></i></div>
+                                <div class="text">Quản lí banner</div>
+                            </a>
                         </li>
 
                     </ul>
@@ -157,7 +83,7 @@
 
         </div>
     </div>
-    <!-- /section-menu-left -->
+
 
 </body>
 

@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Product Manager
+        Quản lí sản phẩm
     </title>
 @endsection
 
@@ -39,7 +39,7 @@
             <!-- main-content-wrap -->
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Product Manager</h3>
+                    <h3>Quản lí sản phẩm</h3>
 
                 </div>
                 <!-- product-list -->
@@ -48,38 +48,42 @@
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
 
-                            <form class="form-search">
+                            <form class="form-search" method="GET" action="{{ route('managers.m_product.manager_product') }}">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." class="" name="name"
-                                        tabindex="2" value="" aria-required="true" required="">
+                                    <input type="text" placeholder="Nhập tên sản phẩm cần tìm..." name="search" tabindex="2" value="{{ request('search') }}" aria-required="true" required="">
                                 </fieldset>
                                 <div class="button-submit">
-                                    <button class="" type="submit"><i class="icon-search"></i></button>
+                                    <button type="submit"><i class="icon-search"></i></button>
                                 </div>
                             </form>
                         </div>
                         <a class="tf-button style-1 w208" href="{{ route('products.create') }}"><i
-                                class="icon-plus"></i>Add new</a>
+                                class="icon-plus"></i>Thêm mới</a>
                     </div>
                     <div class="wg-table table-product-list">
                         <ul class="table-title flex gap20 mb-14">
                             <li>
-                                <div class="body-title">Product</div>
+                                <div class="body-title">Sản phẩm</div>
                             </li>
                             <li>
-                                <div class="body-title">Category</div>
+                                <div class="body-title">Danh mục sản phẩm</div>
                             </li>
-
+                            {{-- <li>
+                                <div class="body-title">Mã code</div>
+                            </li> --}}
 
                             <li>
-                                <div class="body-title">Create at</div>
+                                <div class="body-title">Ngày tạo</div>
                             </li>
 
                             <li>
-                                <div class="body-title">Action</div>
+                                <div class="body-title">Hoạt động</div>
                             </li>
                         </ul>
                         <ul class="flex flex-column">
+                            @if ($products->isEmpty())
+            <li class="no-results">Không tìm thấy sản phẩm nào với từ khóa "{{ $search }}".</li>
+        @else
                             @foreach ($products as $product)
                                 <li class="product-item gap14">
                                     <div class="image no-bg">
@@ -90,6 +94,8 @@
                                             <a href="{{ route('products.edit', $product->ProductID) }}" class="body-title-2">{{ $product->ProductName }}</a>
                                         </div>
                                         <div class="body-text">{{ $product->category->CategoryName }}</div> <!-- Hiển thị tên danh mục -->
+
+
                                         <div class="body-text">{{ $product->created_at }}</div> <!-- Hiển thị tên danh mục -->
 
                                         <div class="list-icon-function">
@@ -99,7 +105,7 @@
                                                 </a>
                                             </div>
                                             <div class="user-item">
-                                                <form action="{{ route('products.destroy', $product->ProductID) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                <form action="{{ route('products.destroy', $product->ProductID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" style="border: none; background: none;">
@@ -111,6 +117,7 @@
                                     </div>
                                 </li>
                             @endforeach
+                            @endif
                         </ul>
                     </div>
                     <div class="divider"></div>

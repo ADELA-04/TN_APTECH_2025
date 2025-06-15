@@ -3,8 +3,9 @@
     <title>order detail custom</title>
 @endsection
 @section('css')
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/uicons-regular-rounded.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
@@ -20,124 +21,111 @@
 @endsection
 @section('content')
     <section>
-        <div class="w-100 pt-60 pb-120 position-relative">
+        <div class="w-100 position-relative">
             <div class="container">
-                <div class="sec-title2 d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
-                    <h3 class="mb-0">Your Oder</h3>
+                <div
+                    class="mt-20 sec-title2  position-relative w-100 ">
+                    <span><a href="{{ route('orders.index') }}">Theo dõi đơn hàng ></a></span>
+                    <span class="mb-0" > <a style="font-family: 'Roboto';" >Chi tiết đơn hàng</a></span>
+                </div>
 
-                </div><!-- Section Title 2 -->
-            <!-- Thanh tiến trình -->
-<div class="col-12" style="margin-bottom: 30px; padding: 10px;">
-    <div class="wg-box h-full">
-        <div class="road-map horizontal">
-            <div class="road-map-item active">
-                <div class="icon"><i class="fas fa-receipt"></i></div>
-                <h6>Receiving orders</h6>
-                <div class="body-text">05:43 AM</div>
-            </div>
-            <div class="road-map-item active">
-                <div class="icon"><i class="fas fa-cogs"></i></div>
-                <h6>Order processing</h6>
-                <div class="body-text">01:21 PM</div>
-            </div>
-            <div class="road-map-item active">
-                <div class="icon"><i class="fas fa-truck"></i></div>
-                <h6>Being delivered</h6>
-                <div class="body-text">Processing</div>
-            </div>
-            <div class="road-map-item">
-                <div class="icon"><i class="fas fa-check-circle"></i></div>
-                <h6>Delivered</h6>
-                <div class="body-text">Pending</div>
             </div>
         </div>
-    </div>
-</div>
-                <div class="cart-wrap position-relative w-100">
-                    <form>
-                        <table class="cart-table w-100">
-                            <thead>
-                                <tr>
+        <div class="cart-wrap position-relative w-100">
+            <form>
+                <table class="cart-table w-100">
+                    <thead>
+                        <tr>
 
-                                    <th>Product</th>
-                                    <th>Atribute</th>
+                            <th class="text-center" style="font-family: 'Roboto';">Sản phẩm</th>
+                            <th style="font-family: 'Roboto';">Thuộc tính</th>
 
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Subtotal</th>
+                            <th style="font-family: 'Roboto';">Đơn giá</th>
+                            <th style="font-family: 'Roboto';">Số lượng</th>
+                            <th style="font-family: 'Roboto';">Thành tiền</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="cart-item">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($order->orderDetails as $detail)
+                            <tr class="cart-item">
+                                <td class="d-flex align-items-center">
+                                    <div class="cart-product-box d-flex flex-wrap align-items-center">
+                                        <div class="cart-product-img overflow-hidden">
 
-                                    <td class="d-flex align-items-center">
+                                            <a href="{{ route('product.detail', $detail->ProductID) }}" title="">
+                                                <img class="img-fluid w-60" src="{{ asset($detail->product->Image) }}"
+                                                    alt="{{ $detail->product->Name }}"> </a>
 
-                                        <div class="cart-product-box d-flex flex-wrap align-items-center">
-                                            <div class="cart-product-img overflow-hidden">
-                                                <a href="product-detail.html" title="">
-                                                    <img class="img-fluid w-100"
-                                                        src="assets/images/resources/cart-img1-1.jpg" alt="Cart Image 1">
-                                                </a>
-                                            </div>
-                                            <h5 class="mb-0">
-                                                <a href="product-detail.html" title="">Commodo Blown Lamp</a>
-                                            </h5>
                                         </div>
+                                        <p style="font-family: 'Roboto';" class="mb-0">
+                                            <a style="font-size: 15px" href="{{ route('product.detail', $detail->ProductID) }}"
+                                                title="">   {{ Str::limit($detail->product->ProductName, 30) }}</a>
+                                        </p>
+                                    </div>
 
 
-                                    </td>
+                                </td>
 
-                                    <td>
-                                        <span class="">Color: </span>
-                                        <span class="">Xanh </span>
-                                    </td>
-                                    <td><span class="price">$124.00</span></td>
-                                    <td>
-                                        <span class="">01 </span>
-                                    </td>
-                                    <td><span class="price text-color1">$275.00</span></td>
+                                <td>
+                                    <span class="">{{ $detail->Color }} --</span>
+                                    <span class="">{{ $detail->Size }}</span>
+                                </td>
+                                <td><span class="price">{{ number_format($detail->Price, 0, ',', '.') }} VNĐ</span></td>
+                                <td>
+                                    <span class="">{{ $detail->Quantity }}</span>
+                                </td>
+                                <td><span
+                                        class="price text-color1">{{ number_format($detail->Price * $detail->Quantity, 0, ',', '.') }}
+                                        VNĐ</span></td>
 
 
-                                </tr>
-                            </tbody>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+                <div class="col-md-12 col-sm-12 col-lg-12">
+                    <div class="cart-total v2 w-100" style="border-radius: 0px;">
+                        <div style="text-align:right;">
+                            <h4 style="color:tomato;font-family: 'Roboto';" >Hóa đơn</h4>
+                        </div>
+
+                        <table>
+<tr style="border-bottom: none">
+                                <td style="font-family: 'Roboto';">Tổng tiền hàng</td>
+                               <td><span class="price">{{ number_format($order->TotalAmount-40000, 0, ',', '.') }} VNĐ</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: 'Roboto';">Phí vận chuyển</td>
+                                <td><span class="price">40.000 VNĐ</span></td>
+                            </tr>
+                              <tr>
+                                <td style="font-family: 'Roboto';">Tổng tiền</td>
+                                <td><strong class="price">{{ number_format($order->TotalAmount, 0, ',', '.') }} VNĐ</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: 'Roboto';">Phương thức thanh toán</td>
+                                <td><span class="price" style="font-family: 'Roboto';" >{{ $order->PaymentMethod }}</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: 'Roboto';">Ngày đặt hàng</td>
+                                <td><span class="price">{{ $order->created_at }}</span></td>
+                            </tr>
+
+                             <tr>
+                                <td style="font-family: 'Roboto';">Trang thái đơn hàng</td>
+                                <td><span class="price" style="color: rgb(13, 183, 13);font-family: 'Roboto';">{{ $order->OrderStatus }}</span></td>
+                            </tr>
 
                         </table>
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                            <div class="cart-total v2 w-100" style="border-radius: 0px;">
-                                <div style="text-align:right;">
-                                    <h4 style="color:tomato;">Complete</h4>
-                                </div>
 
-                                <table>
 
-                                    <tr>
-                                        <td>Shipping</td>
-                                        <td><span class="price">$30.000</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Payment</td>
-                                        <td><span class="price">COD</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Estimated Delivery Time</td>
-                                        <td><span class="price">20/10/2025</span></td>
-                                    </tr>
-                                    <tr style="border-bottom: none">
-                                        <td>Total</td>
-                                        <td><strong class="price">$323.00</strong></td>
-                                    </tr>
-                                </table>
-
-                                <div style="text-align: center">
-                                    <button class="theme-btn bg-color1" type="submit"
-                                        style="margin-top: 15px">Review<span></span><span></span><span></span><span></span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div><!-- Cart Wrap -->
-            </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- Cart Wrap -->
+        </div>
         </div>
     </section>
 @endsection

@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+          'customer' => [ // Thêm guard cho Customer
+        'driver' => 'session',
+        'provider' => 'customers',
+    ],
     ],
 
     /*
@@ -63,6 +67,14 @@ return [
     'users' => [
         'driver' => 'eloquent',
         'model' => App\Models\User::class, // Sử dụng trực tiếp model User
+    ],
+     'customers' => [ // Thêm provider cho Customer
+        'driver' => 'eloquent',
+        'model' => App\Models\Customer::class,
+    ],
+    'cart' => [ // Thêm provider cho Cart
+        'driver' => 'eloquent',
+        'model' => App\Models\Cart::class,
     ],
 ],
 

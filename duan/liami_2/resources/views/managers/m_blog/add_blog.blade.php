@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       ADD Blog
+       Thêm mới tin tức
     </title>
 @endsection
 
@@ -38,11 +38,10 @@
                     <div class="main-content-inner">
                         <div class="main-content-wrap">
                             <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                                <h3>Add Blog</h3>
+                                <h3>Thêm tin tức</h3>
                                 <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
-                                    <li><a href="#"><div class="text-tiny">Blog</div></a></li>
-                                    <li><i class="icon-chevron-right"></i></li>
-                                    <li><div class="text-tiny">Add Blog</div></li>
+                                    <li><i class="icon-chevron-left"></i></li>
+                                    <li><a href="{{ route('managers.m_blog.manager_blog') }}"><div class="text-tiny">Quay lại</div></a></li>
                                 </ul>
                             </div>
 
@@ -68,23 +67,23 @@
                                 @csrf
                                 <div class="wg-box">
                                     <fieldset class="name">
-                                        <div class="body-title mb-10">Title <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" name="Title" placeholder="Enter blog title" required>
-                                        <div class="text-tiny">Do not exceed 20 characters when entering the blog title.</div>
+                                        <div class="body-title mb-10">Tiêu đề <span class="tf-color-1">*</span></div>
+                                        <input class="mb-10" type="text" name="Title" placeholder="Nhập tiêu đề tin tức..." required>
+
                                     </fieldset>
                                     <fieldset class="description">
-                                        <div class="body-title mb-10">Summary <span class="tf-color-1">*</span></div>
-                                        <textarea class="mb-10" name="Summary" placeholder="Summary" required></textarea>
-                                        <div class="text-tiny">Do not exceed 100 characters when entering the summary.</div>
+                                        <div class="body-title mb-10">Mô tả ngắn <span class="tf-color-1">*</span></div>
+                                        <textarea class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn cho tin tức..." required></textarea>
+                                        {{-- <div class="text-tiny">Do not exceed 100 characters when entering the summary.</div> --}}
                                     </fieldset>
                                     <fieldset class="description">
-                                        <div class="body-title mb-10">Content <span class="tf-color-1">*</span></div>
-                                        <textarea class="mb-10" name="Content" placeholder="Content" required></textarea>
+                                            <textarea class="mb-10" name="Content" placeholder="Nhập nội dung..." tabindex="0">{{ old('Description') }}</textarea>
+
                                     </fieldset>
                                 </div>
                                 <div class="wg-box">
                                     <fieldset>
-                                        <div class="body-title mb-10">Upload images</div>
+                                        <div class="body-title mb-10">Ảnh minh họa</div>
                                         <div class="upload-image mb-16">
                                             <div class="item up-load">
                                                 <label class="uploadfile" for="myFile">
@@ -97,18 +96,10 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <fieldset class="brand">
-                                        <div class="body-title mb-10">Is visible <span class="tf-color-1">*</span></div>
-                                        <div class="select">
-                                            <select name="IsVisible" required>
-                                                <option value="1">Yes</option>
-                                                <option value="0">No</option>
-                                            </select>
-                                        </div>
-                                    </fieldset>
+
                                     <div class="cols gap10">
-                                        <button class="tf-button w-full" type="submit">Save</button>
-                                        <button class="tf-button style-1 w-full" type="button" onclick="window.location='{{ route('managers.m_blog.manager_blog') }}'">Cancel</button>
+                                        <button class="tf-button w-full" type="submit">Lưu</button>
+                                        <button class="tf-button style-1 w-full" type="button" onclick="window.location='{{ route('managers.m_blog.manager_blog') }}'">Hủy</button>
                                     </div>
                                 </div>
                             </form>
@@ -136,10 +127,14 @@
    <script src="{{ asset('assets/js2/switcher.js') }}"></script>
    <script src="{{ asset('assets/js2/theme-settings.js') }}"></script>
    <script src="{{ asset('assets/js2/main.js') }}"></script>
-
-
-    <script>
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+ <script>
         document.addEventListener('DOMContentLoaded', function() {
+            CKEDITOR.replace('Content', {
+                filebrowserUploadUrl: "{{ route('upload.image') }}",
+                filebrowserUploadMethod: 'form'
+            });
+
             const fileInput = document.getElementById('myFile');
             const preview = document.getElementById('previewImage');
 
@@ -158,5 +153,4 @@
             });
         });
     </script>
-
 @endsection

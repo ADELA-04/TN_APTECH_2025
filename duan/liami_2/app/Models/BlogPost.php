@@ -16,7 +16,6 @@ class BlogPost extends Model
         'Content',
         'Summary',
         'ImageURL',
-        'IsVisible',
         'AuthorID',
         'views',
     ];

@@ -29,7 +29,7 @@
             <!-- main-content-wrap -->
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Customer Manager</h3>
+                    <h3>Danh sách khách hàng</h3>
                 </div>
                 <!-- product-list -->
                 <div class="wg-box">
@@ -38,36 +38,36 @@
 
                             <form class="form-search">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." name="name" required>
+                                    <input type="text" placeholder="Tìm kiếm..." name="name" required>
                                 </fieldset>
                                 <div class="button-submit">
                                     <button type="submit"><i class="icon-search"></i></button>
                                 </div>
                             </form>
                         </div>
-                        <a class="tf-button style-1 w208" href="{{ route('customer.create') }}"><i
-                                class="icon-plus"></i>Add new</a>
+                        {{-- <a class="tf-button style-1 w208" href="{{ route('customer.create') }}"><i
+                                class="icon-plus"></i>Add new</a> --}}
                     </div>
 
                     <div class="wg-table table-product-list">
                         <ul class="table-title flex gap20 mb-14">
                             <li>
-                                <div class="body-title">Customer</div>
+                                <div class="body-title">Khách hàng</div>
                             </li>
                             <li>
-                                <div class="body-title">Gmail</div>
+                                <div class="body-title">Email</div>
                             </li>
                             <li>
-                                <div class="body-title">Phone</div>
+                                <div class="body-title">Số điện thoại</div>
                             </li>
                             <li>
-                                <div class="body-title">Order</div>
+                                <div class="body-title">Đơn hàng</div>
                             </li>
                             <li>
-                                <div class="body-title">Total spending</div>
+                                <div class="body-title">Tổng chi tiêu</div>
                             </li>
                             <li>
-                                <div class="body-title">Action</div>
+                                <div class="body-title">Hành động</div>
                             </li>
                         </ul>
                         <ul class="flex flex-column">
@@ -90,13 +90,13 @@
                                         <div class="body-text">1</div>
                                         <div class="body-text">150000</div>
                                         <div class="list-icon-function">
-                                            <div class="item edit">
+                                            {{-- <div class="item edit">
                                                 <a href="{{ route('customers.edit',$customer->CustomerID) }}">
                                                     <i class="icon-edit-3"></i>
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                             <div class="user-item">
-                                                <form action="{{ route('customer.destroy', $customer->CustomerID) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                <form action="{{ route('customer.destroy', $customer->CustomerID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" style="border: none; background: none;">
