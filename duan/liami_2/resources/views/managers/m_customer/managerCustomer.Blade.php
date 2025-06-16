@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('assets/icon/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
-
 @endsection
 
 {{-- content --}}
@@ -36,17 +35,16 @@
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
 
-                            <form class="form-search">
-                                <fieldset class="name">
-                                    <input type="text" placeholder="Tìm kiếm..." name="name" required>
-                                </fieldset>
-                                <div class="button-submit">
-                                    <button type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
+                            <form class="form-search" method="GET" action="{{ route('manager_customer') }}">
+    <fieldset class="name">
+        <input type="text" placeholder="Tìm kiếm bằng mã khách hàng..." name="customer_id" required>
+    </fieldset>
+    <div class="button-submit">
+        <button type="submit"><i class="icon-search"></i></button>
+    </div>
+</form>
                         </div>
-                        {{-- <a class="tf-button style-1 w208" href="{{ route('customer.create') }}"><i
-                                class="icon-plus"></i>Add new</a> --}}
+
                     </div>
 
                     <div class="wg-table table-product-list">
@@ -61,56 +59,53 @@
                                 <div class="body-title">Số điện thoại</div>
                             </li>
                             <li>
-                                <div class="body-title">Đơn hàng</div>
+                                <div class="body-title"> Số đơn hàng</div>
                             </li>
-                            <li>
-                                <div class="body-title">Tổng chi tiêu</div>
-                            </li>
+
                             <li>
                                 <div class="body-title">Hành động</div>
                             </li>
                         </ul>
                         <ul class="flex flex-column">
-                            @if(isset($customers) && $customers->isNotEmpty())
-                            @foreach ($customers as $customer)
-                                <li class="product-item gap14">
-                                    <div class="image no-bg">
-                                        <img src="{{ asset($customer->ProfilePicture) }}" alt="" >
-                                    </div>
-                                    <div class="flex items-center justify-between gap20 flex-grow">
-                                        <div class="name">
-                                            <a href="{{ route('customers.edit', $customer->CustomerID) }}" class="body-title-2">{{ $customer->FullName }}</a>
+                            @if (isset($customers) && $customers->isNotEmpty())
+                                @foreach ($customers as $customer)
+                                    <li class="product-item gap14">
+                                        <div class="image no-bg">
+                                            <img src="{{ asset($customer->ProfilePicture) }}" alt="">
                                         </div>
-                                        <div class="body-text">{{ $customer->Email }}</div>
-                                        <div class="body-text"> @if ($customer->shippingAddress->isNotEmpty())
-                                            {{ $customer->shippingAddress->first()->Phone }}
-                                        @else
-                                            Không có số điện thoại
-                                        @endif</div>
-                                        <div class="body-text">1</div>
-                                        <div class="body-text">150000</div>
-                                        <div class="list-icon-function">
-                                            {{-- <div class="item edit">
-                                                <a href="{{ route('customers.edit',$customer->CustomerID) }}">
-                                                    <i class="icon-edit-3"></i>
-                                                </a>
-                                            </div> --}}
-                                            <div class="user-item">
-                                                <form action="{{ route('customer.destroy', $customer->CustomerID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" style="border: none; background: none;">
-                                                        <i class="icon-trash-2"></i>
-                                                    </button>
-                                                </form>
+                                        <div class="flex items-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="{{ route('customers.edit', $customer->CustomerID) }}"
+                                                    class="body-title-2">{{ $customer->FullName }}</a>
+                                            </div>
+                                            <div class="body-text">{{ $customer->Email }}</div>
+                                            <div class="body-text">
+                                                @if ($customer->orders->isNotEmpty())
+                                                    {{ $customer->orders->first()->Phone }}
+                                                @else
+                                                    Không có số điện thoại
+                                                @endif
+                                            </div>
+                                            <div class="body-text">{{ $customer->orders_count }} Đơn hàng</div>
+                                            <div class="list-icon-function">
+
+                                                <div class="user-item">
+                                                    <form action="{{ route('customer.destroy', $customer->CustomerID) }}"
+                                                        method="POST" onsubmit="return confirm('Xác nhận xóa?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="border: none; background: none;">
+                                                            <i class="icon-trash-2"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 @endforeach
-                                @else
-                                    <li class="product-item">Không có khách hàng nào.</li>
-                                @endif
+                            @else
+                                <li class="product-item">Không có khách hàng nào.</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="divider"></div>
@@ -126,7 +121,7 @@
                             </li>
 
                             @for ($i = 1; $i <= $customers->lastPage(); $i++)
-                                <li class="{{ ($customers->currentPage() == $i) ? 'active' : '' }}">
+                                <li class="{{ $customers->currentPage() == $i ? 'active' : '' }}">
                                     <a href="{{ $customers->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor

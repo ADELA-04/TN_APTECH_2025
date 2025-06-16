@@ -21,12 +21,12 @@
         <div class="w-100 pt-60 pb-120 position-relative">
             <div class="container">
                 @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
 
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
                 <div class="sec-title2 position-relative w-100">
                     <h3 class="mb-0">Thanh toán</h3>
                 </div><!-- Section Title -->
@@ -45,7 +45,8 @@
                                         <div class="col-md-12 col-sm-12 col-lg-12">
                                             <div class="field-box v2 position-relative w-100">
                                                 <label>Tên khách hàng *</label>
-                                                <input required name="full_name" type="text" value="{{ $user->FullName }}">
+                                                <input required name="full_name" type="text"
+                                                    value="{{ $user->FullName }}">
 
                                             </div>
                                         </div>
@@ -56,21 +57,16 @@
 
                                             </div>
                                         </div>
-                                       <div class="col-md-12 col-sm-12 col-lg-12">
-    <div class="field-box v2 position-relative w-100">
-        <label>Số điện thoại *</label>
-        <input placeholder="Số điện thoại phải là số và không quá 10 số"
-            required
-            name="phone"
-            type="text"
-            value="{{ $user->Phone }}"
-            pattern="^[0-9]{10}$"
-            maxlength="10"
-            title="Số điện thoại phải là 10 chữ số"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-        >
-    </div>
-</div>
+                                        <div class="col-md-12 col-sm-12 col-lg-12">
+                                            <div class="field-box v2 position-relative w-100">
+                                                <label>Số điện thoại *</label>
+                                                <input placeholder="Số điện thoại phải là số và không quá 10 số" required
+                                                    name="phone" type="text" value="{{ $user->Phone }}"
+                                                    pattern="^[0-9]{10}$" maxlength="10"
+                                                    title="Số điện thoại phải là 10 chữ số"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 col-sm-12 col-lg-12">
 
                                             <div class="field-box v2  position-relative w-100">
@@ -106,8 +102,10 @@
                                     </tr>
                                     @foreach ($cartItems as $item)
                                         <tr>
-                                            <input type="hidden" name="cart_ids" id="cart-ids" value="{{ json_encode($cartItems->pluck('CartItemID')) }}">
-                                            <td style="font-family: 'Roboto';">{{ $item->product->ProductName }}  <span
+
+                                            <input type="hidden" name="cart_ids" id="cart-ids"
+                                                value="{{ json_encode($cartItems->pluck('CartItemID')) }}">
+                                            <td style="font-family: 'Roboto';">{{ $item->product->ProductName }} <span
                                                     style="color: rgb(226, 104, 4)">--{{ $item->Color }}</span><span
                                                     style="color: rgb(226, 104, 4)">--{{ $item->Size }}</span><span
                                                     style="color: rgb(226, 104, 4)">--sl:{{ $item->Quantity }}</span></td>
@@ -116,12 +114,12 @@
                                                     VNĐ</span></td>
                                         </tr>
                                     @endforeach
- {{-- <input type="hidden" name="cart_ids" id="cart-ids" value="{{ json_encode($cartItems->pluck('CartID')) }}">                                    <tr> --}}
-                                        <td style="font-family: 'Roboto';">Tổng tiền hàng</td>
-                                        <td><span class="price">{{ number_format($totalAmount, 0) }} VNĐ</span></td>
+                                    {{-- <input type="hidden" name="cart_ids" id="cart-ids" value="{{ json_encode($cartItems->pluck('CartID')) }}">                                    <tr> --}}
+                                    <td style="font-family: 'Roboto';">Tổng tiền hàng</td>
+                                    <td><span class="price">{{ number_format($totalAmount, 0) }} VNĐ</span></td>
                                     </tr>
                                     <tr>
-                                       <span>{{ json_encode($cartItems->pluck('CartItemID')) }}</span>
+                                        <span>{{ json_encode($cartItems->pluck('CartItemID')) }}</span>
                                     </tr>
                                     <tr>
                                         <td style="font-family: 'Roboto';">Phí vận chuyển</td>
@@ -145,7 +143,6 @@
     </section>
 @endsection
 @section('script')
-
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos.min.js') }}"></script>

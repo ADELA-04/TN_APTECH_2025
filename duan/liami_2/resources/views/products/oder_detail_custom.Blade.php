@@ -78,8 +78,6 @@
                                 <td><span
                                         class="price text-color1">{{ number_format($detail->Price * $detail->Quantity, 0, ',', '.') }}
                                         VNĐ</span></td>
-
-
                             </tr>
                         @endforeach
                     </tbody>

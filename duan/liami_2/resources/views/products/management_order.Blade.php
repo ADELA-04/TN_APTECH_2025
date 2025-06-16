@@ -62,18 +62,7 @@
                             </tbody>
 
                         </table>
-                        {{-- <div class="checkout-wrap position-relative w-100">
-                            <div class="row mrg30 ">
-                                <div class="col-md-12 col-sm-12 mb-3 ho " >
-                                    <div class="not-bar bg-color5 w-100 " style="border-radius:0px; text-align: right;">
-                                                <div style="text-align: center">
-                                                    <button class="theme-btn bg-color1"
-                                                    type="submit">Review<span></span><span></span><span></span><span></span></button>
-                                                </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
+
                     </form>
                 </div><!-- Cart Wrap -->
             </div>

@@ -93,18 +93,11 @@
                 <hr class="mt-70 mb-0">
                 <div class="bottom-bar d-flex flex-wrap align-items-center justify-content-between w-100">
                     <ul class="bottom-links d-flex flex-wrap align-items-center list-unstyled mb-0">
-                        <li><a href="javascript:void(0);" title="" style="font-family: 'Roboto';">Chính sách</a>
-                        </li>
-                        <li><a href="javascript:void(0);" title="" style="font-family: 'Roboto';">Điều khoản dịch
-                                vụ</a></li>
-                        <li>&copy; <a href="{{ asset('index.html') }}" title="">Liami</a> All rights reserved.
-                        </li>
+
+                        <li><p style="font-family: 'Roboto';">Liami - Thương hiệu thời trang thành lập năm 2023.</p></li>
+
                     </ul><!-- Bottom Links -->
-                    <div class="payment-opt d-flex flex-wrap align-items-center">
-                        <span>Accept for</span>
-                        <img class="img-fluid" src="{{ asset('assets/images/payment-opt-img.png') }}"
-                            alt="Payment Options Image">
-                    </div><!-- Payment Options -->
+
                 </div><!-- Bottom Bar -->
             </div>
         </div>

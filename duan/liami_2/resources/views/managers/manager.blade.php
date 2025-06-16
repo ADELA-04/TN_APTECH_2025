@@ -115,11 +115,10 @@
                     <!-- orders -->
                     <div class="wg-box">
                         <div class="flex items-center justify-between">
-                            <h5>Sản phẩm được xem nhiều nhất</h5>
+                            <h5>Top sản phẩm được xem nhiều nhất</h5>
                             <div class="dropdown default">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
-                                    <span class="view-all">Xem tất cả<i class="icon-chevron-down"></i></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
@@ -146,9 +145,7 @@
                                 <li>
                                     <div class="body-title">Lượt xem</div>
                                 </li>
-                                <li>
-                                    <div class="body-title">Giá (VNĐ)</div>
-                                </li>
+
                             </ul>
 
                             @foreach ($topViewedProducts as $topViewedProduct)
@@ -168,9 +165,7 @@
                                             <div class="body-text">{{ $topViewedProduct->ProductID }}</div>
 
                                             <div class="body-text">{{ $topViewedProduct->View }}</div>
-                                            <div>
-                                                <div class="block-available">{{ $topViewedProduct->Price }}</div>
-                                            </div>
+
                                         </div>
                                     </li>
                             @endforeach

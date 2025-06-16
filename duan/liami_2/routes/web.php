@@ -11,25 +11,26 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\ApparenceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ShippingAddressController;
+
 use App\Http\Controllers\OrderController;
-use App\Models\ShippingAddress;
+
 
 //Route::get('/address/add', [AddressController::class, 'create'])->name('address.add');
 
 
 //order
-Route::get('/orders/{id}', [OrderController::class, 'index_detail'])->name('orders.detail');
+Route::get('/orderslist', [OrderController::class, 'index2'])->name('orders.index2');
+Route::get('/orders-detail/{id}', [OrderController::class, 'index_detail'])->name('orders.detail');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 Route::post('/checkout-pay', [OrderController::class, 'store'])->name('checkout.store');
-
+Route::get('/orders/{id}', [OrderController::class, 'edit'])->name('order.edit');
+Route::post('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
 // cart
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
@@ -76,7 +77,7 @@ Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profi
 Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 
 //customer
-Route::get('/managers/m_customer/manager_customer', [CustomerController::class, 'index'])->name('managers.m_customer.manager_customer');
+Route::get('/manager_customer', [CustomerController::class, 'index'])->name('manager_customer');
 Route::get('/customer/create', [CustomerController::class, 'create'])->name('customer.create');
 Route::post('/customer', [CustomerController::class, 'store'])->name('customer.store');
 Route::get('/customers/{CustomerID}/edit', [CustomerController::class, 'edit'])->name('customers.edit');

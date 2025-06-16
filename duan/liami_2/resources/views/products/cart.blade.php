@@ -58,7 +58,7 @@
                                                     </a>
                                                 </div>
                                                 <h5 class="mb-0">
-                                                    <a
+                                                    <a style="font-family: 'Roboto';"
                                                         href="{{ route('product.detail', $item->ProductID) }}">{{ Str::limit($item->product->ProductName, 20, '...') }}</a>
                                                 </h5>
                                             </div>
@@ -84,19 +84,10 @@
                             </tbody>
                         </table>
 
-                        <div class="cart-totals d-flex flex-wrap justify-content-end">
-                            <div class="cart-total">
-                                <h4 style="font-family: 'Roboto';">Thông tin đơn hàng</h4>
-                                <table>
-                                    <tr>
-                                        <td style="font-family: 'Roboto';">Thành tiền</td>
-                                        <td><strong>{{ number_format($totalAmount, 0) }} VNĐ</strong></td>
-                                    </tr>
-                                </table>
-                                <button class="theme-btn bg-color1 mt-10" type="submit">
-                                    Mua hàng<span></span><span></span><span></span><span></span>
-                                </button>
-                            </div>
+                        <div class="mt-30 justify-content-center">
+                            <button class="theme-btn bg-color1 " type="submit">
+                                Mua hàng<span></span><span></span><span></span><span></span>
+                            </button>
                         </div>
                     </form>
                 </div><!-- Cart Wrap -->
@@ -119,23 +110,23 @@
     <script>
         $(document).ready(function() {
             function calculateSelectedTotals() {
-    let selectedProducts = [];
+                let selectedProducts = [];
 
-    $('.cart-item').each(function() {
-        const isSelected = $(this).find('.product-select').is(':checked');
-        if (isSelected) {
-            const cartItemId = $(this).find('.cart-item-id').val(); // CartItemID
-            const quantity = parseInt($(this).find('.product-quanty').text());
+                $('.cart-item').each(function() {
+                    const isSelected = $(this).find('.product-select').is(':checked');
+                    if (isSelected) {
+                        const cartItemId = $(this).find('.cart-item-id').val(); // CartItemID
+                        const quantity = parseInt($(this).find('.product-quanty').text());
 
-            selectedProducts.push({
-                id: cartItemId,
-                quantity: quantity
-            });
-        }
-    });
+                        selectedProducts.push({
+                            id: cartItemId,
+                            quantity: quantity
+                        });
+                    }
+                });
 
-    $('#selected-products').val(JSON.stringify(selectedProducts));
-}
+                $('#selected-products').val(JSON.stringify(selectedProducts));
+            }
             $('.product-select').on('change', function() {
                 calculateSelectedTotals();
             });

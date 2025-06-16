@@ -15,6 +15,31 @@ use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
+  public function index2(Request $request)
+{
+    // Lấy từ khóa tìm kiếm từ request
+    $searchTerm = $request->input('name');
+
+    // Lấy tất cả đơn hàng cùng với thông tin khách hàng
+    $query = Order::with(['customer', 'orderDetails.product']);
+
+    // Nếu có từ khóa tìm kiếm, thêm điều kiện vào truy vấn
+    if ($searchTerm) {
+        $query->where('OrderID', 'like', "%{$searchTerm}%");
+    }
+
+    // Sắp xếp theo ngày tạo mới nhất
+    $orders = $query->orderBy('created_at', 'desc')->paginate(10);
+
+    // Thêm hình ảnh sản phẩm vào mỗi đơn hàng
+    foreach ($orders as $order) {
+        $firstDetail = $order->orderDetails->first();
+        $order->product_image = $firstDetail ? $firstDetail->product->Image : null;
+    }
+
+    return view('managers.order.order_List', compact('orders'));
+}
+
     public function index_detail($id)
     {
         $order = Order::with('orderDetails')->findOrFail($id);
@@ -140,18 +165,18 @@ class OrderController extends Controller
         $order->CustomerID = $customer->CustomerID;
         $order->TotalAmount = $request->input('total_amount');
         $order->PaymentMethod = $request->input('payment_method');
+         $order->OrderStatus='Chờ xác nhận';
         $order->Notes = $request->input('notes');
+
         $order->save();
 
         // Lấy danh sách cart_ids từ request
         $cartIds = json_decode($request->input('cart_ids'), true);
-
         // Lấy tất cả CartItems dựa trên cartIds
         $cartItems = CartItem::whereIn('CartItemID', $cartIds)->get();
 
-        // Tạo chi tiết đơn hàng chỉ cho các CartItem có CartID trong mảng
         foreach ($cartItems as $item) {
-            if (in_array($item->CartID, $cartIds)) { // Kiểm tra xem CartID có trong mảng không
+
                 $orderDetail = new OrderDetail();
                 $orderDetail->OrderID = $order->OrderID;
                 $orderDetail->ProductID = $item->ProductID; // Đảm bảo bạn lấy đúng ProductID
@@ -160,9 +185,18 @@ class OrderController extends Controller
                 $orderDetail->Color = $item->Color;
                 $orderDetail->Size = $item->Size;
                 $orderDetail->save();
-            }
+
         }
+ // Xóa CartItems đã được đặt hàng
+    CartItem::whereIn('CartItemID', $cartIds)->delete();
 
         return redirect()->route('orders.index')->with('success', 'Đặt hàng thành công!');
     }
+public function edit($id)
+{
+    // Lấy đơn hàng cùng với thông tin khách hàng và chi tiết đơn hàng
+    $order = Order::with(['customer', 'orderDetails.product'])->findOrFail($id);
+
+    return view('managers.order.order_detail', compact('order'));
+}
 }

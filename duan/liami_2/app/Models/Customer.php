@@ -24,4 +24,8 @@ class Customer extends Authenticatable
       public function getAuthPassword() {
         return $this->PasswordHash;
     }
+     public function orders()
+    {
+        return $this->hasMany(Order::class, 'CustomerID');
+    }
 }

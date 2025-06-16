@@ -48,7 +48,7 @@
                             </picture>
                             <div class="slider-cap v2 text-center text-white position-absolute">
                                 <h1 class="mb-0 animated fadeInUp">{{ $banner->Title }}<br> </h1>
-                                <p class="mb-0 animated fadeInUp">{{ $banner->subTitle }}<br></p>
+                                <p class="mb-0 animated fadeInUp" style="font-family: 'Roboto';">{{ $banner->subTitle }}<br></p>
                                 <div
                                     class="btns-group d-flex flex-wrap justify-content-center align-items-center animated fadeInUp">
                                     <a class="theme-btn bg-color1" href="{{ $banner->Link }}" title="">Xem
@@ -69,29 +69,29 @@
                         <div class="col-md-3 col-sm-6 col-lg-3">
                             <div class="serv-box text-center w-100">
                                 <span class="d-inline-block text-color4"><i class="fi fi-rr-truck-side"></i></span>
-                                <h4 class="mb-0" style="font-family: 'Roboto';">Miễn phí giao hàng</h4>
-                                <p class="mb-0">Đối với tất cả các đơn hàng trên 150 VNĐ</p>
+                                <h4 class="mb-0" style="font-family: 'Roboto';">Giao hàng nhanh chóng</h4>
+                                <p class="mb-0">Giao hàng tận nơi nhanh chóng, tiện lợi và an toàn.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-lg-3">
                             <div class="serv-box text-center w-100">
                                 <span class="d-inline-block text-color4"><i class="fi fi-rr-time-forward"></i></span>
-                                <h4 class="mb-0" style="font-family: 'Roboto';">Hoàn trả trong 10 ngày</h4>
-                                <p class="mb-0">Khả năng trả lại hàng hóa của bạn</p>
+                                <h4 class="mb-0" style="font-family: 'Roboto';">Hoàn trả miễn phí</h4>
+                                <p class="mb-0">Khả năng trả lại hàng hóa của bạn.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-lg-3">
                             <div class="serv-box text-center w-100">
                                 <span class="d-inline-block text-color4"><i class="fi fi-rr-heart"></i></span>
-                                <h4 class="mb-0" style="font-family: 'Roboto';">Chúng tôi bao gồm</h4>
-                                <p class="mb-0">Đại diện cho tất cả</p>
+                                <h4 class="mb-0" style="font-family: 'Roboto';">Lựa chọn của phái đẹp</h4>
+                                <p class="mb-0">Nhiều năm là thương hiệu tài trợ cho các cuộc thi sắc đẹp.</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-lg-3">
                             <div class="serv-box text-center w-100">
                                 <span class="d-inline-block text-color4"><i class="fi fi-rr-plane"></i></span>
                                 <h4 class="mb-0" style="font-family: 'Roboto';">Bảo hành quốc tế</h4>
-                                <p class="mb-0">Bưu phẩm đến các quốc gia</p>
+                                <p class="mb-0">Liên hệ để được tư vấn các đơn hàng quốc tế.</p>
                             </div>
                         </div>
                     </div>

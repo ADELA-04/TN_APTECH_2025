@@ -38,8 +38,8 @@
                     <div class="center-heading">Quản lí</div>
                     <ul class="menu-list">
 
-                        <li class="menu-item ">
-                            <a href="{{ route('managers.m_product.manager_product') }}" class=""
+                        <li class="menu-item {{ request()->is('orderslist')|| request()->is('orders/*') ? 'active' : '' }}">
+                            <a href="{{ route('orders.index2') }}" class=""
                                 class="menu-item-button">
                                 <div class="icon"><i class="icon-shopping-cart"></i></div>
                                 <div class="text">Quản lí đơn hàng</div>
@@ -65,8 +65,8 @@
                             </a>
 
                         </li>
-                        <li class="menu-item {{ request()->is('managers/m_customer*') ? 'active' : '' }} }}">
-                            <a href="{{ route('managers.m_customer.manager_customer') }}" class="menu-item-button">
+                        <li class="menu-item {{ request()->is('manager_customer') ? 'active' : '' }} }}">
+                            <a href="{{ route('manager_customer') }}" class="menu-item-button">
                                 <div class="icon"><i class="icon-user"></i></div>
                                 <div class="text">Quản lí khách hàng</div>
                             </a>
@@ -89,12 +89,7 @@
                             </a>
 
                         </li>
-                        <li class="menu-item {{ request()->is('') ? 'active' : '' }}">
-                            <a href="report.html" class="">
-                                <div class="icon"><i class="icon-pie-chart"></i></div>
-                                <div class="text">Thống kê - Báo cáo</div>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
                 <div class="center-item">
