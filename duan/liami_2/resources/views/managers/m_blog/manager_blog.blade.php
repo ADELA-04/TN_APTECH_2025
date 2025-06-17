@@ -87,8 +87,7 @@
                         </ul>
                         <ul class="flex flex-column">
                             @if ($blogs->isEmpty())
-                            <li class="no-results">Không tìm thấy bài viết nào phù hợp với từ khóa "{{ $search }}".</li>
-                        @else
+ <div class="alert alert-warning">Không tìm thấy.</div>                        @else
                             @foreach ($blogs as $blog)
                                 <li class="product-item gap14">
                                     <div class="image no-bg">

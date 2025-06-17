@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('Logo')->nullable();
             $table->string('Favicon')->nullable();
             $table->string('NavigationLink')->nullable();
+             $table->string('LinkFB')->nullable();
+              $table->string('LinkIN')->nullable();
             $table->string('BusinessName', 100)->nullable();
             $table->string('BossName', 100)->nullable();
             $table->string('Phone', 15)->nullable();

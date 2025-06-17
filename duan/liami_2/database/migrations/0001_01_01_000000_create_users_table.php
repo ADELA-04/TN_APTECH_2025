@@ -24,11 +24,11 @@ return new class extends Migration
             $table->timestamps(); // Cột thời gian tạo và cập nhật
         });
 
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary(); // Email là khóa chính
-            $table->string('token'); // Token cho việc đặt lại mật khẩu
-            $table->timestamp('created_at')->nullable(); // Thời gian tạo token
-        });
+        // Schema::create('password_reset_tokens', function (Blueprint $table) {
+        //     $table->string('email')->primary(); // Email là khóa chính
+        //     $table->string('token'); // Token cho việc đặt lại mật khẩu
+        //     $table->timestamp('created_at')->nullable(); // Thời gian tạo token
+        // });
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary(); // ID phiên

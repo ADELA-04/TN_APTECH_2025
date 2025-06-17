@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('CartID')->constrained('carts', 'CartID'); // Khóa ngoại đến bảng Carts
             $table->foreignId('ProductID')->constrained('products', 'ProductID'); // Khóa ngoại đến bảng Products
             $table->integer('Quantity'); // Số lượng
+            $table->string('Color');
+            $table->string('Size');
             $table->timestamps(); // Thời gian tạo và cập nhật
         });
     }

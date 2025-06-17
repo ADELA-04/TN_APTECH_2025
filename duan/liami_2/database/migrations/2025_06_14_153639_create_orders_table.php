@@ -18,8 +18,10 @@ return new class extends Migration
             $table->enum('OrderStatus', ['Chờ xác nhận', 'Đã xác nhận', 'Chờ đơn vị vận chuyển','Đã bàn giao cho đơn vị vận chuyển','Đang giao hàng','Đã giao','Đã hủy']);
             $table->timestamps(0);
             $table->enum('PaymentMethod', ['COD', 'Bank Transfer'])->default('COD');
+            $table->string('Notes');
             $table->string('Address');
             $table->string('Phone');
+             $table->string('ShippingCode');
 
         });
     }

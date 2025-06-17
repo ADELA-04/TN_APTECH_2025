@@ -38,7 +38,7 @@
                         <tr>
 
                             <th class="text-center" style="font-family: 'Roboto';">Sản phẩm</th>
-                            <th style="font-family: 'Roboto';">Thuộc tính</th>
+                            <th style="font-family: 'Roboto';">Thông số</th>
 
                             <th style="font-family: 'Roboto';">Đơn giá</th>
                             <th style="font-family: 'Roboto';">Số lượng</th>
@@ -68,7 +68,7 @@
                                 </td>
 
                                 <td>
-                                    <span class="">{{ $detail->Color }} --</span>
+                                    <span class="">{{ $detail->Color }} -</span>
                                     <span class="">{{ $detail->Size }}</span>
                                 </td>
                                 <td><span class="price">{{ number_format($detail->Price, 0, ',', '.') }} VNĐ</span></td>
@@ -110,7 +110,14 @@
                                 <td style="font-family: 'Roboto';">Ngày đặt hàng</td>
                                 <td><span class="price">{{ $order->created_at }}</span></td>
                             </tr>
-
+                            <tr>
+                                <td style="font-family: 'Roboto';">Ghi chú</td>
+                                <td><span class="price" style="font-family: 'Roboto';">{{ $order->Notes }}</span></td>
+                            </tr>
+<tr>
+                                <td style="font-family: 'Roboto';">Mã vận đơn</td>
+                                <td><span  class="price">{{ $order->ShippingCode }}</span></td>
+                            </tr>
                              <tr>
                                 <td style="font-family: 'Roboto';">Trang thái đơn hàng</td>
                                 <td><span class="price" style="color: rgb(13, 183, 13);font-family: 'Roboto';">{{ $order->OrderStatus }}</span></td>

@@ -15,7 +15,7 @@ use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
-  public function index2(Request $request)
+ public function index2(Request $request)
 {
     // Lấy từ khóa tìm kiếm từ request
     $searchTerm = $request->input('name');
@@ -37,8 +37,48 @@ class OrderController extends Controller
         $order->product_image = $firstDetail ? $firstDetail->product->Image : null;
     }
 
-    return view('managers.order.order_List', compact('orders'));
+    // Kiểm tra nếu không tìm thấy đơn hàng nào
+    $notFound = $orders->isEmpty() && $searchTerm ? true : false;
+
+    return view('managers.order.order_List', compact('orders', 'notFound'));
 }
+ // Cập nhật trạng thái đơn hàng
+    public function updateStatus(Request $request, $id)
+    {
+        // Xác thực dữ liệu
+        $request->validate([
+            'OrderStatus' => 'required|string|max:255',
+        ]);
+
+        // Tìm đơn hàng
+        $order = Order::findOrFail($id);
+
+        // Cập nhật trạng thái
+        $order->OrderStatus = $request->input('OrderStatus');
+        $order->save();
+
+        // Trả về thông báo thành công
+        return redirect()->back()->with('success', 'Trạng thái đơn hàng đã được cập nhật thành công!');
+    }
+
+    // Cập nhật mã vận đơn
+    public function updateShippingCode(Request $request, $id)
+    {
+        // Xác thực dữ liệu
+        $request->validate([
+            'ShippingCode' => 'required|string|max:255',
+        ]);
+
+        // Tìm đơn hàng
+        $order = Order::findOrFail($id);
+
+        // Cập nhật mã vận đơn
+        $order->ShippingCode = $request->input('ShippingCode');
+        $order->save();
+
+        // Trả về thông báo thành công
+        return redirect()->back()->with('success', 'Mã vận đơn đã được cập nhật thành công!');
+    }
 
     public function index_detail($id)
     {
@@ -199,4 +239,64 @@ public function edit($id)
 
     return view('managers.order.order_detail', compact('order'));
 }
+public function checkout2(Request $request)
+    {
+        // Lấy thông tin từ các mô hình
+        $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
+        $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
+        $allProduct = Product::all();
+        $settings = Setting::all();
+        $banners = Banner::all();
+        $currentUrl = url()->current();
+        $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+        $user = Auth::guard('customer')->user();
+        return view('products.checkout2', compact(
+            'categories',
+            'settings',
+            'banners',
+            'allProduct',
+            'newProduct',
+            'blogs',
+            'topViewedProducts',
+            'currentUrl',
+            'user'
+        ));
+    }
+      public function store2(Request $request)
+    {
+          $customer = Auth::guard('customer')->user();
+        $validatedData = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'address' => 'required|string',
+            'phone' => 'required|string|size:10',
+            'payment_method' => 'required|string',
+            'notes' => 'nullable|string',
+            'total_amount' => 'required|numeric',
+        ]);
+
+        // Tạo đơn hàng
+        $order = Order::create([
+            'CustomerID' => $customer->CustomerID, // Giả sử bạn có thông tin khách hàng từ auth
+            'TotalAmount' => $validatedData['total_amount'],
+            'OrderStatus' => 'Chờ xác nhận', // Hoặc trạng thái mặc định
+            'PaymentMethod' => $validatedData['payment_method'],
+            'Notes' => $validatedData['notes'],
+            'Address' => $validatedData['address'],
+            'Phone' => $validatedData['phone'],
+        ]);
+
+        // Tạo chi tiết đơn hàng
+        OrderDetail::create([
+            'OrderID' => $order->OrderID,
+            'ProductID' => request()->input('product_id'),
+            'Quantity' => request()->input('quantity'),
+            'Price' => request()->input('product_price'),
+            'Color' => request()->input('color'),
+            'Size' => request()->input('size'),
+        ]);
+
+        // Redirect hoặc trả về thông báo thành công
+        return redirect()->route('orders.index')->with('success', 'Đơn hàng đã được tạo thành công!');
+    }
 }

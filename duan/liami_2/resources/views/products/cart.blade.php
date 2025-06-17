@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     <th style="font-family: 'Roboto';">Sản phẩm</th>
-                                    <th style="font-family: 'Roboto';">Thuộc tính</th>
+                                    <th style="font-family: 'Roboto';">Thông số</th>
                                     <th style="font-family: 'Roboto';">Đơn giá</th>
                                     <th style="font-family: 'Roboto';">Số lượng</th>
                                     <th style="font-family: 'Roboto';">Thành tiền</th>
@@ -63,7 +63,7 @@
                                                 </h5>
                                             </div>
                                         </td>
-                                        <td><span>{{ $item->Color }}</span></td>
+                                        <td><span>{{ $item->Color }}-{{ $item->Size }}</span></td>
                                         <td><span class="price">{{ number_format($item->product->SalePrice, 0) }}
                                                 VNĐ</span></td>
                                         <td><span class="product-quanty">{{ $item->Quantity }}</span></td>
@@ -71,13 +71,9 @@
                                                 class="price text-color1">{{ number_format($item->Quantity * $item->product->SalePrice, 0) }}
                                                 VNĐ</span></td>
                                         <td>
-                                            <form action="{{ route('cart.remove', $item->CartItemID) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                <button type="submit" class="remove-product" title="">
-                                                    <i class="fi fi-rr-cross-small"></i>
-                                                </button>
-                                            </form>
+                                            <button type="button" class="remove-product" onclick="removeFromCart({{ $item->CartItemID }})">
+                                                <i class="fi fi-rr-cross-small"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -108,6 +104,16 @@
     <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
     <script>
+            function removeFromCart(cartItemId) {
+            fetch(`/cart/remove/${cartItemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            });
+            location.reload();
+        }
         $(document).ready(function() {
             function calculateSelectedTotals() {
                 let selectedProducts = [];

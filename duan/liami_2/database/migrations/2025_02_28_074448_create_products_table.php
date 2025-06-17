@@ -24,8 +24,6 @@ return new class extends Migration
             $table->string('Image')->nullable();
             $table->string('Weigh', 255)->nullable();
             $table->string('Brand', 255)->nullable();
-            $table->string('Status', 255)->nullable();
-
             $table->integer('View')->default(0);
             $table->foreignId('CategoryID')->constrained('categories','CategoryID');
             $table->boolean('IsVisible')->default(true);

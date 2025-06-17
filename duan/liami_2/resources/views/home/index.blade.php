@@ -2,7 +2,7 @@
 
 @section('title')
     <title>
-        Home page
+      LIAMI
     </title>
 @endsection
 @section('css')

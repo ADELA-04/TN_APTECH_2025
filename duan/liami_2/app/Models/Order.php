@@ -19,6 +19,7 @@ class Order extends Model
         'Notes',
         'Address',
         'Phone',
+         'ShippingCode',
     ];
 
     public function customer()

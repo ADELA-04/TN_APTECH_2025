@@ -68,9 +68,7 @@
                             <li>
                                 <div class="body-title">Danh mục sản phẩm</div>
                             </li>
-                            {{-- <li>
-                                <div class="body-title">Mã code</div>
-                            </li> --}}
+
 
                             <li>
                                 <div class="body-title">Ngày tạo</div>
@@ -82,7 +80,7 @@
                         </ul>
                         <ul class="flex flex-column">
                             @if ($products->isEmpty())
-            <li class="no-results">Không tìm thấy sản phẩm nào với từ khóa "{{ $search }}".</li>
+            <div class="alert alert-warning">Không tìm thấy.</div>
         @else
                             @foreach ($products as $product)
                                 <li class="product-item gap14">

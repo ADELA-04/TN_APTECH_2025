@@ -86,8 +86,7 @@
                     </ul>
                     <ul class="flex flex-column">
                         @if ($users->isEmpty())
-                        <li class="no-results">Không tìm thấy người dùng nào với từ khóa "{{ $search }}".</li>
-                    @else
+ <div class="alert alert-warning">Không tìm thấy.</div>                    @else
                         @foreach ($users as $user)
                             <li class="user-item gap14">
                                 <div class="flex items-center justify-between gap20 flex-grow">

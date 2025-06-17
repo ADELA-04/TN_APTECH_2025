@@ -39,14 +39,14 @@
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
-                            <form class="form-search" method="GET" action="">
-                                <fieldset class="name">
-                                    <input type="text" placeholder="Search here..." name="name" required>
-                                </fieldset>
-                                <div class="button-submit">
-                                    <button type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
+                            <form class="form-search" method="GET" action="{{ route('managers.settings_banner') }}"> <!-- Thay your.route.name bằng route chính xác -->
+    <fieldset class="name">
+        <input type="text" placeholder="Tìm kiếm bằng mã banner..." name="name" required>
+    </fieldset>
+    <div class="button-submit">
+        <button type="submit"><i class="icon-search"></i></button>
+    </div>
+</form>
                         </div>
                     </div>
 
@@ -65,6 +65,9 @@
                             </li>
                         </ul>
                         <ul class="flex flex-column">
+                            @if (isset($notFound) && $notFound)
+    <div class="alert alert-warning">Không tìm thấy.</div>
+@endif
                             @foreach ($banners as $banner)
                                 <li class="product-item gap14">
                                     <div class="image no-bg">

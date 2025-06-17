@@ -16,11 +16,7 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CartController;
-
 use App\Http\Controllers\OrderController;
-
-
-//Route::get('/address/add', [AddressController::class, 'create'])->name('address.add');
 
 
 //order
@@ -28,13 +24,17 @@ Route::get('/orderslist', [OrderController::class, 'index2'])->name('orders.inde
 Route::get('/orders-detail/{id}', [OrderController::class, 'index_detail'])->name('orders.detail');
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+Route::post('/checkout2', [OrderController::class, 'checkout2'])->name('checkout2');
+Route::post('/checkout-pay-2', [OrderController::class, 'store2'])->name('checkout2.store');
 Route::post('/checkout-pay', [OrderController::class, 'store'])->name('checkout.store');
 Route::get('/orders/{id}', [OrderController::class, 'edit'])->name('order.edit');
 Route::post('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::post('/orders/{id}/update-shippingcode', [OrderController::class, 'updateShippingCode'])->name('orders.updateShippingCode');
+
 // cart
 Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::delete('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
 
 //setting
@@ -100,11 +100,6 @@ Route::delete('/managers/m_blog/delete_blog/{PostID}', [BlogPostController::clas
 
 Route::get('/', [IndexController::class, 'index2'])->name('home');
 
-//trang home
-// Route::domain('doan.store')->group(function () {
-// });
-// Route::get(uri: '/', [IndexController::class, 'index2'])->name('home');
-
 //Category
 Route::get('/managers/m_category/manager_category', [CategoryController::class, 'index'])->name('managers.m_category.manager_category');
 Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -134,9 +129,6 @@ Route::get('/search', [IndexController::class, 'searchProducts'])->name('search.
 Route::get('/filter-brand', [IndexController::class, 'filterByBrand'])->name('filter.brand.products');
 Route::get('/filter-price', [IndexController::class, 'filterByPrice'])->name('filter.price.products');
 Route::get('/filter', action: [IndexController::class, 'filterByCategory'])->name('filter.products');
-
-// Route::get('/*', action: [IndexController::class, 'edit'])->name('products.edit');
-
 
 
 //test

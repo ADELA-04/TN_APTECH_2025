@@ -104,7 +104,7 @@
                                     </li>
                                 @endforeach
                             @else
-                                <li class="product-item">Không có khách hàng nào.</li>
+                               <div class="alert alert-warning">Không tìm thấy.</div>
                             @endif
                         </ul>
                     </div>

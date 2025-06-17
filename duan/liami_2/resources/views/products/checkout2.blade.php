@@ -36,10 +36,16 @@
 
                             <div class="checkout-form w-100">
 
-                                <form action="{{ route('checkout.store') }}" method="POST">
-                                    @csrf <input type="hidden" name="total_amount" value="{{ $finalAmount }}">
-                                    <input type="hidden" name="notes" value="{{ request('notes', '') }}">
-                                    <input type="hidden" name="notes" value="{{ request('notes', '') }}">
+                                <form action="{{ route('checkout2.store') }}" method="POST">
+                                    @csrf <input type="hidden" name="total_amount" value="">
+                                    <input type="hidden" name="product_price" value="{{ request()->input('product_price') }}">
+                                    <input type="hidden" name="total_amount"
+                                        value="{{ request()->input('product_price') * request()->input('quantity') + 40000 }}">
+                                    <input type="hidden" name="product_id" value="{{ request()->input('product_id') }}">
+                                    <input type="hidden" name="quantity" value="{{ request()->input('quantity') }}">
+                                    <input type="hidden" name="color" value="{{ request()->input('color') }}">
+                                    <input type="hidden" name="size" value="{{ request()->input('size') }}">
+                                    <input type="hidden" name="notes" value="">
 
                                     <div class="row mrg30">
                                         <div class="col-md-12 col-sm-12 col-lg-12">
@@ -100,32 +106,35 @@
                                         <th>Đơn hàng</th>
                                         <th></th>
                                     </tr>
-                                    @foreach ($cartItems as $item)
-                                        <tr>
 
-                                            <input type="hidden" name="cart_ids" id="cart-ids"
-                                                value="{{ json_encode($cartItems->pluck('CartItemID')) }}">
-                                            <td style="font-family: 'Roboto';">{{ $item->product->ProductName }} <span
-                                                    style="color: rgb(226, 104, 4)">--{{ $item->Color }}</span><span
-                                                    style="color: rgb(226, 104, 4)">--{{ $item->Size }}</span><span
-                                                    style="color: rgb(226, 104, 4)">--sl:{{ $item->Quantity }}</span></td>
-                                            <td><span
-                                                    class="price">{{ number_format($item->product->SalePrice * $item->Quantity, 0) }}
-                                                    VNĐ</span></td>
-                                        </tr>
-                                    @endforeach
-                                    {{-- <input type="hidden" name="cart_ids" id="cart-ids" value="{{ json_encode($cartItems->pluck('CartID')) }}">                                    <tr> --}}
+                                    <tr>
+                                        <td style="font-family: 'Roboto';"> {{ request()->input('product_name') }}<span
+                                                style="color: rgb(226, 104, 4)">--{{ request()->input('color') }}</span><span
+                                                style="color: rgb(226, 104, 4)">--{{ request()->input('size') }}</span><span
+                                                style="color: rgb(226, 104, 4)">--sl:
+                                                {{ request()->input('quantity') }}</span></td>
+                                        <td><span
+                                                class="price">{{ number_format(request()->input('product_price'), 0, ',', '.') }}
+                                                VNĐ</span></td>
+                                    </tr>
+
                                     <td style="font-family: 'Roboto';">Tổng tiền hàng</td>
-                                    <td><span class="price">{{ number_format($totalAmount, 0) }} VNĐ</span></td>
+                                    <td> <span
+                                            class="price">{{ number_format(request()->input('product_price') * request()->input('quantity'), 0, ',', '.') }}
+                                            VNĐ</span></td>
                                     </tr>
 
                                     <tr>
                                         <td style="font-family: 'Roboto';">Phí vận chuyển</td>
-                                        <td><span class="price">{{ number_format($shippingFee, 0) }} VNĐ</span></td>
+                                        <td><span class="price">40.000 VNĐ</span></td>
                                     </tr>
                                     <tr>
                                         <td style="font-family: 'Roboto';">Thành tiền</td>
-                                        <td><strong class="price">{{ number_format($finalAmount, 0) }} VNĐ</strong></td>
+                                        <td>
+                                            <strong
+                                                class="price">{{ number_format(request()->input('product_price') * request()->input('quantity') + 40000, 0, ',', '.') }}
+                                                VNĐ</strong>
+                                        </td>
                                     </tr>
                                 </table>
 

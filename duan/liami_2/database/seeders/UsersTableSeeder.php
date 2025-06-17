@@ -13,24 +13,35 @@ class UsersTableSeeder extends Seeder
             $users = [
 
                 [
-                    'Username' => 'Admin2',
-                    'Email' => 'dothom07082005@gmail.com',
-                    'Password' => bcrypt('12345678'),
-                    'Role' => 'Admin',
-                    'Phone' => '0123456780',
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ],
-                [
-                    'Username' => 'Nhân viên 2',
+                    'Username' => 'Admin',
                     'Email' => 'nvmoi@gmail.com',
                     'Password' => bcrypt('12345678'),
                     'Role' => 'Admin',
                     'Phone' => '0123456780',
+                    'Avartar' => 'assets/images3/1749479586_yt-07427_1554192484.jpg',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
-
+                [
+                    'Username' => 'Quản trị sp',
+                    'Email' => 'nvsp@gmail.com',
+                    'Password' => bcrypt('12345678'),
+                    'Role' => 'Staff_Product',
+                    'Phone' => '0123456780',
+                    'Avartar' => 'assets/images3/1749479586_yt-07427_1554192484.jpg',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
+                [
+                    'Username' => 'Quản trị dh',
+                    'Email' => 'nvdonhang@gmail.com',
+                    'Password' => bcrypt('12345678'),
+                    'Role' => 'Staff_Order',
+                    'Phone' => '0123456780',
+                    'Avartar' => 'assets/images3/1749479586_yt-07427_1554192484.jpg',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ],
 
             ];
 

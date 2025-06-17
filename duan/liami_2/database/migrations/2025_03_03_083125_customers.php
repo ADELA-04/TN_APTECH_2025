@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id('CustomerID');
-            $table->string('Username')->unique();
+            $table->string('Email')->unique();
             $table->string('FullName')->nullable();
             $table->string('PasswordHash');
             $table->enum('Gender', ['Male', 'Female', 'Other'])->nullable();

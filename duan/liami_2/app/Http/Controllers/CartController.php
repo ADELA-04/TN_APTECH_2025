@@ -100,7 +100,6 @@ class CartController extends Controller
                 'Size' => $request->size,
             ]);
         }
-
         return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
 

@@ -9,11 +9,24 @@ use Illuminate\Support\Facades\Log;
 class BannerController extends Controller
 {
     // Hiển thị danh sách banner
-    public function index()
-    {
-        $banners = Banner::orderBy('created_at', 'desc')->paginate(10); // Lấy tất cả banner
-        return view('managers.setting.settingpage.manager_banner', compact('banners'));
+    public function index(Request $request)
+{
+    $searchTerm = $request->input('name');
+    $banners = null; // Khởi tạo biến banners
+
+    if ($searchTerm) {
+        $banners = Banner::where('BannerID', $searchTerm)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    } else {
+        $banners = Banner::orderBy('created_at', 'desc')->paginate(10);
     }
+
+    // Kiểm tra nếu không tìm thấy banner nào
+    $notFound = $banners->isEmpty() && $searchTerm ? true : false;
+
+    return view('managers.setting.settingpage.manager_banner', compact('banners', 'notFound'));
+}
 
     // Hiển thị form tạo mới banner
     public function create()

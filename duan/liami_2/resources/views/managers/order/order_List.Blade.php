@@ -43,13 +43,14 @@
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
                             <form class="form-search" method="GET" action="{{ route('orders.index2') }}">
-    <fieldset class="name">
-        <input type="text" placeholder="Tìm kiếm theo số điện thoại..." name="name" tabindex="2" value="{{ request('name') }}" aria-required="true" required="">
-    </fieldset>
-    <div class="button-submit">
-        <button type="submit"><i class="icon-search"></i></button>
-    </div>
-</form>
+                                <fieldset class="name">
+                                    <input type="text" placeholder="Tìm kiếm theo số điện thoại..." name="name"
+                                        tabindex="2" value="{{ request('name') }}" aria-required="true" required="">
+                                </fieldset>
+                                <div class="button-submit">
+                                    <button type="submit"><i class="icon-search"></i></button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="wg-table table-all-category">
@@ -77,6 +78,10 @@
                             </li>
                         </ul>
                         <ul class="flex flex-column">
+                            @if (isset($notFound) && $notFound)
+                                <div class="alert alert-warning">Không tìm thấy.</div>
+                            @endif
+
                             @foreach ($orders as $order)
                                 <li class="product-item gap14">
                                     <div class="image no-bg">
@@ -84,7 +89,9 @@
                                     </div>
                                     <div class="flex items-center justify-between gap20 flex-grow">
 
-                                        <div class="body-text"><a href="{{ route('order.edit', $order->OrderID) }}" class="body-title-2">#{{ $order->OrderID }}</a></div>
+                                        <div class="body-text"><a href="{{ route('order.edit', $order->OrderID) }}"
+                                                class="body-title-2">#{{ $order->OrderID }}
+                                                #{{ $order->ShippingCode }}</a></div>
 
                                         <div class="body-text">{{ $order->created_at->format('d/m/Y') }}</div>
 
@@ -94,7 +101,8 @@
                                         <div class="body-text">{{ $order->PaymentMethod }}</div>
                                         <div class="list-icon-function">
                                             <div class="item edit">
-                                                <a href="{{ route('order.edit', $order->OrderID) }}"> <i class="icon-edit-3"></i></a>
+                                                <a href="{{ route('order.edit', $order->OrderID) }}"> <i
+                                                        class="icon-edit-3"></i></a>
 
                                             </div>
                                         </div>
@@ -103,7 +111,7 @@
                             @endforeach
                         </ul>
                     </div>
-                     <div class="divider"></div>
+                    <div class="divider"></div>
                     <div class="flex items-center justify-between flex-wrap gap10">
                         <div class="text-tiny">Hiện {{ $orders->count() }}/10 mục</div>
                         <ul class="wg-pagination flex items-center">
@@ -116,7 +124,7 @@
                             </li>
 
                             @for ($i = 1; $i <= $orders->lastPage(); $i++)
-                                <li class="{{ ($orders->currentPage() == $i) ? 'active' : '' }}">
+                                <li class="{{ $orders->currentPage() == $i ? 'active' : '' }}">
                                     <a href="{{ $orders->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor
@@ -130,13 +138,13 @@
                             </li>
                         </ul>
                     </div>
-            </div>
                 </div>
-                <!-- /order-list -->
             </div>
-            <!-- /main-content-wrap -->
+            <!-- /order-list -->
         </div>
         <!-- /main-content-wrap -->
+    </div>
+    <!-- /main-content-wrap -->
 
     </div>
     <!-- /main-content -->

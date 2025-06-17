@@ -173,6 +173,18 @@
                                     nhật</button>
                             </form>
                         </div>
+                        <div class="wg-box mb-20 gap10">
+                            <div class="body-title">Cập nhật mã vận đơn</div>
+                            <form action="{{ route('orders.updateShippingCode', $order->OrderID) }}" method="POST">
+                                @csrf
+                                <div class="body-title-2 tf-color-2">
+                                        <input class="mb-10" type="text" name="ShippingCode" value="{{ old('ShippingCode', $order->ShippingCode) }}">
+
+                                </div>
+                                <button type="submit" class="tf-button style-1 w-full">Cập
+                                    nhật</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <!-- /order-detail -->
@@ -181,16 +193,18 @@
                     <div class="wg-table table-order-track">
                         <ul class="table-title flex mb-24 gap20">
                             <li>
-                                <div class="body-title">Trang thái đơn hàng</div>
+                                <div class="body-title">Ngày đặt</div>
                             </li>
-                            <li></li>
-
+                            <li class="body-title"></li>
+<li class="body-title">ID khách hàng</li>
+<li class="body-title"></li>
                         </ul>
                         <ul class="flex flex-column gap14">
                             <li class="cart-totals-item">
-                                <div class="body-text">20 Nov 2023</div>
-                                <div class="body-text">2:30 PM</div>
-
+                                <div class="body-text">{{ $order->created_at }}</div>
+                                <div class="body-text"></div>
+<div class="body-text">{{ $order->customer->CustomerID }}</div>
+                                <div class="body-text"></div>
                             </li>
                             <li class="divider"></li>
                         </ul>

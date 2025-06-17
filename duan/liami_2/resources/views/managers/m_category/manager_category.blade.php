@@ -78,8 +78,7 @@
                         <ul class="flex flex-column">
                             @if(isset($categories) && $categories->isNotEmpty())
                               @if ($categories->isEmpty())
-            <li class="no-results">Không tìm thấy danh mục nào với từ khóa "{{ $search }}".</li>
-        @else
+ <div class="alert alert-warning">Không tìm thấy.</div>        @else
                                 @foreach ($categories as $category)
                                     <li class="product-item gap14">
                                         <div class="flex items-center justify-between gap20 flex-grow">

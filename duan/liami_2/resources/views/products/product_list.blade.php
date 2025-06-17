@@ -110,7 +110,7 @@
                         <div class="text-tiny" style="margin-bottom: 10px; text-align: right;;">Hiện
                             {{ $products->count() }}/12 mục</div>
                         @if ($products->isEmpty())
-                            <img src="{{ asset('assets\images3\no-found.png') }}" alt="img">
+                            <img src="{{ asset('assets\images3\no-found-2.jpg') }}" alt="img">
                         @else
                             <ul class="row list-products auto-clear equal-container product-grid">
                                 @foreach ($products as $product)
