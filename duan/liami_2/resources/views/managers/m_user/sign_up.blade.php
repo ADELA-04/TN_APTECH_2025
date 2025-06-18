@@ -1,6 +1,6 @@
 @extends('layouts.master2')
 @section('title')
-    <title>Sign up</title>
+    <title>Đăng kí</title>
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">

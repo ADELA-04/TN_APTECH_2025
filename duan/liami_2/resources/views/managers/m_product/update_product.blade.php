@@ -79,9 +79,9 @@
                                                     name="Price" value="{{ old('Price', $product->Price) }}" required>
                                             </fieldset>
                                             <fieldset class="male">
-                                                <div class="body-title mb-10">Giá giảm</div>
+                                                <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span></div>
                                                 <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
-                                                    name="SalePrice" value="{{ old('SalePrice', $product->SalePrice) }}">
+                                                    name="SalePrice" value="{{ old('SalePrice', $product->SalePrice) }}" required>
                                             </fieldset>
                                             @if ($errors->has('SalePrice'))
                                                 <div class="text-tiny" style="color: brown; font-weight: bold;">

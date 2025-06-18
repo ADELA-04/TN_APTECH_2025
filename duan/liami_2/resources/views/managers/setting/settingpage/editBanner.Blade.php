@@ -1,7 +1,7 @@
 @extends('layouts.admin_master')
 
 @section('title')
-    <title>Edit Banner</title>
+    <title>Chỉnh sửa Banner</title>
 @endsection
 
 {{-- css --}}
@@ -31,7 +31,7 @@
         <div class="main-content-inner">
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Setting banner</h3>
+                    <h3>Chỉnh sửa banner</h3>
                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                         <li><i class="icon-chevron-left"></i></li>
                         <li><a href="{{ route('managers.settings_banner') }}">

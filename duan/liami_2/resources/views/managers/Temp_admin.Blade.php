@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Setting Manager
+        Giao diện admin
     </title>
 @endsection
 

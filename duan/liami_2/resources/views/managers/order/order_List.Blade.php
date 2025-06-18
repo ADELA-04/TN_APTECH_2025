@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Danh sách đơn hàng
+        Quản lí đơn hàng
     </title>
 @endsection
 

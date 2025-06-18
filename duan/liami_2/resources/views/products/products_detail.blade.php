@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>LIAMI</title>
+    <title>Chi tiết sản phẩm</title>
 @endsection
 
 @section('css')
@@ -80,13 +80,13 @@
                                 <p class="mb-4">{{ $product->Summary }}</p>
                                 <form action="{{ route('cart.add') }}" method="POST" id="productForm">
                                     @csrf
-                                     <input type="hidden" name="product_id" value="{{ $product->ProductID }}">
-    <input type="hidden" name="product_name" value="{{ $product->ProductName }}">
-    <input type="hidden" name="product_price" value="{{ $product->SalePrice }}">
-    <input type="hidden" name="product_image" value="{{ asset($product->Image) }}">
-    <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định -->
-    <input type="hidden" name="color" value=""> <!-- Màu sắc -->
-    <input type="hidden" name="size" value=""> <!-- Kích thước -->
+                                    <input type="hidden" name="product_id" value="{{ $product->ProductID }}">
+                                    <input type="hidden" name="product_name" value="{{ $product->ProductName }}">
+                                    <input type="hidden" name="product_price" value="{{ $product->SalePrice }}">
+                                    <input type="hidden" name="product_image" value="{{ asset($product->Image) }}">
+                                    <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định -->
+                                    <input type="hidden" name="color" value=""> <!-- Màu sắc -->
+                                    <input type="hidden" name="size" value=""> <!-- Kích thước -->
                                     <input type="hidden" name="product_id" value="{{ $product->ProductID }}">
                                     <div class="product-bottom d-flex flex-wrap align-items-center w-100">
                                         <div class="mr-05 product-quanty">
@@ -104,10 +104,11 @@
                                                     <option value="{{ trim($size) }}">{{ trim($size) }}</option>
                                                 @endforeach
                                             </select>
-                                            <button class="theme-btn bg-color1 mr-05 mb-10" type="button" onclick="submitForm('cart.add')">Thêm vào giỏ hàng</button>
-            <button class="theme-btn bg-color1 mr-05 mb-10" type="button" onclick="submitForm('checkout2')">Mua hàng</button>
-
                                         </div>
+                                        <div class="mt-20"> <button class="theme-btn bg-color1 mb-10 ml-10" type="button"
+                                                onclick="submitForm('cart.add')">Thêm vào giỏ hàng</button>
+                                            <button class="theme-btn bg-color1 mr-05 mb-10" type="button"
+                                                onclick="submitForm('checkout2')">Mua hàng</button></div>
                                     </div>
                                 </form>
                             </div>
@@ -271,24 +272,26 @@
 @endsection
 
 @section('script')
-<script>
-    function submitForm(action) {
-        const form = document.getElementById('productForm');
-        form.action = action === 'cart.add' ? '{{ route('cart.add') }}' : '{{ route('checkout2') }}';
-        form.submit();
-    }
+    <script>
+        // phân biệt 2 action trong form khi nhấn hai nút khác nhau
+        function submitForm(action) {
+            const form = document.getElementById('productForm');
+            form.action = action === 'cart.add' ? '{{ route('cart.add') }}' : '{{ route('checkout2') }}';
+            form.submit();
+        }
+
         function updateQuantity(value) {
-        document.querySelector('input[name="quantity"]').value = value; // Cập nhật số lượng
-    }
+            document.querySelector('input[name="quantity"]').value = value; // Cập nhật số lượng
+        }
 
-    function updateColor(value) {
-        document.querySelector('input[name="color"]').value = value; // Cập nhật màu sắc
-    }
+        function updateColor(value) {
+            document.querySelector('input[name="color"]').value = value; // Cập nhật màu sắc
+        }
 
-    function updateSize(value) {
-        document.querySelector('input[name="size"]').value = value; // Cập nhật kích thước
-    }
-</script>
+        function updateSize(value) {
+            document.querySelector('input[name="size"]').value = value; // Cập nhật kích thước
+        }
+    </script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/aos.min.js') }}"></script>

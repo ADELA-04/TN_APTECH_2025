@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       Profile User
+       Đổi mật khẩu
     </title>
 @endsection
 

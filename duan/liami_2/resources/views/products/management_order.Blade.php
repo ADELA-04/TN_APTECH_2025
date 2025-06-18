@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>management order</title>
+    <title>Danh sách đơn hàng</title>
 @endsection
 @section('css')
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">

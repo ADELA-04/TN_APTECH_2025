@@ -2,7 +2,7 @@
 
 @section('title')
     <title>
-      LIAMI
+        LIAMI
     </title>
 @endsection
 @section('css')

@@ -42,15 +42,32 @@
                     <h3>Quản lí sản phẩm</h3>
 
                 </div>
+
                 <!-- product-list -->
                 <div class="wg-box">
 
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
 
-                            <form class="form-search" method="GET" action="{{ route('managers.m_product.manager_product') }}">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <form class="form-search" method="GET"
+                                action="{{ route('managers.m_product.manager_product') }}">
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Nhập tên sản phẩm cần tìm..." name="search" tabindex="2" value="{{ request('search') }}" aria-required="true" required="">
+                                    <input type="text" placeholder="Nhập tên sản phẩm cần tìm..." name="search"
+                                        tabindex="2" value="{{ request('search') }}" aria-required="true" required="">
                                 </fieldset>
                                 <div class="button-submit">
                                     <button type="submit"><i class="icon-search"></i></button>
@@ -80,41 +97,45 @@
                         </ul>
                         <ul class="flex flex-column">
                             @if ($products->isEmpty())
-            <div class="alert alert-warning">Không tìm thấy.</div>
-        @else
-                            @foreach ($products as $product)
-                                <li class="product-item gap14">
-                                    <div class="image no-bg">
-                                        <img src="{{ asset($product->Image) }}" alt="Product Image" >
-                                    </div>
-                                    <div class="flex items-center justify-between gap20 flex-grow">
-                                        <div class="name">
-                                            <a href="{{ route('products.edit', $product->ProductID) }}" class="body-title-2">{{ $product->ProductName }}</a>
+                                <div class="alert alert-warning">Không tìm thấy.</div>
+                            @else
+                                @foreach ($products as $product)
+                                    <li class="product-item gap14">
+                                        <div class="image no-bg">
+                                            <img src="{{ asset($product->Image) }}" alt="Product Image">
                                         </div>
-                                        <div class="body-text">{{ $product->category->CategoryName }}</div> <!-- Hiển thị tên danh mục -->
-
-
-                                        <div class="body-text">{{ $product->created_at }}</div> <!-- Hiển thị tên danh mục -->
-
-                                        <div class="list-icon-function">
-                                            <div class="item edit">
-                                                <a href="{{ route('products.edit', $product->ProductID) }}">
-                                                    <i class="icon-edit-3"></i>
-                                                </a>
+                                        <div class="flex items-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="{{ route('products.edit', $product->ProductID) }}"
+                                                    class="body-title-2">{{ $product->ProductName }}</a>
                                             </div>
-                                            <div class="user-item">
-                                                <form action="{{ route('products.destroy', $product->ProductID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" style="border: none; background: none;">
-                                                        <i class="icon-trash-2"></i>
-                                                    </button>
-                                                </form>
+                                            <div class="body-text">{{ $product->category->CategoryName }}</div>
+                                            <!-- Hiển thị tên danh mục -->
+
+
+                                            <div class="body-text">{{ $product->created_at }}</div>
+                                            <!-- Hiển thị tên danh mục -->
+
+                                            <div class="list-icon-function">
+                                                <div class="item edit">
+                                                    <a href="{{ route('products.edit', $product->ProductID) }}">
+                                                        <i class="icon-edit-3"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="user-item">
+                                                    <form action="{{ route('products.destroy', $product->ProductID) }}"
+                                                        method="POST" onsubmit="return confirm('Xác nhận xóa?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="border: none; background: none;">
+                                                            <i class="icon-trash-2"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
+                                    </li>
+                                @endforeach
                             @endif
                         </ul>
                     </div>
@@ -131,7 +152,7 @@
                             </li>
 
                             @for ($i = 1; $i <= $products->lastPage(); $i++)
-                                <li class="{{ ($products->currentPage() == $i) ? 'active' : '' }}">
+                                <li class="{{ $products->currentPage() == $i ? 'active' : '' }}">
                                     <a href="{{ $products->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor

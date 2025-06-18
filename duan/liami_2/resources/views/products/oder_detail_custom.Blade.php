@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>order detail custom</title>
+    <title>Chi tiết đơn hàng</title>
 @endsection
 @section('css')
     <meta charset="UTF-8">

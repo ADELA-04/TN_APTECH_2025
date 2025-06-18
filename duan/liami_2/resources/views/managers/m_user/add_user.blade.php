@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       Thêm mới tài khoản
+       Thêm mới tài khoản nhân viên
     </title>
 @endsection
 

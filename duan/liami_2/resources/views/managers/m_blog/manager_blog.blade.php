@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('assets/icon/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
-
 @endsection
 
 {{-- content --}}
@@ -31,7 +30,12 @@
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
                     <h3>Quản lí tin tức</h3>
                 </div>
-                 @if (session('success'))
+
+                <!-- product-list -->
+                <div class="wg-box">
+                    <div class="flex items-center justify-between gap10 flex-wrap">
+                        <div class="wg-filter flex-grow">
+                            @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
                                 </div>
@@ -46,14 +50,11 @@
                                     </ul>
                                 </div>
                             @endif
-                <!-- product-list -->
-                <div class="wg-box">
-                    <div class="flex items-center justify-between gap10 flex-wrap">
-                        <div class="wg-filter flex-grow">
                             <form class="form-search" method="GET" action="{{ route('managers.m_blog.manager_blog') }}">
 
                                 <fieldset class="name">
-                                    <input type="text" placeholder="Nhập tên bài đăng muốn tìm..." name="name" value="{{ request('name') }}" required>
+                                    <input type="text" placeholder="Nhập tên bài đăng muốn tìm..." name="name"
+                                        value="{{ request('name') }}" required>
                                 </fieldset>
                                 <div class="button-submit">
                                     <button type="submit"><i class="icon-search"></i></button>
@@ -87,40 +88,43 @@
                         </ul>
                         <ul class="flex flex-column">
                             @if ($blogs->isEmpty())
- <div class="alert alert-warning">Không tìm thấy.</div>                        @else
-                            @foreach ($blogs as $blog)
-                                <li class="product-item gap14">
-                                    <div class="image no-bg">
-                                        <img src="{{ asset($blog->ImageURL) }}" alt="Blog Image" >
-                                    </div>
-                                    <div class="flex items-center justify-between gap20 flex-grow">
-                                        <div class="name">
-                                            <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}"
-                                                class="body-title-2">{{ $blog->Title }}</a>
+                                <div class="alert alert-warning">Không tìm thấy.</div>
+                            @else
+                                @foreach ($blogs as $blog)
+                                    <li class="product-item gap14">
+                                        <div class="image no-bg">
+                                            <img src="{{ asset($blog->ImageURL) }}" alt="Blog Image">
                                         </div>
-                                        <div class="body-text">{{ $blog->AuthorID }}</div>
-                                        <div class="body-text">{{ $blog->created_at->format('d/m/Y') }}</div>
-                                        <div class="body-text">{{ $blog->IsVisible ? 'Hiển thị' : 'Ẩn' }}</div>
-                                        <div class="body-text">{{ $blog->views }}</div>
-                                        <div class="list-icon-function">
-                                            <div class="item edit">
-                                                <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}">
-                                                    <i class="icon-edit-3"></i>
-                                                </a>
+                                        <div class="flex items-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}"
+                                                    class="body-title-2">{{ $blog->Title }}</a>
                                             </div>
-                                            <div class="user-item">
-                                                <form action="{{ route('managers.m_blog.delete_blog', $blog->PostID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" style="border: none; background: none;">
-                                                        <i class="icon-trash-2"></i>
-                                                    </button>
-                                                </form>
+                                            <div class="body-text">{{ $blog->AuthorID }}</div>
+                                            <div class="body-text">{{ $blog->created_at->format('d/m/Y') }}</div>
+                                            <div class="body-text">{{ $blog->IsVisible ? 'Hiển thị' : 'Ẩn' }}</div>
+                                            <div class="body-text">{{ $blog->views }}</div>
+                                            <div class="list-icon-function">
+                                                <div class="item edit">
+                                                    <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}">
+                                                        <i class="icon-edit-3"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="user-item">
+                                                    <form
+                                                        action="{{ route('managers.m_blog.delete_blog', $blog->PostID) }}"
+                                                        method="POST" onsubmit="return confirm('Xác nhận xóa?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="border: none; background: none;">
+                                                            <i class="icon-trash-2"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
+                                    </li>
+                                @endforeach
                             @endif
                         </ul>
                     </div>
@@ -137,7 +141,7 @@
                             </li>
 
                             @for ($i = 1; $i <= $blogs->lastPage(); $i++)
-                                <li class="{{ ($blogs->currentPage() == $i) ? 'active' : '' }}">
+                                <li class="{{ $blogs->currentPage() == $i ? 'active' : '' }}">
                                     <a href="{{ $blogs->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor

@@ -2,7 +2,7 @@
 
 @section('title')
     <title>
-        Blogs Detail
+        Tin tức chi tiết
     </title>
 @endsection
 @section('css')

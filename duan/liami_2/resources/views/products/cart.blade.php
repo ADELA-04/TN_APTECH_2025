@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Cart</title>
+    <title>Giỏ hàng</title>
 @endsection
 @section('css')
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -104,6 +104,7 @@
     <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
     <script>
+        //xóa bằng js
             function removeFromCart(cartItemId) {
             fetch(`/cart/remove/${cartItemId}`, {
                 method: 'DELETE',
@@ -114,6 +115,7 @@
             });
             location.reload();
         }
+        // lấy id cartiterm được check và đẩy sang form thanh toán
         $(document).ready(function() {
             function calculateSelectedTotals() {
                 let selectedProducts = [];

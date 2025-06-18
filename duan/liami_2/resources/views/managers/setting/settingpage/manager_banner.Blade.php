@@ -2,7 +2,7 @@
 
 {{-- title --}}
 @section('title')
-    <title>Banner Manager</title>
+    <title>Quản lí banner</title>
 @endsection
 
 {{-- css --}}

@@ -265,24 +265,27 @@
                                     placeholder="Tìm kiếm..." value="{{ request()->input('search') }}">
                             </form>
                         </li>
-                        <li>
-                            <a class="d-inline-block" href="{{ route('cart.show') }}" title="">
-                                <i class="fi fi-rr-shopping-bag"></i>
-                                @php
-                                    $user = Auth::guard('customer')->user();
-                                    $totalQuantity = 0;
-                                    if ($user) {
-                                        $cart = App\Models\Cart::where('CustomerID', $user->CustomerID)->first();
-                                        if ($cart) {
-                                            $totalQuantity = $cart->cartItems()->sum('Quantity');
+                        //hiển thị giỏ hàng khi đăng nhập
+                        @if (Auth::guard('customer')->check())
+                            <li>
+                                <a class="d-inline-block" href="{{ route('cart.show') }}" title="">
+                                    <i class="fi fi-rr-shopping-bag"></i>
+                                    @php
+                                        $user = Auth::guard('customer')->user();
+                                        $totalQuantity = 0;
+                                        if ($user) {
+                                            $cart = App\Models\Cart::where('CustomerID', $user->CustomerID)->first();
+                                            if ($cart) {
+                                                $totalQuantity = $cart->cartItems()->sum('Quantity');
+                                            }
                                         }
-                                    }
-                                @endphp
-                                @if ($totalQuantity > 0)
-                                    <span class="cart-quantity">{{ $totalQuantity }}</span>
-                                @endif
-                            </a>
-                        </li>
+                                    @endphp
+                                    @if ($totalQuantity > 0)
+                                        <span class="cart-quantity">{{ $totalQuantity }}</span>
+                                    @endif
+                                </a>
+                            </li>
+                              @endif
                     </ul>
                 </div>
             </div>

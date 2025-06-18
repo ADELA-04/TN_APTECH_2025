@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       Quản lí tài khoản
+        Quản lí nhân viên
     </title>
 @endsection
 
@@ -32,93 +32,98 @@
 
 {{-- content --}}
 @section('content')
-   <!-- main-content -->
-<div class="main-content">
-    <!-- main-content-wrap -->
-    <div class="main-content-inner">
+    <!-- main-content -->
+    <div class="main-content">
         <!-- main-content-wrap -->
-        <div class="main-content-wrap">
-            <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                <h3>Tất cả tài khoản</h3>
-            </div>
-            <!-- all-user -->
-            <div class="wg-box">
-                <div class="flex items-center justify-between gap10 flex-wrap">
-                    <div class="wg-filter flex-grow">
-                        <!-- Hiển thị thông báo thành công -->
-                        @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <form class="form-search" method="GET" action="{{ route('managers.m_user.manager_user') }}">
-                        <fieldset class="name">
-                            <input type="text" placeholder="Nhập email để tìm kiếm..." name="email" required value="{{ request('email') }}">
-                        </fieldset>
-                        <div class="button-submit">
-                            <button type="submit"><i class="icon-search"></i></button>
-                        </div>
-                    </form>
-                    </div>
-                    <a class="tf-button style-1 w208" href="{{ route('managers.m_user.add_user') }}"><i
-                            class="icon-plus"></i>Thêm mới</a>
+        <div class="main-content-inner">
+            <!-- main-content-wrap -->
+            <div class="main-content-wrap">
+                <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+                    <h3>Tất cả tài khoản</h3>
                 </div>
-                <div class="wg-table table-all-user">
-                    <ul class="table-title flex gap20 mb-14">
-                        <li>
-                            <div class="body-title">Tên tài khoản</div>
-                        </li>
-                        <li>
-                            <div class="body-title">Điện thoại</div>
-                        </li>
-                        <li>
-                            <div class="body-title">Email</div>
-                        </li>
-                        <li>
-                            <div class="body-title">Hành động</div>
-                        </li>
-                    </ul>
-                    <ul class="flex flex-column">
-                        @if ($users->isEmpty())
- <div class="alert alert-warning">Không tìm thấy.</div>                    @else
-                        @foreach ($users as $user)
-                            <li class="user-item gap14">
-                                <div class="flex items-center justify-between gap20 flex-grow">
-                                    <div class="name">
-                                        <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"
-                                            class="body-title-2">{{ $user->Username ?? 'N/A' }}</a>
-                                        <div class="text-tiny mt-3">{{ $user->Role ?? 'N/A' }}</div>
-                                    </div>
-                                    <div class="body-text" style=" text-align: left;">{{ $user->Phone ?? 'N/A' }}</div>
-                                    <div class="body-text">{{ $user->Email ?? 'N/A' }}</div>
-                                    <div class="list-icon-function">
-                                        <div class="item edit">
-                                            <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"><i
-                                                    class="icon-edit-3"></i></a>
-                                        </div>
-                                        <div class="user-item">
-                                            <form action="{{ route('managers.m_user.delete_user', $user->UserID) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" style="border: none; background: none;">
-                                                    <i class="icon-trash-2"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
+                <!-- all-user -->
+                <div class="wg-box">
+                    <div class="flex items-center justify-between gap10 flex-wrap">
+                        <div class="wg-filter flex-grow">
+                            <!-- Hiển thị thông báo thành công -->
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
                                 </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            <form class="form-search" method="GET" action="{{ route('managers.m_user.manager_user') }}">
+                                <fieldset class="name">
+                                    <input type="text" placeholder="Nhập email để tìm kiếm..." name="email" required
+                                        value="{{ request('email') }}">
+                                </fieldset>
+                                <div class="button-submit">
+                                    <button type="submit"><i class="icon-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <a class="tf-button style-1 w208" href="{{ route('managers.m_user.add_user') }}"><i
+                                class="icon-plus"></i>Thêm mới</a>
+                    </div>
+                    <div class="wg-table table-all-user">
+                        <ul class="table-title flex gap20 mb-14">
+                            <li>
+                                <div class="body-title">Tên tài khoản</div>
                             </li>
-                        @endforeach
-                        @endif
-                    </ul>
-                </div>
-                <div class="divider"></div>
+                            <li>
+                                <div class="body-title">Điện thoại</div>
+                            </li>
+                            <li>
+                                <div class="body-title">Email</div>
+                            </li>
+                            <li>
+                                <div class="body-title">Hành động</div>
+                            </li>
+                        </ul>
+                        <ul class="flex flex-column">
+                            @if ($users->isEmpty())
+                                <div class="alert alert-warning">Không tìm thấy.</div>
+                            @else
+                                @foreach ($users as $user)
+                                    <li class="user-item gap14">
+                                        <div class="flex items-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"
+                                                    class="body-title-2">{{ $user->Username ?? 'N/A' }}</a>
+                                                <div class="text-tiny mt-3">{{ $user->Role ?? 'N/A' }}</div>
+                                            </div>
+                                            <div class="body-text" style=" text-align: left;">{{ $user->Phone ?? 'N/A' }}
+                                            </div>
+                                            <div class="body-text">{{ $user->Email ?? 'N/A' }}</div>
+                                            <div class="list-icon-function">
+                                                <div class="item edit">
+                                                    <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"><i
+                                                            class="icon-edit-3"></i></a>
+                                                </div>
+                                                <div class="user-item">
+                                                    <form
+                                                        action="{{ route('managers.m_user.delete_user', $user->UserID) }}"
+                                                        method="POST" onsubmit="return confirm('Xác nhận xóa?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" style="border: none; background: none;">
+                                                            <i class="icon-trash-2"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
+                    <div class="divider"></div>
                     <div class="flex items-center justify-between flex-wrap gap10">
                         <div class="text-tiny">Hiện {{ $users->count() }}/10 mục</div>
                         <ul class="wg-pagination flex items-center">
@@ -131,7 +136,7 @@
                             </li>
 
                             @for ($i = 1; $i <= $users->lastPage(); $i++)
-                                <li class="{{ ($users->currentPage() == $i) ? 'active' : '' }}">
+                                <li class="{{ $users->currentPage() == $i ? 'active' : '' }}">
                                     <a href="{{ $users->url($i) }}">{{ $i }}</a>
                                 </li>
                             @endfor
@@ -145,14 +150,14 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+                <!-- /all-user -->
             </div>
-            <!-- /all-user -->
+            <!-- /main-content-wrap -->
         </div>
         <!-- /main-content-wrap -->
     </div>
-    <!-- /main-content-wrap -->
-</div>
-<!-- /main-content -->
+    <!-- /main-content -->
 @endsection
 
 
@@ -167,5 +172,4 @@
     <script src="{{ asset('assets/js2/theme-settings.js') }}"></script>
     <script src="{{ asset('assets/js2/main.js') }}"></script>
     <script src="{{ asset('assets/js2/custom.js') }}"></script>
-
 @endsection

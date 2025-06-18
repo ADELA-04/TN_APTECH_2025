@@ -19,8 +19,8 @@ public function update(Request $request)
 {
     // Xác thực dữ liệu nhập vào
     $validatedData = $request->validate([
-        'Logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'Favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'Logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        'Favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         'NavigationLink' => 'required|string',
         'LinkFB' => 'required|url',
         'LinkIN' => 'required|url',

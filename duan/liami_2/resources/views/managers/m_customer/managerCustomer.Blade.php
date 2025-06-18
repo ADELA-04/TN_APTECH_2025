@@ -2,7 +2,7 @@
 
 {{-- title --}}
 @section('title')
-    <title>Customer Manager</title>
+    <title>Quản lí khách hàng</title>
 @endsection
 
 {{-- css --}}
@@ -29,12 +29,28 @@
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
                     <h3>Danh sách khách hàng</h3>
+
                 </div>
+
                 <!-- product-list -->
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
+@if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form class="form-search" method="GET" action="{{ route('manager_customer') }}">
     <fieldset class="name">
         <input type="text" placeholder="Tìm kiếm bằng mã khách hàng..." name="customer_id" required>

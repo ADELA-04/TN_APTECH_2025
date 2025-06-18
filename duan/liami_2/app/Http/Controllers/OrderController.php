@@ -15,6 +15,7 @@ use App\Models\OrderDetail;
 
 class OrderController extends Controller
 {
+    //hiển thị bên trang admin
  public function index2(Request $request)
 {
     // Lấy từ khóa tìm kiếm từ request
@@ -42,7 +43,7 @@ class OrderController extends Controller
 
     return view('managers.order.order_List', compact('orders', 'notFound'));
 }
- // Cập nhật trạng thái đơn hàng
+ // Cập nhật trạng thái đơn hàng admin
     public function updateStatus(Request $request, $id)
     {
         // Xác thực dữ liệu
@@ -80,35 +81,7 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Mã vận đơn đã được cập nhật thành công!');
     }
 
-    public function index_detail($id)
-    {
-        $order = Order::with('orderDetails')->findOrFail($id);
-        $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
-        $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
-        $allProduct = Product::all();
-        $settings = Setting::all();
-        $banners = Banner::all();
-        $currentUrl = url()->current();
-        $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
-        $categories = Category::with('children')->whereNull('parent_id')->get();
-        $user = Auth::guard('customer')->user();
-        // Lấy danh sách đơn hàng
-        $orders = Order::with('orderDetails.product')->orderBy('created_at', 'desc')->get();
-        return view('products.oder_detail_custom', compact(
 
-            'order',
-            'categories',
-            'settings',
-            'banners',
-            'allProduct',
-            'newProduct',
-            'blogs',
-            'topViewedProducts',
-            'currentUrl',
-            'user',
-            'orders',
-        ));
-    }
 
     //danh sách đơn hàng
     public function index()
@@ -139,7 +112,38 @@ class OrderController extends Controller
             'orders',
         ));
     }
-    // hiển thị tranh thanh toán (giỏ hàng)
+    //chi tiết đơn hàng bên khách hàng
+    public function index_detail($id)
+    {
+        $order = Order::with('orderDetails')->findOrFail($id);
+        $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
+        $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
+        $allProduct = Product::all();
+        $settings = Setting::all();
+        $banners = Banner::all();
+        $currentUrl = url()->current();
+        $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+        $user = Auth::guard('customer')->user();
+        // Lấy danh sách đơn hàng
+        $orders = Order::with('orderDetails.product')->orderBy('created_at', 'desc')->get();
+        return view('products.oder_detail_custom', compact(
+
+            'order',
+            'categories',
+            'settings',
+            'banners',
+            'allProduct',
+            'newProduct',
+            'blogs',
+            'topViewedProducts',
+            'currentUrl',
+            'user',
+            'orders',
+        ));
+    }
+
+    // hiển thị trang thanh toán từ giỏ hàng (giỏ hàng)
     public function checkout(Request $request)
     {
         // Lấy thông tin từ các mô hình
@@ -232,6 +236,7 @@ class OrderController extends Controller
 
         return redirect()->route('orders.index')->with('success', 'Đặt hàng thành công!');
     }
+    //chi tiết đơn hàng bên admin
 public function edit($id)
 {
     // Lấy đơn hàng cùng với thông tin khách hàng và chi tiết đơn hàng
@@ -239,6 +244,7 @@ public function edit($id)
 
     return view('managers.order.order_detail', compact('order'));
 }
+//thanh toán bằng nút mua ngay
 public function checkout2(Request $request)
     {
         // Lấy thông tin từ các mô hình
@@ -263,6 +269,7 @@ public function checkout2(Request $request)
             'user'
         ));
     }
+    //thực hiện lưu vào csdl
       public function store2(Request $request)
     {
           $customer = Auth::guard('customer')->user();

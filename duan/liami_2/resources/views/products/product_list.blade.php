@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-    <title>Product List</title>
+    <title>Sản phẩm</title>
 @endsection
 @section('css')
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.png') }}" />
@@ -63,24 +63,7 @@
                 <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <div class="wrapper-sidebar shop-sidebar">
                         <div class="sidebar">
-                            <div class=" ">
-                                <h4 class="" style="font-family: 'Roboto';">Giá</h4>
-                                <ul class="">
-                                    @foreach ($categories as $category)
-                                        <li class="mb-2 list-unstyled">
-                                            <form action="{{ route('filter.products') }}" method="GET">
-                                                <input id="category_{{ $category->CategoryID }}" type="checkbox"
-                                                    name="category_id[]" value="{{ $category->CategoryID }}"
-                                                    onchange="this.form.submit()"
-                                                    @if (isset($selectedCategoryIDs) && in_array($category->CategoryID, $selectedCategoryIDs)) checked @endif>
-                                                <label style="font-family: 'Roboto';"
-                                                    for="category_{{ $category->CategoryID }}"
-                                                    class="">{{ $category->CategoryName }}</label>
-                                            </form>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+
                             <div class="">
                                 <h4 class="" style="font-family: 'Roboto';">Thương hiệu</h4>
                                 <ul class="">

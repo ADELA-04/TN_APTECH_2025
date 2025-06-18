@@ -14,7 +14,7 @@ class OrdersTableSeeder extends Seeder
     {
         DB::table('orders')->insert([
             [
-                'CustomerID' => 1, // ID khách hàng
+                'CustomerID' => 4, // ID khách hàng
                 'TotalAmount' => 100000.00,
                 'OrderStatus' => 'Chờ xác nhận',
                 'PaymentMethod' => 'COD',

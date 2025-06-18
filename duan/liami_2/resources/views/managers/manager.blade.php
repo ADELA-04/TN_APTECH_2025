@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Trang dashboard
+        Tổng quan
     </title>
 @endsection
 
@@ -43,25 +43,11 @@
         <div class="main-content-inner">
             <!-- main-content-wrap -->
             <div class="main-content-wrap">
-                <div class="tf-section-3 ">
+                <div class="tf-section-2 ">
                     <!-- website-visitors -->
                     <div class="wg-box">
                         <div class="flex items-center justify-between">
-                            <h5>Tổng quan lượt ghé thăm trang web</h5>
-                            <div class="dropdown default">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="icon-more"><i class="icon-more-horizontal"></i></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần này</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần trước</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h5>Tổng quan doanh thu</h5>
                         </div>
                         <div id="line-chart-10"></div>
                     </div>
@@ -69,66 +55,19 @@
                     <!-- website-visitors -->
                     <div class="wg-box">
                         <div class="flex items-center justify-between">
-                            <h5>Tổng quan lượt ghé thăm sản phẩm</h5>
-                            <div class="dropdown default">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="icon-more"><i class="icon-more-horizontal"></i></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần này</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần trước</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h5>Top 5 mã sản phẩm bán chạy nhất</h5>
+
                         </div>
                         <div id="line-chart-9"></div>
                     </div>
                     <!-- website-visitors -->
-                    <!-- website-visitors -->
-                    <div class="wg-box">
-                        <div class="flex items-center justify-between">
-                            <h5>Tổng quan lượt ghé thăm blog</h5>
-                            <div class="dropdown default">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <span class="icon-more"><i class="icon-more-horizontal"></i></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần này</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">Tuần trước</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div id="line-chart-1"></div>
-                    </div>
-                    <!-- website-visitors -->
+
                 </div>
                 <div class="tf-section mb-30" style="margin-top: 20px">
                     <!-- orders -->
                     <div class="wg-box">
                         <div class="flex items-center justify-between">
-                            <h5>Top sản phẩm được xem nhiều nhất</h5>
-                            <div class="dropdown default">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a href="javascript:void(0);">3 ngày</a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);">7 ngày</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <h5>Top 5 sản phẩm được xem nhiều nhất</h5>
                         </div>
                         <div class="wg-table table-product-overview t2">
                             <ul class="table-title flex gap20 mb-14">
@@ -136,14 +75,14 @@
                                     <div class="body-title">Sản phẩm</div>
                                 </li>
                                 <li>
-                                    <div class="body-title">Danh mục sản phẩm</div>
+                                    <div class="body-title text-center">Danh mục sản phẩm</div>
                                 </li>
                                 <li>
-                                    <div class="body-title">Mã sản phẩm</div>
+                                    <div class="body-title text-center">Mã sản phẩm</div>
                                 </li>
 
                                 <li>
-                                    <div class="body-title">Lượt xem</div>
+                                    <div class="body-title text-center">Lượt xem</div>
                                 </li>
 
                             </ul>
@@ -161,10 +100,10 @@
                                                 <a href="{{ route('product.detail', $topViewedProduct->ProductID) }}"
                                                     class="body-title-2">{{ $topViewedProduct->ProductName }}</a>
                                             </div>
-                                            <div class="body-text">{{ $topViewedProduct->Category->CategoryName }}</div>
-                                            <div class="body-text">{{ $topViewedProduct->ProductID }}</div>
+                                            <div class="body-text text-center"> {{ $topViewedProduct->Category->CategoryName }}</div>
+                                            <div class="body-text text-center">{{ $topViewedProduct->ProductID }}</div>
 
-                                            <div class="body-text">{{ $topViewedProduct->View }}</div>
+                                            <div class="body-text text-center">{{ $topViewedProduct->View }}</div>
 
                                         </div>
                                     </li>
@@ -200,14 +139,20 @@
     <script src="assets/js2/raphael.min.js"></script>
     <script src="assets/js2/morris.js"></script>
     <script src="assets/js2/apexcharts/apexcharts.js"></script>
-    <script src="assets/js2/apexcharts/line-chart-1.js"></script>
-    <script src="assets/js2/apexcharts/line-chart-2.js"></script>
-    <script src="assets/js2/apexcharts/line-chart-3.js"></script>
-    <script src="assets/js2/apexcharts/line-chart-4.js"></script>
-    <script src="assets/js2/apexcharts/line-chart-8.js"></script>
+    <script>
+        // lấy dữ liệu từ controller đẩy sang để hiển thị ra biểu đồ
+        var percentages = @json($percentages);
+   var productCodes = @json($productCodes);
+     var totalQuantities = @json($totalQuantities);
+       </script>
     <script src="assets/js2/apexcharts/line-chart-9.js"></script>
+     <script>
+         // lấy dữ liệu từ controller đẩy sang để hiển thị ra biểu đồ
+        var revenueData = @json($revenueData);
+    </script>
     <script src="assets/js2/apexcharts/line-chart-10.js"></script>
     <script src="assets/js2/switcher.js"></script>
     <script src="assets/js2/theme-settings.js"></script>
     <script src="assets/js2/main.js"></script>
+
 @endsection

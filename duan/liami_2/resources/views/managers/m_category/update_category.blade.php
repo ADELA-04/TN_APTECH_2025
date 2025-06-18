@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        Chỉnh sửa danh mục sản phẩm
+        Chỉnh sửa danh mục
     </title>
 @endsection
 

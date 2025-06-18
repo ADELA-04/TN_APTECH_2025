@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-        add banner
+        Thêm mới banner
     </title>
 @endsection
 
@@ -39,7 +39,7 @@
             <!-- main-content-wrap -->
             <div class="main-content-wrap">
                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
-                    <h3>Setting banner</h3>
+                    <h3>Thêm mới banner</h3>
                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                         <li><i class="icon-chevron-left"></i></li>
                         <li><a href="{{ route('managers.settings_banner') }}">
@@ -76,12 +76,12 @@
                                 <div class="gap24 ">
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Tiêu đề</div>
-                                        <input class="flex-grow" type="text" placeholder="Nhập tiêu đề..." name="Title"
+                                        <input required class="flex-grow" type="text" placeholder="Nhập tiêu đề..." name="Title"
                                             tabindex="0" value="" aria-required="true">
                                     </fieldset>
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Tiêu đề phụ</div>
-                                        <input class="flex-grow" type="text" placeholder="Nhập tiêu đề phụ..."
+                                        <input required class="flex-grow" type="text" placeholder="Nhập tiêu đề phụ..."
                                             name="subTitle" tabindex="0" value="" aria-required="true">
                                     </fieldset>
                                     <fieldset class="title mb-24">
@@ -106,7 +106,7 @@
 
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Liên kết điều hướng</div>
-                                        <input class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
+                                        <input required class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
                                             name="Link" tabindex="0" value="" aria-required="true">
                                     </fieldset>
 

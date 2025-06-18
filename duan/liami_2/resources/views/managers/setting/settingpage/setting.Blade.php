@@ -1,7 +1,7 @@
 @extends('layouts.admin_master')
 
 @section('title')
-    <title>Information Shop</title>
+    <title>Cài đặt chung</title>
 @endsection
 
 @section('css')

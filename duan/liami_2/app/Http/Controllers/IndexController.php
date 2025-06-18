@@ -101,6 +101,7 @@ class IndexController extends Controller
             'currentUrl',
         ));
     }
+    //xem chi tiết sp
 public function viewProductDetail($ProductID)
 {
 
@@ -123,7 +124,7 @@ public function viewProductDetail($ProductID)
 
     return view('products.products_detail', compact('product','relatedProducts', 'banners', 'settings', 'categories'));
 }
-
+//xem tất cả sp
 public function viewAllProduct()
 {
 
@@ -137,17 +138,25 @@ public function viewAllProduct()
 
     return view('products.product_list', compact('products','brands', 'banners', 'settings',  'categories'));
 }
-
+// xem sp theo danh mục
 public function list($category_id)
-{ $brands = Product::select('Brand')->distinct()->get();
+{
+    $brands = Product::select('Brand')->distinct()->get();
     $category = Category::find($category_id);
     $banners = Banner::all();
     $settings = Setting::all();
-
     $categories = Category::with('children')->whereNull('parent_id')->get();
-    $products = Product::where('CategoryID', $category_id)->paginate(12);;
-    return view('products.product_list', compact('products','category','brands', 'banners', 'settings',  'categories'));
+
+    // Lấy danh sách sản phẩm theo CategoryID và sắp xếp theo thời gian đăng gần nhất
+    $products = Product::where('CategoryID', $category_id)
+        ->orderBy('created_at', 'desc') // Sắp xếp theo thời gian tạo, gần nhất trước
+        ->paginate(12);
+
+    return view('products.product_list', compact('products', 'category', 'brands', 'banners', 'settings', 'categories'));
 }
+
+
+//tìm kiếm sp
 public function searchProducts(Request $request)
 {
     // Lấy từ khóa tìm kiếm
@@ -173,24 +182,25 @@ public function searchProducts(Request $request)
 
     return view('products.product_list', compact('products', 'brands', 'banners', 'settings',  'categories', 'searchTerm'));
 }
-
+//lọc theo thương hiệu
 public function filterByBrand(Request $request)
 {
     $selectedBrand = $request->input('brand'); // Lấy thương hiệu đã chọn từ yêu cầu
 
-    // Lấy danh sách sản phẩm theo thương hiệu
-    $products = Product::where('Brand', $selectedBrand)->paginate(12);
+    // Lấy danh sách sản phẩm theo thương hiệu và sắp xếp theo thời gian đăng gần nhất
+    $products = Product::where('Brand', $selectedBrand)
+        ->orderBy('created_at', 'desc') // Sắp xếp theo thời gian tạo, gần nhất trước
+        ->paginate(12);
 
     // Các biến khác
     $brands = Product::select('Brand')->distinct()->get();
     $banners = Banner::all();
     $settings = Setting::all();
-
     $categories = Category::with('children')->whereNull('parent_id')->get();
 
-    return view('products.product_list', compact('products', 'brands', 'banners', 'settings',  'categories', 'selectedBrand'));
+    return view('products.product_list', compact('products', 'brands', 'banners', 'settings', 'categories', 'selectedBrand'));
 }
-
+//lọc theo giá
 public function filterByPrice(Request $request)
 {
     $minPrice = $request->input('min_price', 0); // Giá tối thiểu
@@ -208,34 +218,27 @@ public function filterByPrice(Request $request)
 
     return view('products.product_list', compact('products', 'brands', 'banners', 'settings',  'categories', 'minPrice', 'maxPrice'));
 }
-
+//lọc theo danh mục
 public function filterByCategory(Request $request)
 {
     $selectedCategoryIDs = $request->input('category_id', []); // Lấy mảng các danh mục đã chọn
     $brands = Product::select('Brand')->distinct()->get();
-    // Lấy danh sách sản phẩm theo các danh mục đã chọn
+
+    // Lấy danh sách sản phẩm theo các danh mục đã chọn và sắp xếp theo thời gian đăng gần nhất
     $products = Product::when(!empty($selectedCategoryIDs), function ($query) use ($selectedCategoryIDs) {
         $query->whereIn('CategoryID', $selectedCategoryIDs);
-    })->paginate(12);
+    })
+    ->orderBy('created_at', 'desc') // Sắp xếp theo thời gian tạo, gần nhất trước
+    ->paginate(12);
 
     // Các biến khác
     $categories = Category::with('children')->whereNull('parent_id')->get();
-
     $banners = Banner::all();
     $settings = Setting::all();
 
-    return view('products.product_list', compact('products', 'brands','categories', 'banners', 'settings',  'selectedCategoryIDs'));
+    return view('products.product_list', compact('products', 'brands', 'categories', 'banners', 'settings', 'selectedCategoryIDs'));
 }
-// public function master()
-// {
-//   $settings = Setting::all();
-//       return view('layouts.master', compact('settings'));
-// }
-// public function master2()
-// {
-//   $settings = Setting::all();
-//       return view('layouts.master2', compact('settings'));
-// }
+
 public function admin_master()
 {
   $settings = Setting::all();

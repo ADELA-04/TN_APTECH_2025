@@ -89,11 +89,11 @@
                                                     required>
                                             </fieldset>
                                             <fieldset class="male">
-                                                <div class="body-title mb-10">Giá giảm
+                                                <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span>
                                                 </div>
                                                 <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
                                                     name="SalePrice" tabindex="0" value="{{ old('SalePrice') }}"
-                                                    >
+                                                    required>
                                             </fieldset>
                                         </div>
                                         <fieldset class="name">
