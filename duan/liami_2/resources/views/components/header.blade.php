@@ -265,7 +265,7 @@
                                     placeholder="Tìm kiếm..." value="{{ request()->input('search') }}">
                             </form>
                         </li>
-                        //hiển thị giỏ hàng khi đăng nhập
+                        {{-- hiển thị giỏ hàng khi đăng nhập --}}
                         @if (Auth::guard('customer')->check())
                             <li>
                                 <a class="d-inline-block" href="{{ route('cart.show') }}" title="">

@@ -77,20 +77,20 @@
                         @csrf
                         <div class="field-box v2 position-relative w-100">
                             <label>Họ và Tên</label>
-                            <input type="text" name="FullName" value="{{ old('FullName') }}" required>
+                            <input placeholder="Nhập họ tên..." type="text" name="FullName" value="{{ old('FullName') }}" required>
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Email</label>
-                            <input type="email" name="Email" value="{{ old('Email') }}" required>
+                            <input placeholder="Nhập email..." type="email" name="Email" value="{{ old('Email') }}" required>
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Mật khẩu</label>
-                            <input type="password" name="Password" required id="password">
+                            <input placeholder="Nhập mật khẩu..." type="password" name="Password" required id="password">
                             <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Nhập lại mật khẩu</label>
-                            <input type="password" name="Password_confirmation" required id="password_confirmation">
+                            <input placeholder="Nhập lại mật khẩu" type="password" name="Password_confirmation" required id="password_confirmation">
                             <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
                         </div>
                         <div

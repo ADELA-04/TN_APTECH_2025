@@ -82,14 +82,14 @@
                                  !!}</p>
 
                             </div>
-                            <div class="post-detail-share d-flex flex-wrap align-items-center w-100">
+                            {{-- <div class="post-detail-share d-flex flex-wrap align-items-center w-100">
                                 <h5 class="mb-0" style="font-family: 'Roboto';">Chia sẻ:</h5>
                                 <div class="share-links d-flex flex-wrap">
                                     <a href="javascript:void(0);" title="Chia sẻ trên Facebook" onclick="shareOnFacebook();">
                                         <i class="fab fa-facebook-f"></i> Facebook
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div><!-- Post Detail -->
                     </div>
                 </div>

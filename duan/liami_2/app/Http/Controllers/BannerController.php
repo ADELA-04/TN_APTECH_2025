@@ -6,27 +6,28 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+
 class BannerController extends Controller
 {
     // Hiển thị danh sách banner
     public function index(Request $request)
-{
-    $searchTerm = $request->input('name');
-    $banners = null; // Khởi tạo biến banners
+    {
+        $searchTerm = $request->input('name');
+        $banners = null; // Khởi tạo biến banners
 
-    if ($searchTerm) {
-        $banners = Banner::where('BannerID', $searchTerm)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-    } else {
-        $banners = Banner::orderBy('created_at', 'desc')->paginate(10);
+        if ($searchTerm) {
+            $banners = Banner::where('BannerID', $searchTerm)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
+        } else {
+            $banners = Banner::orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        // Kiểm tra nếu không tìm thấy banner nào
+        $notFound = $banners->isEmpty() && $searchTerm ? true : false;
+
+        return view('managers.setting.settingpage.manager_banner', compact('banners', 'notFound'));
     }
-
-    // Kiểm tra nếu không tìm thấy banner nào
-    $notFound = $banners->isEmpty() && $searchTerm ? true : false;
-
-    return view('managers.setting.settingpage.manager_banner', compact('banners', 'notFound'));
-}
 
     // Hiển thị form tạo mới banner
     public function create()
@@ -39,9 +40,9 @@ class BannerController extends Controller
     {
         $request->validate([
             'Title' => 'required|string',
-        'subTitle' => 'nullable|string',
-        'ImageURL' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'Link' => 'nullable',
+            'subTitle' => 'nullable|string',
+            'ImageURL' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'Link' => 'nullable',
 
 
         ]);
@@ -67,7 +68,7 @@ class BannerController extends Controller
 
         $currentDate = now(); // Lấy thời gian hiện tại
         $status = ($currentDate >= $request->StartDate && $currentDate <= $request->EndDate) ? 'active' : 'in_active';
-        $banner=Banner::create([
+        $banner = Banner::create([
             'Title' => $request->Title,
             'subTitle' => $request->subTitle,
             'ImageURL' => $imagePath, // Thêm trường này
@@ -75,7 +76,7 @@ class BannerController extends Controller
 
         ]);
 
-        return redirect()->route('settings_banner.edit',$banner->BannerID)->with('success', 'Thêm thành công!');
+        return redirect()->route('settings_banner.edit', $banner->BannerID)->with('success', 'Thêm thành công!');
     }
 
     // Hiển thị form chỉnh sửa banner
@@ -90,35 +91,35 @@ class BannerController extends Controller
     {
         $request->validate([
             'Title' => 'nullable|string',
-        'subTitle' => 'nullable|string',
-        'LogoImageURL' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Thêm giới hạn kích thước nếu cần
-        'Link' => 'nullable',
+            'subTitle' => 'nullable|string',
+            'LogoImageURL' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Thêm giới hạn kích thước nếu cần
+            'Link' => 'nullable',
 
 
         ]);
 
         $banner = Banner::findOrFail($id);
 
-    // Kiểm tra tệp tải lên
-    if ($request->hasFile('ImageURL')) {
-        $file = $request->file('ImageURL');
+        // Kiểm tra tệp tải lên
+        if ($request->hasFile('ImageURL')) {
+            $file = $request->file('ImageURL');
 
-        if ($file->isValid()) {
-            $originalName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/images3'), $originalName);
-            $imagePath = 'assets/images3/' . $originalName;
+            if ($file->isValid()) {
+                $originalName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images3'), $originalName);
+                $imagePath = 'assets/images3/' . $originalName;
 
-            // Cập nhật đường dẫn hình ảnh
-            $banner->ImageURL = $imagePath;
+                // Cập nhật đường dẫn hình ảnh
+                $banner->ImageURL = $imagePath;
+            }
         }
-    }
-         // Cập nhật các trường khác
-    $banner->Title = $request->Title;
-    $banner->subTitle = $request->subTitle;
-    $banner->Link = $request->Link;
-    $banner->save();
+        // Cập nhật các trường khác
+        $banner->Title = $request->Title;
+        $banner->subTitle = $request->subTitle;
+        $banner->Link = $request->Link;
+        $banner->save();
 
-        return redirect()->route('settings_banner.edit',$id)->with('success', 'Sửa thành công');
+        return redirect()->route('settings_banner.edit', $id)->with('success', 'Sửa thành công');
     }
 
     // Xóa banner

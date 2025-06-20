@@ -86,7 +86,7 @@
                                             <div class="field-box v2 position-relative w-100">
                                                 <label>Hình thức thanh toán *</label>
                                                 <select name="payment_method" required>
-                                                    <option>Chuyển khoản</option>
+                                                    {{-- <option>Chuyển khoản</option> --}}
                                                     <option>Thanh toán khi nhận hàng (COD)</option>
 
                                                 </select>
