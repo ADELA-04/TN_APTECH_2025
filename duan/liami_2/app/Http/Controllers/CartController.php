@@ -59,21 +59,25 @@ class CartController extends Controller
 
     public function addToCart(Request $request)
     {
+        $messages = [
+        'quantity.required' => 'Số lượng là bắt buộc.',
+        'quantity.integer' => 'Số lượng phải là một số nguyên.',
+        'quantity.min' => 'Số lượng phải lớn hơn hoặc bằng 1.',
+    ];
         // Xác thực dữ liệu yêu cầu
         $request->validate([
-            'product_id' => 'required|exists:products,ProductID',
-            'quantity' => 'required|integer|min:1',
-            'color' => 'required|string',
-            'size' => 'required|string',
-        ]);
-
+        'product_id' => 'required|exists:products,ProductID',
+        'quantity' => 'required|integer|min:1',
+        'color' => 'required|string',
+        'size' => 'required|string',
+    ], $messages);
         // Lấy người dùng đã xác thực
         $user = Auth::guard('customer')->user();
 
         // Kiểm tra nếu người dùng chưa đăng nhập
         if (!$user) {
             session(['intended_url' => url()->current()]);
-            return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng.');
+            return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng hoặc mua hàng.');
         }
 
         // Tạo hoặc lấy giỏ hàng của người dùng

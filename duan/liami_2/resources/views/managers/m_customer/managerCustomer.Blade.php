@@ -69,13 +69,13 @@
                                 <div class="body-title">Khách hàng</div>
                             </li>
                             <li>
-                                <div class="body-title">Email</div>
+                                <div class="body-title text-center">Email</div>
                             </li>
                             <li>
-                                <div class="body-title">Số điện thoại</div>
+                                <div class="body-title text-center">Số điện thoại</div>
                             </li>
                             <li>
-                                <div class="body-title"> Số đơn hàng</div>
+                                <div class="body-title text-center"> Số đơn hàng</div>
                             </li>
 
                             <li>
@@ -91,18 +91,18 @@
                                         </div>
                                         <div class="flex items-center justify-between gap20 flex-grow">
                                             <div class="name">
-                                                <a href="{{ route('customers.edit', $customer->CustomerID) }}"
+                                                <a
                                                     class="body-title-2">{{ $customer->FullName }}</a>
                                             </div>
-                                            <div class="body-text">{{ $customer->Email }}</div>
-                                            <div class="body-text">
+                                            <div class="body-text text-center">{{ $customer->Email }}</div>
+                                            <div class="body-text text-center">
                                                 @if ($customer->orders->isNotEmpty())
                                                     {{ $customer->orders->first()->Phone }}
                                                 @else
                                                     Không có số điện thoại
                                                 @endif
                                             </div>
-                                            <div class="body-text">{{ $customer->orders_count }} Đơn hàng</div>
+                                            <div class="body-text text-center">{{ $customer->orders_count }} Đơn hàng</div>
                                             <div class="list-icon-function">
 
                                                 <div class="user-item">

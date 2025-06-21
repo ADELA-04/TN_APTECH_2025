@@ -43,7 +43,7 @@ class AuthController extends Controller
         'Email' => $request->Email,
         'PasswordHash' => Hash::make($request->Password),
         'Gender' => $request->Gender ?? null,
-        'ProfilePicture' => $request->ProfilePicture ?? null,
+        'ProfilePicture' => 'assets\images3\cus.jpg',
     ]);
 
     // Chuyển hướng hoặc trả về phản hồi

@@ -27,6 +27,7 @@
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
+
                 <div class="sec-title2 position-relative w-100">
                     <h3 class="mb-0">Thanh toán</h3>
                 </div><!-- Section Title -->
@@ -53,7 +54,7 @@
                                         <div class="col-md-12 col-sm-12 col-lg-12">
                                             <div class="field-box v2 position-relative w-100">
                                                 <label>Địa chỉ nhận hàng *</label>
-                                                <input required name="address" type="text" value="{{ $user->Address }}">
+                                                <input required name="address" type="text" value="{{ $user->Address }}" placeholder="Nhập địa chỉ nhận hàng">
 
                                             </div>
                                         </div>

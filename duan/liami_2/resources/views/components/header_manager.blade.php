@@ -57,8 +57,8 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="header-user wg-user">
                                 <span class="image">
-                                    <img src="{{ Auth::user()->Avartar ? asset(Auth::user()->Avartar) : asset('path/to/default/image.png') }}"
-                                        alt="{{ Auth::user()->Avartar ? '' : 'Hình đại diện không có' }}">
+                                    <img src="{{ Auth::user()->Avartar ? asset(Auth::user()->Avartar) : asset('assets/images3/cus.jpg') }}"
+     alt="{{ Auth::user()->Avartar ? '' : 'Hình đại diện không có' }}">
                                 </span>
                                 <span class="flex flex-column">
                                     <span class="body-title mb-2">{{ Auth::user()->Username }}</span>
@@ -98,15 +98,7 @@
                                 </a>
                             </li>
 
-                            {{--
-                            <li>
-                                <a href="setting.html" class="user-item">
-                                    <div class="icon">
-                                        <i class="icon-settings"></i>
-                                    </div>
-                                    <div class="body-title-2">Setting</div>
-                                </a>
-                            </li> --}}
+
 
 
                         </ul>

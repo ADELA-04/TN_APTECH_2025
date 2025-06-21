@@ -36,6 +36,15 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="container">
                 <div class="product-detail position-relative w-100">
                     <div class="row mrg30">
@@ -58,7 +67,7 @@
                                             <a href="{{ asset($product->Image) }}" data-fancybox="gallery" title="">
                                                 <img class="img-fluid w-100" src="{{ asset($product->Image) }}"
                                                     alt="Product Detail Big Image 1">
-                                                <i class="fi fi-rr-eye rounded-circle"></i>
+
                                             </a>
                                         </div>
                                     </li>
@@ -90,7 +99,7 @@
                                     <input type="hidden" name="product_id" value="{{ $product->ProductID }}">
                                     <div class="product-bottom d-flex flex-wrap align-items-center w-100">
                                         <div class="mr-05 product-quanty">
-                                            <input type="number" name="quantity" class="qty" value="1"
+                                           <input type="number" name="quantity" class="qty" value="1"
                                                 min="1">
                                         </div>
                                         <div>
@@ -132,10 +141,6 @@
                         <li class="nav-item">
                             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-detail-tab1-2"
                                 type="button" style="font-family: 'Roboto';">Thông số sản phẩm</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#product-detail-tab1-3"
-                                type="button" style="font-family: 'Roboto';">Đánh giá</button>
                         </li>
                     </ul>
                     <div class="tab-content">

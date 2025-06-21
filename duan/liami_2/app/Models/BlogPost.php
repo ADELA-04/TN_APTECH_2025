@@ -19,4 +19,5 @@ class BlogPost extends Model
         'AuthorID',
         'views',
     ];
+
 }

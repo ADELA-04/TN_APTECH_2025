@@ -68,8 +68,12 @@ input[type="password"] {
         {{ session('success') }}
     </div>
 @endif
+@if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
                 <form action="{{ route('actionLogin') }}" method="POST">
                     @csrf
+
                     <div class="field-box v2 position-relative w-100">
                         <label>Email</label>
                         <input type="email" name="Email" required placeholder="Nhập email...">

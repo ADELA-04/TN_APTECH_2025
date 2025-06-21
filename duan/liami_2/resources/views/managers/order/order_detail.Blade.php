@@ -167,6 +167,9 @@
                                             công</option>
                                         <option value="Hoàn trả"
                                             {{ $order->OrderStatus == 'Hoàn trả' ? 'selected' : '' }}>Hoàn trả</option>
+                                            <option value="Đã hết hàng"
+                                            {{ $order->OrderStatus == 'Đã hết hàng' ? 'selected' : '' }}>Đã hết hàng
+                                        </option>
                                     </select>
                                 </div>
                                 <button type="submit" class="tf-button style-1 w-full">Cập

@@ -53,7 +53,7 @@ class ProductController extends Controller
                 'Summary' => 'nullable|string',
                 'Description' => 'nullable|string',
                 'Price' => 'required|numeric',
-                'SalePrice' => 'nullable|numeric|lt:Price',
+                'SalePrice' => 'required|numeric|lt:Price',
                 'Size' => 'nullable|string',
                 'Color' => 'nullable|string',
                 'Material' => 'nullable|string',

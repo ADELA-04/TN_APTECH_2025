@@ -65,24 +65,24 @@
                                                 name="ProductName" value="{{ old('ProductName', $product->ProductName) }}" required>
                                         </fieldset>
                                         <fieldset class="description">
-                                            <div class="body-title mb-10">Mô tả ngắn</div>
-                                            <textarea class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn...">{{ old('Summary', $product->Summary) }}</textarea>
+                                            <div class="body-title mb-10">Mô tả ngắn<span class="tf-color-1">*</span></div>
+                                            <textarea required class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn...">{{ old('Summary', $product->Summary) }}</textarea>
                                         </fieldset>
                                         <fieldset class="description">
                                             <div class="body-title mb-10">Mô tả</div>
                                             <textarea class="mb-10" name="Description" placeholder="Nhập mô tả...">{{ old('Description', $product->Description) }}</textarea>
                                         </fieldset>
                                         <div class="gap22 cols">
-                                            <fieldset class="category">
-                                                <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span></div>
-                                                <input class="mb-10" type="text" placeholder="Nhập giá..."
-                                                    name="Price" value="{{ old('Price', $product->Price) }}" required>
-                                            </fieldset>
-                                            <fieldset class="male">
-                                                <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span></div>
-                                                <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
-                                                    name="SalePrice" value="{{ old('SalePrice', $product->SalePrice) }}" required>
-                                            </fieldset>
+                                          <fieldset class="category">
+    <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span></div>
+    <input class="mb-10" type="text" placeholder="Nhập giá..."
+        name="Price" value="{{ old('Price', $product->Price) }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
+</fieldset>
+<fieldset class="male">
+    <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span></div>
+    <input required class="mb-10" type="text" placeholder="Nhập giá giảm..."
+        name="SalePrice" value="{{ old('SalePrice', $product->SalePrice) }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
+</fieldset>
                                             @if ($errors->has('SalePrice'))
                                                 <div class="text-tiny" style="color: brown; font-weight: bold;">
                                                     {{ $errors->first('SalePrice') }}
@@ -90,23 +90,23 @@
                                             @endif
                                         </div>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Kích thước</div>
-                                            <input class="mb-10" type="text" placeholder="Nhập kích thước..."
+                                            <div class="body-title mb-10">Kích thước<span class="tf-color-1">*</span></div>
+                                            <input required class="mb-10" type="text" placeholder="Nhập kích thước..."
                                                 name="Size" value="{{ old('Size', $product->Size) }}">
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Màu sắc</div>
-                                            <input class="mb-10" type="text" placeholder="Nhập màu sắc..."
+                                            <div class="body-title mb-10">Màu sắc<span class="tf-color-1">*</span></div>
+                                            <input required class="mb-10" type="text" placeholder="Nhập màu sắc..."
                                                 name="Color" value="{{ old('Color', $product->Color) }}">
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Chất liệu</div>
-                                            <input class="mb-10" type="text" placeholder="Nhập chất liệu..."
+                                            <div class="body-title mb-10">Chất liệu<span class="tf-color-1">*</span></div>
+                                            <input required class="mb-10" type="text" placeholder="Nhập chất liệu..."
                                                 name="Material" value="{{ old('Material', $product->Material) }}">
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Khối lượng (kg)</div>
-                                            <input class="mb-10" type="text" placeholder="Nhập khối lượng..."
+                                            <div class="body-title mb-10">Khối lượng (kg)<span class="tf-color-1">*</span></div>
+                                            <input required class="mb-10" type="text" placeholder="Nhập khối lượng..."
                                                 name="Weigh" value="{{ old('Weigh', $product->Weigh) }}">
                                         </fieldset>
                                     </div>
@@ -129,8 +129,8 @@
                                             </div>
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Nhà cung cấp</div>
-                                            <input class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
+                                            <div class="body-title mb-10">Nhà cung cấp<span class="tf-color-1">*</span></div>
+                                            <input required class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
                                                 name="Brand" value="{{ old('Brand', $product->Brand) }}" >
                                         </fieldset>
                                         <fieldset class="category">
@@ -198,5 +198,17 @@
                 }
             });
         });
+        document.addEventListener('DOMContentLoaded', function() {
+    const priceInput = document.querySelector('input[name="Price"]');
+    const salePriceInput = document.querySelector('input[name="SalePrice"]');
+
+    priceInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
+    });
+
+    salePriceInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
+    });
+});
     </script>
 @endsection

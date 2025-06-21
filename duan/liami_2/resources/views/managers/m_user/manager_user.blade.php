@@ -76,10 +76,10 @@
                                 <div class="body-title">Tên tài khoản</div>
                             </li>
                             <li>
-                                <div class="body-title">Điện thoại</div>
+                                <div class="body-title text-center">Điện thoại</div>
                             </li>
                             <li>
-                                <div class="body-title">Email</div>
+                                <div class="body-title text-center">Email</div>
                             </li>
                             <li>
                                 <div class="body-title">Hành động</div>
@@ -91,15 +91,17 @@
                             @else
                                 @foreach ($users as $user)
                                     <li class="user-item gap14">
+                                         <div class="image no-bg">
+<img src="{{ asset($user->Avartar ?? 'assets/images3/cus.jpg') }}" alt="">                                        </div>
                                         <div class="flex items-center justify-between gap20 flex-grow">
                                             <div class="name">
                                                 <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"
                                                     class="body-title-2">{{ $user->Username ?? 'N/A' }}</a>
                                                 <div class="text-tiny mt-3">{{ $user->Role ?? 'N/A' }}</div>
                                             </div>
-                                            <div class="body-text" style=" text-align: left;">{{ $user->Phone ?? 'N/A' }}
+                                            <div class="body-text text-center" style=" text-align: left;">{{ $user->Phone ?? 'N/A' }}
                                             </div>
-                                            <div class="body-text">{{ $user->Email ?? 'N/A' }}</div>
+                                            <div class="body-text text-center">{{ $user->Email ?? 'N/A' }}</div>
                                             <div class="list-icon-function">
                                                 <div class="item edit">
                                                     <a href="{{ route('managers.m_user.edit_user', $user->UserID) }}"><i

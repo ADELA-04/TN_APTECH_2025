@@ -71,9 +71,9 @@
                                                 required>
                                         </fieldset>
                                         <fieldset class="description">
-                                            <div class="body-title mb-10">Mô tả ngắn
+                                            <div class="body-title mb-10">Mô tả ngắn<span class="tf-color-1">*</span>
                                             </div>
-                                            <textarea class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn..." tabindex="0" aria-required="true"
+                                            <textarea required class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn..." tabindex="0" aria-required="true"
                                                 >{{ old('Summary') }}</textarea>
                                         </fieldset>
                                         <fieldset class="description">
@@ -83,44 +83,46 @@
                                         </fieldset>
                                         <div class="gap22 cols">
                                             <fieldset class="category">
-                                                <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span></div>
-                                                <input class="mb-10" type="text" placeholder="Nhập giá..."
-                                                    name="Price" tabindex="0" value="{{ old('Price') }}"
-                                                    required>
-                                            </fieldset>
-                                            <fieldset class="male">
-                                                <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span>
-                                                </div>
-                                                <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
-                                                    name="SalePrice" tabindex="0" value="{{ old('SalePrice') }}"
-                                                    required>
-                                            </fieldset>
+    <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span></div>
+    <input class="mb-10" type="text" placeholder="Nhập giá..."
+        name="Price" tabindex="0" value="{{ old('Price') }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
+</fieldset>
+<fieldset class="male">
+    <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span></div>
+    <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
+        name="SalePrice" tabindex="0" value="{{ old('SalePrice') }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
+</fieldset>
+                                              @if ($errors->has('SalePrice'))
+            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                {{ $errors->first('SalePrice') }}
+            </div>
+        @endif
                                         </div>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Kích thước
+                                            <div class="body-title mb-10">Kích thước<span class="tf-color-1">*</span>
                                             </div>
-                                            <input class="mb-10" type="text" placeholder="Nhập kích thước"
+                                            <input required class="mb-10" type="text" placeholder="Nhập kích thước"
                                                 name="Size" tabindex="0" value="{{ old('Size') }}"
                                                 >
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Màu sắc
+                                            <div class="body-title mb-10">Màu sắc<span class="tf-color-1">*</span>
                                             </div>
-                                            <input class="mb-10" type="text" placeholder="Nhập màu sắc..."
+                                            <input required class="mb-10" type="text" placeholder="Nhập màu sắc..."
                                                 name="Color" tabindex="0" value="{{ old('Color') }}"
                                                 >
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Chất liệu
+                                            <div class="body-title mb-10">Chất liệu<span class="tf-color-1">*</span>
                                             </div>
-                                            <input class="mb-10" type="text" placeholder="Nhập chất liệu..."
+                                            <input required class="mb-10" type="text" placeholder="Nhập chất liệu..."
                                                 name="Material" tabindex="0" value="{{ old('Material') }}"
                                                 >
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Khối lượng (kg)
+                                            <div class="body-title mb-10">Khối lượng (kg)<span class="tf-color-1">*</span>
                                             </div>
-                                            <input class="mb-10" type="text" placeholder="Nhập khối lượng..."
+                                            <input required class="mb-10" type="text" placeholder="Nhập khối lượng..."
                                                 name="Weigh" tabindex="0" value="{{ old('Weigh') }}"
                                                 >
                                         </fieldset>
@@ -135,7 +137,7 @@
                                                         <span class="text-tiny">Drop your images here or select <span
                                                                 class="tf-color">click to browse</span></span>
                                                         <input type="file" id="myFile" name="Image"
-                                                            accept="image/*" style="display: none;"> </label>
+                                                            accept="image/*" style="display: none;" > </label>
                                                 </div>
                                                 <div class="item">
                                                     <img id="previewImage" src="" alt="Image Preview"
@@ -144,9 +146,9 @@
                                             </div>
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Nhà cung cấp
+                                            <div class="body-title mb-10">Nhà cung cấp<span class="tf-color-1">*</span>
                                             </div>
-                                            <input class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
+                                            <input required class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
                                                 name="Brand" tabindex="0" value="{{ old('Brand') }}"
                                                 >
                                         </fieldset>
@@ -217,5 +219,18 @@
                 }
             });
         });
+        // không cho phép nhập giá bằng kí tự khác số
+        document.addEventListener('DOMContentLoaded', function() {
+    const priceInput = document.querySelector('input[name="Price"]');
+    const salePriceInput = document.querySelector('input[name="SalePrice"]');
+
+    priceInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
+    });
+
+    salePriceInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
+    });
+});
     </script>
 @endsection

@@ -73,8 +73,7 @@
                                             @error('CategoryName')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
-                                            {{-- <div class="text-tiny">Do not exceed 20 characters when entering the category
-                                                name.</div> --}}
+
                                         </fieldset>
                                         <fieldset class="brand">
                                             <div class="body-title mb-10">Danh mục cha <span class="tf-color-1">*</span>
@@ -89,15 +88,7 @@
                                                 </select>
                                             </div>
                                         </fieldset>
-                                        {{-- <fieldset class="brand">
-                                            <div class="body-title mb-10">Cho phép hiển thị <span class="tf-color-1">*</span></div>
-                                            <div class="select">
-                                                <select name="IsVisible" required>
-                                                    <option value="1">Có</option>
-                                                    <option value="0">Không</option>
-                                                </select>
-                                            </div>
-                                        </fieldset> --}}
+
                                         <div class="cols gap10">
                                             <button class="tf-button w-full" type="submit">Lưu</button>
                                             <a class="tf-button style-1 w-full"

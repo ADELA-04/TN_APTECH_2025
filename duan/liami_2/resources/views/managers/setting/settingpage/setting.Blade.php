@@ -96,47 +96,47 @@
 
                                         <fieldset class="title mb-24">
                                             <div class="body-title mb-10">Liên kết điều hướng</div>
-                                            <input class="flex-grow" type="text" placeholder="Enter navigation link"
+                                            <input class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
                                                 name="NavigationLink" tabindex="0"
                                                 value="{{ $setting->NavigationLink }}">
                                         </fieldset>
                                         <fieldset class="title mb-24">
                                             <div class="body-title mb-10">Liên kết facebook</div>
-                                            <input class="flex-grow" type="text" placeholder="Enter Facebook link"
+                                            <input class="flex-grow" type="text" placeholder="Nhập liên kết facebook..."
                                                 name="LinkFB" tabindex="0" value="{{ $setting->LinkFB }}">
                                         </fieldset>
                                         <fieldset class="title mb-24">
                                             <div class="body-title mb-10">Liên kết Intagram</div>
-                                            <input class="flex-grow" type="text" placeholder="Enter Intagram link"
+                                            <input class="flex-grow" type="text" placeholder="Nhập liên kết intagram..."
                                                 name="LinkIN" tabindex="0" value="{{ $setting->LinkIN }}">
                                         </fieldset>
                                         <div class="body-title mb-10">Tên doanh nghiệp</div>
-                                        <input class="mb-10" type="text" placeholder="Enter Business Name"
+                                        <input class="mb-10" type="text" placeholder="Nhập tên doanh nghiệp..."
                                             name="BusinessName" value="{{ $setting->BusinessName }}" required>
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Người đại diện</div>
-                                            <input class="mb-10" type="text" placeholder="Enter Boss Name"
+                                            <input class="mb-10" type="text" placeholder="Nhập tên người đại diện..."
                                                 name="BossName" value="{{ $setting->BossName }}" required>
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Địa chỉ cửa hàng</div>
-                                            <input class="mb-10" type="text" placeholder="Enter Shop Address"
+                                            <input class="mb-10" type="text" placeholder="Nhập địa chỉ cửa hàng..."
                                                 name="Address" value="{{ $setting->Address }}" required>
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Hotline</div>
-                                            <input class="mb-10" type="text" placeholder="Enter the hotline"
+                                            <input class="mb-10" type="text" placeholder="Nhập hotline..."
                                                 name="Phone" value="{{ $setting->Phone }}" required>
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Email quản trị</div>
-                                            <input class="mb-10" type="email" placeholder="Enter email admin"
+                                            <input class="mb-10" type="email" placeholder="Nhập email quản trị..."
                                                 name="Email" value="{{ $setting->Email }}" required>
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Kích thước mặc định</div>
-                                            <input class="mb-10" type="text" placeholder="Enter Default Weight"
+                                            <input class="mb-10" type="text" placeholder="Nhập kích thước mặc định..."
                                                 name="DefaultWeight" value="{{ $setting->DefaultWeight }}" required>
 
                                         </fieldset>

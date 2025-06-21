@@ -41,11 +41,13 @@ class BannerController extends Controller
         $request->validate([
             'Title' => 'required|string',
             'subTitle' => 'nullable|string',
-            'ImageURL' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ImageURL' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'Link' => 'nullable',
-
-
-        ]);
+        ],
+        [
+            'ImageURL.required' => 'Ảnh minh họa là bắt buộc là bắt buộc.',
+        ]
+    );
         $imagePath = null;
 
         // Kiểm tra tệp tải lên
@@ -92,11 +94,15 @@ class BannerController extends Controller
         $request->validate([
             'Title' => 'nullable|string',
             'subTitle' => 'nullable|string',
-            'LogoImageURL' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Thêm giới hạn kích thước nếu cần
+            'LogoImageURL' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Thêm giới hạn kích thước nếu cần
             'Link' => 'nullable',
 
 
-        ]);
+        ],
+        [
+            'ImageURL.required' => 'Ảnh minh họa là bắt buộc là bắt buộc.',
+        ]
+    );
 
         $banner = Banner::findOrFail($id);
 

@@ -71,17 +71,17 @@
                                 <div class="body-title">Tin tức</div>
                             </li>
                             <li>
-                                <div class="body-title">Người đăng</div>
+                                <div class="body-title text-center">ID người đăng</div>
                             </li>
                             <li>
-                                <div class="body-title">Ngày tạo</div>
+                                <div class="body-title text-center">Ngày tạo</div>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <div class="body-title">Hiển thị</div>
-                            </li>
-                            <li>
+                            </li> --}}
+                            {{-- <li>
                                 <div class="body-title">Lượt xem</div>
-                            </li>
+                            </li> --}}
                             <li>
                                 <div class="body-title">Hành động</div>
                             </li>
@@ -100,10 +100,10 @@
                                                 <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}"
                                                     class="body-title-2">{{ $blog->Title }}</a>
                                             </div>
-                                            <div class="body-text">{{ $blog->AuthorID }}</div>
-                                            <div class="body-text">{{ $blog->created_at->format('d/m/Y') }}</div>
-                                            <div class="body-text">{{ $blog->IsVisible ? 'Hiển thị' : 'Ẩn' }}</div>
-                                            <div class="body-text">{{ $blog->views }}</div>
+                                            <div class="body-text text-center">{{ $blog->AuthorID }}</div>
+                                            <div class="body-text text-center">{{ $blog->created_at->format('d/m/Y') }}</div>
+                                            {{-- <div class="body-text">{{ $blog->IsVisible ? 'Hiển thị' : 'Ẩn' }}</div> --}}
+                                            {{-- <div class="body-text">{{ $blog->views }}</div> --}}
                                             <div class="list-icon-function">
                                                 <div class="item edit">
                                                     <a href="{{ route('managers.m_blog.edit_blog', $blog->PostID) }}">

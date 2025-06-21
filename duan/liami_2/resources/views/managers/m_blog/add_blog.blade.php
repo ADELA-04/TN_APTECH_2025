@@ -77,8 +77,11 @@
                                         {{-- <div class="text-tiny">Do not exceed 100 characters when entering the summary.</div> --}}
                                     </fieldset>
                                     <fieldset class="description">
-                                            <textarea class="mb-10" name="Content" placeholder="Nhập nội dung..." tabindex="0">{{ old('Description') }}</textarea>
-
+                                                                                <div class="body-title mb-10">Nội dung <span class="tf-color-1">*</span></div>
+                                            <textarea required class="mb-10" name="Content" placeholder="Nhập nội dung..." tabindex="0">{{ old('Description') }}</textarea>
+   @if ($errors->has('Content'))
+        <div class="text-danger">{{ $errors->first('Content') }}</div>
+    @endif
                                     </fieldset>
                                 </div>
                                 <div class="wg-box">

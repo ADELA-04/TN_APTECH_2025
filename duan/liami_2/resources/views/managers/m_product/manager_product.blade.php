@@ -83,12 +83,12 @@
                                 <div class="body-title">Sản phẩm</div>
                             </li>
                             <li>
-                                <div class="body-title">Danh mục sản phẩm</div>
+                                <div class="body-title text-center">Danh mục sản phẩm</div>
                             </li>
 
 
                             <li>
-                                <div class="body-title">Ngày tạo</div>
+                                <div class="body-title text-center">Ngày tạo</div>
                             </li>
 
                             <li>
@@ -109,11 +109,11 @@
                                                 <a href="{{ route('products.edit', $product->ProductID) }}"
                                                     class="body-title-2">{{ $product->ProductName }}</a>
                                             </div>
-                                            <div class="body-text">{{ $product->category->CategoryName }}</div>
+                                            <div class="body-text text-center">{{ $product->category->CategoryName }}</div>
                                             <!-- Hiển thị tên danh mục -->
 
 
-                                            <div class="body-text">{{ $product->created_at }}</div>
+                                            <div class="body-text text-center">{{ $product->created_at }}</div>
                                             <!-- Hiển thị tên danh mục -->
 
                                             <div class="list-icon-function">

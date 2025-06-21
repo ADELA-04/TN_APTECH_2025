@@ -50,6 +50,7 @@ class UserController extends Controller
         ], [
             'Username.required' => 'Tên người dùng là bắt buộc.',
             'Password.required' => 'Mật khẩu là bắt buộc.',
+            'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'Email.required' => 'Địa chỉ email là bắt buộc.',
             'Role.required' => 'Quyền hạn email là bắt buộc.',
             'Email.unique' => 'Địa chỉ email đã tồn tại.',

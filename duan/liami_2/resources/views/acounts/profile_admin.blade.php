@@ -73,17 +73,17 @@
                                 <div class="wg-box">
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Tên đang nhập <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Username" tabindex="0" value="{{ $user->Username }}" aria-required="true" required="">
+                                        <input readonly class="mb-10" type="text" placeholder="Nhập tên đăng nhập..." name="Username" tabindex="0" value="{{ $user->Username }}" aria-required="true" required="">
 
                                     </fieldset>
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Email" tabindex="0" value="{{ $user->Email }}" aria-required="true" required="">
+                                        <input readonly class="mb-10" type="text" placeholder="Nhập email..." name="Email" tabindex="0" value="{{ $user->Email }}" aria-required="true" required="">
 
                                     </fieldset>
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Điện thoại <span class="tf-color-1"></span></div>
-                                        <input class="mb-10" type="text" placeholder="Enter product name" name="Phone" tabindex="0" value="{{ $user->Phone }}" aria-required="true" required="">
+                                        <input class="mb-10" type="text" placeholder="Nhập điện thoại..." name="Phone" tabindex="0" value="{{ $user->Phone }}" aria-required="true" required="">
 
                                     </fieldset>
 
