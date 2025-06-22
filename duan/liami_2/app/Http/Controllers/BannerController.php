@@ -40,14 +40,20 @@ class BannerController extends Controller
     {
         $request->validate([
             'Title' => 'required|string',
-            'subTitle' => 'nullable|string',
+            'subTitle' => 'required|string',
             'ImageURL' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'Link' => 'nullable',
-        ],
-        [
-            'ImageURL.required' => 'Ảnh minh họa là bắt buộc là bắt buộc.',
-        ]
-    );
+            'Link' => 'required',
+        ], [
+            'Title.required' => 'Tiêu đề là bắt buộc.',
+            'Title.string' => 'Tiêu đề phải là chuỗi.',
+            'subTitle.required' => 'Tiêu đề phụ là bắt buộc.',
+            'subTitle.string' => 'Tiêu đề phụ phải là chuỗi.',
+            'ImageURL.required' => 'Ảnh minh họa là bắt buộc.',
+            'ImageURL.image' => 'File phải là hình ảnh.',
+            'ImageURL.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif hoặc webp.',
+            'ImageURL.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
+            'Link.required' => 'Liên kết là bắt buộc.',
+        ]);
         $imagePath = null;
 
         // Kiểm tra tệp tải lên
@@ -92,17 +98,21 @@ class BannerController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'Title' => 'nullable|string',
-            'subTitle' => 'nullable|string',
-            'LogoImageURL' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Thêm giới hạn kích thước nếu cần
-            'Link' => 'nullable',
-
-
-        ],
-        [
-            'ImageURL.required' => 'Ảnh minh họa là bắt buộc là bắt buộc.',
-        ]
-    );
+            'Title' => 'required|string',
+            'subTitle' => 'required|string',
+            'ImageURL' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'Link' => 'required',
+        ], [
+            'Title.required' => 'Tiêu đề là bắt buộc.',
+            'Title.string' => 'Tiêu đề phải là chuỗi.',
+            'subTitle.required' => 'Tiêu đề phụ là bắt buộc.',
+            'subTitle.string' => 'Tiêu đề phụ phải là chuỗi.',
+            'ImageURL.required' => 'Ảnh minh họa là bắt buộc.',
+            'ImageURL.image' => 'File phải là hình ảnh.',
+            'ImageURL.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg, gif hoặc webp.',
+            'ImageURL.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
+            'Link.required' => 'Liên kết là bắt buộc.',
+        ]);
 
         $banner = Banner::findOrFail($id);
 

@@ -51,15 +51,6 @@
                                     </div>
                                 @endif
 
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
                                 <form class="tf-section-2 form-add-product"
                                     action="{{ route('managers.m_blog.update_blog_action', $blog->PostID) }}"
                                     method="POST" enctype="multipart/form-data">
@@ -69,17 +60,27 @@
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Tiêu đề <span class="tf-color-1">*</span></div>
                                             <input class="mb-10" type="text" name="Title"
-                                                placeholder="Enter blog title" value="{{ $blog->Title }}" required>
-                                            {{-- <div class="text-tiny">Do not exceed 20 characters when entering the blog title.</div> --}}
+                                                placeholder="Nhập tên tiêu đề..." value="{{ $blog->Title }}">
+                                            @if ($errors->has('Title'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Title') }}</div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="description">
                                             <div class="body-title mb-10">Mô tả ngắn <span class="tf-color-1">*</span></div>
-                                            <textarea class="mb-10" name="Summary" placeholder="Summary" required>{{ $blog->Summary }}</textarea>
-                                            {{-- <div class="text-tiny">Do not exceed 100 characters when entering the summary.</div> --}}
+                                            <textarea class="mb-10" name="Summary" placeholder="Nhập mô tả...">{{ $blog->Summary }}</textarea>
+                                            @if ($errors->has('Summary'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Summary') }}</div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="description">
                                             <div class="body-title mb-10">Nội dung <span class="tf-color-1">*</span></div>
-                                            <textarea class="mb-10" name="Content" placeholder="Content" required>{{ $blog->Content }}</textarea>
+                                            <textarea class="mb-10" name="Content" placeholder="Nhập nội dung...">{{ $blog->Content }}</textarea>
+                                            @if ($errors->has('Content'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Content') }}</div>
+                                            @endif
                                         </fieldset>
                                     </div>
                                     <div class="wg-box">

@@ -21,15 +21,15 @@ public function update(Request $request)
     $validatedData = $request->validate([
         'Logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         'Favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        'NavigationLink' => 'required|string',
-        'LinkFB' => 'required|url',
-        'LinkIN' => 'required|url',
-        'BusinessName' => 'required|string',
-        'BossName' => 'required|string',
-        'Phone' => 'required|string',
-        'Address' => 'required|string',
-        'Email' => 'required|email',
-        'DefaultWeight' => 'required',
+        'NavigationLink' => 'nullable|string',
+        'LinkFB' => 'nullable|url',
+        'LinkIN' => 'nullable|url',
+        'BusinessName' => 'nullable|string',
+        'BossName' => 'nullable|string',
+        'Phone' => 'nullable|string',
+        'Address' => 'nullable|string',
+        'Email' => 'nullable|email',
+        'DefaultWeight' => 'nullable',
 
     ]);
 

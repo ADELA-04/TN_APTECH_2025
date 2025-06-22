@@ -246,29 +246,37 @@ public function edit($id)
 }
 //thanh toán bằng nút mua ngay
 public function checkout2(Request $request)
-    {
-        // Lấy thông tin từ các mô hình
-        $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
-        $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
-        $allProduct = Product::all();
-        $settings = Setting::all();
-        $banners = Banner::all();
-        $currentUrl = url()->current();
-        $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
-        $categories = Category::with('children')->whereNull('parent_id')->get();
-        $user = Auth::guard('customer')->user();
-        return view('products.checkout2', compact(
-            'categories',
-            'settings',
-            'banners',
-            'allProduct',
-            'newProduct',
-            'blogs',
-            'topViewedProducts',
-            'currentUrl',
-            'user'
-        ));
+{
+    // Kiểm tra số lượng sản phẩm
+    $quantity = $request->input('quantity');
+
+    if ($quantity < 1) {
+        return redirect()->back()->withErrors(['quantity' => 'Số lượng phải lớn hơn hoặc bằng 1.']);
     }
+
+    // Lấy thông tin từ các mô hình
+    $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
+    $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
+    $allProduct = Product::all();
+    $settings = Setting::all();
+    $banners = Banner::all();
+    $currentUrl = url()->current();
+    $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
+    $categories = Category::with('children')->whereNull('parent_id')->get();
+    $user = Auth::guard('customer')->user();
+
+    return view('products.checkout2', compact(
+        'categories',
+        'settings',
+        'banners',
+        'allProduct',
+        'newProduct',
+        'blogs',
+        'topViewedProducts',
+        'currentUrl',
+        'user'
+    ));
+}
     //thực hiện lưu vào csdl
       public function store2(Request $request)
     {

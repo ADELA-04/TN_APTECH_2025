@@ -24,23 +24,6 @@
    <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
 @endsection
 
-@section('css')
-   <!-- Theme Style -->
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animate2.min.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/animation.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-select.min.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style2.css') }}">
-   <!-- Font -->
-   <link rel="stylesheet" href="{{ asset('assets/font/fonts.css') }}">
-   <!-- Icon -->
-   <link rel="stylesheet" href="{{ asset('assets/icon/style.css') }}">
-   <!-- Favicon and Touch Icons  -->
-   <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
-   <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
-
-@endsection
-
 {{-- content --}}
 @section('content')
 <div id="wrapper">
@@ -64,16 +47,13 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-
-
-
                             <form action="{{ route('managers.m_user.update_user_action', $user->UserID) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="wg-box">
                                     <fieldset>
                                         <div class="body-title mb-10">Tên tài khoản <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" name="Username" value="{{ old('Username', $user->Username) }}" required>
+                                        <input class="mb-10" type="text" name="Username" value="{{ old('Username', $user->Username) }}">
                                         @if ($errors->has('Username'))
                                             <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Username') }}</div>
                                         @endif
@@ -83,7 +63,7 @@
                                         <div class="body-title mb-10">Mật khẩu:<span class="tf-color-1">*</span></div>
 
                                         <div class="password-wrapper">
-                                            <input class="mb-10" type="password" name="Password" id="password" placeholder="Nhập mật khẩu..." required value="{{ old('Username', $user->Password) }}">
+                                            <input class="mb-10" type="password" name="Password" id="password" placeholder="Nhập mật khẩu..." value="{{ old('Username', $user->Password) }}">
                                             <button type="button" id="toggle-password" class="toggle-password"><i class="icon-eye"></i></button>
                                         </div>
                                         @if ($errors->has('Password'))
@@ -93,7 +73,7 @@
 
                                     <fieldset>
                                         <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="email" name="Email" value="{{ old('Email', $user->Email) }}" required>
+                                        <input class="mb-10" type="email" name="Email" value="{{ old('Email', $user->Email) }}" >
                                         @if ($errors->has('Email'))
                                             <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Email') }}</div>
                                         @endif

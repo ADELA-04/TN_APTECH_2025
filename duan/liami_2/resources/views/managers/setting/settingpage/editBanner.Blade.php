@@ -12,9 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style2.css') }}">
-
-
-
     <!-- Font -->
     <link rel="stylesheet" href="{{ asset('assets/font/fonts.css') }}">
 
@@ -41,18 +38,6 @@
                 </div>
                 @if (session('success'))
                     <div class="alert alert-success">{{ session('success') }}</div>
-                @elseif (session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
                 @endif
 
                 <form class="form-setting form-style-2" action="{{ route('settings_banner.update', $banner->BannerID) }}"
@@ -70,13 +55,21 @@
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Tiêu đề</div>
                                         <input class="flex-grow" placeholder="Nhập tiêu đề..." type="text" name="Title"
-                                            value="{{ $banner->Title }}" required>
+                                            value="{{ $banner->Title }}">
+                                        @if ($errors->has('Title'))
+                                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                {{ $errors->first('Title') }}</div>
+                                        @endif
                                     </fieldset>
 
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Tiêu đề phụ</div>
                                         <input class="flex-grow" placeholder="Nhập tiêu đề phụ..." type="text"
                                             name="subTitle" value="{{ $banner->subTitle }}">
+                                        @if ($errors->has('subTitle'))
+                                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                {{ $errors->first('subTitle') }}</div>
+                                        @endif
                                     </fieldset>
 
                                     <fieldset class="title mb-24">
@@ -96,12 +89,17 @@
                                                     alt="Logo Preview" style="max-width: 100%; height: auto;">
                                             </div>
                                         </div>
+
                                     </fieldset>
 
                                     <fieldset class="title mb-24">
                                         <div class="body-title mb-10">Liên kết điều hướng</div>
                                         <input class="flex-grow" type="text" name="Link" value="{{ $banner->Link }}"
                                             placeholder="Nhập liên kết điều hướng...">
+                                        @if ($errors->has('Link'))
+                                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                {{ $errors->first('Link') }}</div>
+                                        @endif
                                     </fieldset>
 
 
@@ -109,11 +107,11 @@
                             </div>
                         </div>
                     </div>
-<div class="cols gap10">
-<button type="submit" class="tf-button w-full">Lưu</button>
-                    <button class="tf-button style-1 w-full" type="button"
-                        onclick="window.location='{{ route('managers.settings_banner') }}'">Hủy</button>
-</div>
+                    <div class="cols gap10">
+                        <button type="submit" class="tf-button w-full">Lưu</button>
+                        <button class="tf-button style-1 w-full" type="button"
+                            onclick="window.location='{{ route('managers.settings_banner') }}'">Hủy</button>
+                    </div>
 
 
             </div>

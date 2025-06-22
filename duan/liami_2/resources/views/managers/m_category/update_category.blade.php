@@ -16,15 +16,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap-select.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style2.css') }}">
-
-
-
     <!-- Font -->
     <link rel="stylesheet" href="{{ asset('assets/font/fonts.css') }}">
-
     <!-- Icon -->
     <link rel="stylesheet" href="{{ asset('assets/icon/style.css') }}">
-
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('assets/images/favicon.png') }}">
@@ -46,17 +41,6 @@
                             @if (session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                             <form method="POST" action="{{ route('category.update', $category->CategoryID) }}">
                                 @csrf
                                 @method('PUT')
@@ -64,11 +48,12 @@
                                 <div class="wg-box">
                                     <fieldset class="name">
                                         <div class="body-title mb-10">Tên danh mục sản phẩm <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" name="CategoryName" value="{{ old('CategoryName', $category->CategoryName) }}" required>
-                                        @error('CategoryName')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                        {{-- <div class="text-tiny">Do not exceed 20 characters when entering the category name.</div> --}}
+                                        <input class="mb-10" type="text" name="CategoryName" value="{{ old('CategoryName', $category->CategoryName) }}">
+                                       @if ($errors->has('CategoryName'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('CategoryName') }}
+                                                </div>
+                                            @endif
                                     </fieldset>
 
                                     <fieldset class="brand">

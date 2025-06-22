@@ -51,7 +51,7 @@
                                 <div class="wg-box">
                                     <fieldset>
                                         <div class="body-title mb-10">Tên tài khoản <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" type="text" name="Username" required placeholder="Nhập tên tài khoản..." value="{{ old('Username') }}">
+                                        <input class="mb-10" type="text" name="Username" placeholder="Nhập tên tài khoản..." value="{{ old('Username') }}">
                                         @if ($errors->has('Username'))
                                         <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Username') }}</div>
                                     @endif
@@ -68,7 +68,7 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                        <input class="mb-10" value="{{ old('Email') }}" type="email" name="Email" required placeholder="Nhập email...">
+                                        <input class="mb-10" value="{{ old('Email') }}" type="email" name="Email" placeholder="Nhập email...">
                                         @if ($errors->has('Email'))
                                         <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Email') }}</div>
                                     @endif
@@ -76,7 +76,9 @@
                                     <fieldset>
                                         <div class="body-title mb-10">Điện thoại</div>
                                         <input class="mb-10" value="{{ old('Phone') }}" type="text" name="Phone" placeholder="Nhập điện thoại...">
-                                        <div class="text-tiny"></div>
+                                        @if ($errors->has('Phone'))
+                                        <div class="text-tiny" style="color: brown; font-weight: bold;">{{ $errors->first('Phone') }}</div>
+                                    @endif
                                     </fieldset>
                                     <fieldset>
                                         <div class="body-title mb-10">Phân quyền <span class="tf-color-1">*</span></div>

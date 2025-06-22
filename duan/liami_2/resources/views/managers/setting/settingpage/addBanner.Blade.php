@@ -54,76 +54,73 @@
                 @elseif (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form class="form-setting form-style-2" action="{{ route('settings_banner.store') }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="wg-box">
-                        <div class="left">
-                            <h5 class="mb-4">Cài đặt banner</h5>
-                            <div class="body-text">Cài đặt tiêu đề chuẩn SEO, title SEO...</div>
-                        </div>
-                        <div class="right flex-grow">
-                            <div class="gap24 mobile-wrap ">
-                                <div class="gap24 ">
-                                    <fieldset class="title mb-24">
-                                        <div class="body-title mb-10">Tiêu đề</div>
-                                        <input required class="flex-grow" type="text" placeholder="Nhập tiêu đề..." name="Title"
-                                            tabindex="0" value="" aria-required="true">
-                                    </fieldset>
-                                    <fieldset class="title mb-24">
-                                        <div class="body-title mb-10">Tiêu đề phụ</div>
-                                        <input required class="flex-grow" type="text" placeholder="Nhập tiêu đề phụ..."
-                                            name="subTitle" tabindex="0" value="" aria-required="true">
-                                    </fieldset>
-                                    <fieldset class="title mb-24">
-                                        <div class="body-title mb-10">Ảnh minh họa</div>
-                                        <div class="upload-image style-2">
-                                            <div class="item up-load">
-                                                <label class="uploadfile" for="logoFile">
-                                                    <span class="icon"><i class="icon-upload-cloud"></i></span>
-                                                    <span class="text-tiny">Drop your images here or select <span
-                                                            class="tf-color">click to browse</span></span>
-                                                    <input type="file" id="logoFile" name="ImageURL" accept="image/*"
-                                                        style="display: none;">
-                                                </label>
-                                            </div>
-                                            <div class="item mb-24">
-                                                <img id="previewImage" src="" alt="Logo Preview"
-                                                    style="display:none; max-width: 100%; height: auto;">
-                                            </div>
-                                        </div>
-                                    </fieldset>
 
-
-                                    <fieldset class="title mb-24">
-                                        <div class="body-title mb-10">Liên kết điều hướng</div>
-                                        <input required class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
-                                            name="Link" tabindex="0" value="" aria-required="true">
-                                    </fieldset>
-
-                                    {{-- <fieldset class="title mb-24">
-                                        <div class="body-title mb-10">Status</div>
-                                        <input class="flex-grow" type="text" placeholder="Enter Status" readonly name="Status" tabindex="0" value="" aria-required="true" >
-                                    </fieldset> --}}
-                                </div>
+                <form class="form-setting form-style-2" action="{{ route('settings_banner.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="wg-box">
+        <div class="left">
+            <h5 class="mb-4">Cài đặt banner</h5>
+            <div class="body-text">Cài đặt tiêu đề chuẩn SEO, title SEO...</div>
+        </div>
+        <div class="right flex-grow">
+            <div class="gap24 mobile-wrap">
+                <div class="gap24">
+                    <fieldset class="title mb-24">
+                        <div class="body-title mb-10">Tiêu đề</div>
+                        <input class="flex-grow" type="text" placeholder="Nhập tiêu đề..." name="Title"
+                            tabindex="0" value="{{ old('Title') }}" aria-required="true">
+                        @if ($errors->has('Title'))
+                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                {{ $errors->first('Title') }}</div>
+                        @endif
+                    </fieldset>
+                    <fieldset class="title mb-24">
+                        <div class="body-title mb-10">Tiêu đề phụ</div>
+                        <input class="flex-grow" type="text" placeholder="Nhập tiêu đề phụ..."
+                            name="subTitle" tabindex="0" value="{{ old('subTitle') }}" aria-required="true">
+                        @if ($errors->has('subTitle'))
+                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                {{ $errors->first('subTitle') }}</div>
+                        @endif
+                    </fieldset>
+                    <fieldset class="title mb-24">
+                        <div class="body-title mb-10">Ảnh minh họa</div>
+                        <div class="upload-image style-2">
+                            <div class="item up-load">
+                                <label class="uploadfile" for="logoFile">
+                                    <span class="icon"><i class="icon-upload-cloud"></i></span>
+                                    <span class="text-tiny">Drop your images here or select <span
+                                            class="tf-color">click to browse</span></span>
+                                    <input type="file" id="logoFile" name="ImageURL" accept="image/*" style="display: none;">
+                                </label>
                             </div>
+                            <div class="item mb-24">
+                                <img id="previewImage" src="" alt="Logo Preview" style="display:none; max-width: 100%; height: auto;">
+                            </div>
+                            @if ($errors->has('ImageURL'))
+                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                    {{ $errors->first('ImageURL') }}</div>
+                            @endif
                         </div>
-                    </div>
-
-                    <button type="submit" class="tf-button w180 m-auto">Lưu</button>
-                    <button class="tf-button style-1 w-full" type="button"
-                        onclick="window.location='{{ route('managers.settings_banner') }}'">Hủy</button>
+                    </fieldset>
+                    <fieldset class="title mb-24">
+                        <div class="body-title mb-10">Liên kết điều hướng</div>
+                        <input class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
+                            name="Link" tabindex="0" value="{{ old('Link') }}" aria-required="true">
+                        @if ($errors->has('Link'))
+                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                {{ $errors->first('Link') }}</div>
+                        @endif
+                    </fieldset>
+                </div>
             </div>
-            </form>
+        </div>
+    </div>
+
+    <button type="submit" class="tf-button w180 m-auto">Lưu</button>
+    <button class="tf-button w180 style-1 m-auto" type="button"
+        onclick="window.location='{{ route('managers.settings_banner') }}'">Hủy</button>
+</form>
             <!-- /setting -->
         </div>
         <!-- /main-content-wrap -->

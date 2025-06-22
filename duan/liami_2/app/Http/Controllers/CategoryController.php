@@ -43,7 +43,10 @@ class CategoryController extends Controller
         $request->validate([
             'CategoryName' => 'required|string|max:20',
             'parent_id' => 'nullable|exists:categories,CategoryID',
-        ]);
+        ],
+    [
+        'CategoryName.required'=>'Tên danh mục là bắt buộc!',
+    ]);
 
         try {
             Category::create([
@@ -52,9 +55,9 @@ class CategoryController extends Controller
             ]);
             return redirect()->route('category.create')
                 ->with('success', 'Thêm thành công.');
-        } catch (\Exception $e) {
-            return redirect()->route('category.create') // Quay lại trang thêm danh mục
-                ->with('error', 'Failed to add category: ' . $e->getMessage());
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation errors: ', $e->validator->errors()->all());
+            return redirect()->route('category.create')->withErrors($e->validator)->withInput();
         }
     }
     public function edit($CategoryID)
@@ -69,7 +72,9 @@ class CategoryController extends Controller
         $request->validate([
             'CategoryName' => 'required|string',
             'parent_id' => 'nullable|exists:categories,CategoryID',
-        ]);
+        ],[
+        'CategoryName.required'=>'Tên danh mục là bắt buộc!',
+    ]);
 
         try {
             $category = Category::findOrFail($CategoryID);
@@ -80,9 +85,9 @@ class CategoryController extends Controller
 
             return redirect()->route('managers.m_category.manager_category')
                 ->with('success', 'Sửa thành công.');
-        } catch (\Exception $e) {
-            return redirect()->route('managers.m_category.manager_category')
-                ->with('error', 'Sửa thất bại: ' . $e->getMessage());
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation errors: ', $e->validator->errors()->all());
+            return redirect()->route('managers.m_category.manager_category')->withErrors($e->validator)->withInput();
         }
     }
     public function destroy($CategoryID)

@@ -46,15 +46,17 @@ class UserController extends Controller
             'Email' => 'required|email|unique:users,email',
             'Password' => 'required|string|min:8',
             'Role' => 'required|in:Admin,Staff_Order,Staff_Product',
-            'Phone' => 'nullable|string|max:10',
+            'Phone' => 'nullable|numeric|max:10',
         ], [
-            'Username.required' => 'Tên người dùng là bắt buộc.',
+            'Username.required' => 'Tên tài khoản là bắt buộc.',
+            'Username.max' => 'Tên tài không vượt quá 20 kí tự.',
             'Password.required' => 'Mật khẩu là bắt buộc.',
             'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'Email.required' => 'Địa chỉ email là bắt buộc.',
             'Role.required' => 'Quyền hạn email là bắt buộc.',
             'Email.unique' => 'Địa chỉ email đã tồn tại.',
             'Phone.max' => 'Số điện thoại không được vượt quá 10 ký tự.',
+            'Phone.numeric' => 'Số điện thoại phải là kí tự số.',
         ]);
 
         // Kiểm tra xem email đã tồn tại trong bảng Users
@@ -93,18 +95,22 @@ class UserController extends Controller
         $user = User::findOrFail($userID);
 
         // Xác thực dữ liệu
-        $request->validate([
-            'Username' => 'required|max:20',
-            'Email' => 'required|email|unique:users,email,' . $userID . ',UserID', // Sửa cột ở đây
-            'Password' => 'nullable|min:8', // Mật khẩu mới có thể để trống
-            'Phone' => 'nullable|string',
+         $request->validate([
+            'Username' => 'required|string|max:20',
+            'Email' => 'required|email|unique:users,email',
+            'Password' => 'required|string|min:8',
+            'Role' => 'required|in:Admin,Staff_Order,Staff_Product',
+            'Phone' => 'nullable|numeric|max:10',
         ], [
-            'Username.required' => 'Tên người dùng là bắt buộc.',
-            'Username.max' => 'Tên người dùng không được vượt quá 20 ký tự.',
+            'Username.required' => 'Tên tài khoản là bắt buộc.',
+            'Username.max' => 'Tên tài không vượt quá 20 kí tự.',
+            'Password.required' => 'Mật khẩu là bắt buộc.',
             'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'Email.required' => 'Địa chỉ email là bắt buộc.',
-            'Email.email' => 'Địa chỉ email không hợp lệ.',
+            'Role.required' => 'Quyền hạn email là bắt buộc.',
             'Email.unique' => 'Địa chỉ email đã tồn tại.',
+            'Phone.max' => 'Số điện thoại không được vượt quá 10 ký tự.',
+            'Phone.numeric' => 'Số điện thoại phải là kí tự số.',
         ]);
 
         if (Customer::where('Email', $request->Email)->exists()) {
@@ -157,9 +163,13 @@ class UserController extends Controller
         $request->validate([
             'Username' => 'required',
             'Email' => 'required|email',
-            'Phone' => 'nullable|string',
+            'Phone' => 'nullable|numeric|max:10',
             'Avartar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Kiểm tra hình ảnh
-        ]);
+        ],[
+            'Phone.numeric'=>'Điện thoại phải là kí tự số!',
+            'Phone.max'=>'Điện thoại không vượt quá 10 kí tự!',
+        ]
+    );
 
         // Lấy thông tin người dùng hiện tại
         $user = Auth::user();
@@ -181,9 +191,9 @@ class UserController extends Controller
 
         try {
             $user->save();
-        } catch (\Exception $e) {
-
-            return redirect()->route('profile.edit')->withErrors(['error' => 'Đã xảy ra lỗi khi cập nhật hồ sơ.']);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            Log::error('Validation errors: ', $e->validator->errors()->all());
+            return redirect()->route('profile.edit')->withErrors($e->validator)->withInput();
         }
 
         return redirect()->route('profile.edit')->with('success', 'Cập nhật hồ sơ cá nhân thành công!');

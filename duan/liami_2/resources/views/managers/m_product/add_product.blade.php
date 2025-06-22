@@ -3,7 +3,7 @@
 {{-- title --}}
 @section('title')
     <title>
-       Thêm mới sản phẩm
+        Thêm mới sản phẩm
     </title>
 @endsection
 
@@ -34,28 +34,17 @@
                     <div class="main-content">
                         <!-- main-content-wrap -->
                         <div class="main-content-inner">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                             @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
+                                <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
                                     <h3>Thêm sản phẩm</h3>
                                     <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                         <li><i class="icon-chevron-left"></i></li>
-                                        <li><a href="{{ route('managers.m_product.manager_product') }}"><div class="text-tiny">Quay lại</div></a></li>
+                                        <li><a href="{{ route('managers.m_product.manager_product') }}">
+                                                <div class="text-tiny">Quay lại</div>
+                                            </a></li>
                                     </ul>
                                 </div>
                                 <!-- form-add-product -->
@@ -67,14 +56,18 @@
                                             <div class="body-title mb-10">Tên sản phẩm <span class="tf-color-1">*</span>
                                             </div>
                                             <input class="mb-10" type="text" placeholder="Nhập tên sản phẩm..."
-                                                name="ProductName" tabindex="0" value="{{ old('ProductName') }}" aria-required="true"
-                                                required>
+                                                name="ProductName" tabindex="0" value="{{ old('ProductName') }}"
+                                                aria-required="true">
+                                            @if ($errors->has('ProductName'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('ProductName') }}
+                                                </div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="description">
-                                            <div class="body-title mb-10">Mô tả ngắn<span class="tf-color-1">*</span>
+                                            <div class="body-title mb-10">Mô tả ngắn
                                             </div>
-                                            <textarea required class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn..." tabindex="0" aria-required="true"
-                                                >{{ old('Summary') }}</textarea>
+                                            <textarea class="mb-10" name="Summary" placeholder="Nhập mô tả ngắn..." tabindex="0" aria-required="true">{{ old('Summary') }}</textarea>
                                         </fieldset>
                                         <fieldset class="description">
                                             <div class="body-title mb-10">Mô tả
@@ -83,48 +76,63 @@
                                         </fieldset>
                                         <div class="gap22 cols">
                                             <fieldset class="category">
-    <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span></div>
-    <input class="mb-10" type="text" placeholder="Nhập giá..."
-        name="Price" tabindex="0" value="{{ old('Price') }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
-</fieldset>
-<fieldset class="male">
-    <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span></div>
-    <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
-        name="SalePrice" tabindex="0" value="{{ old('SalePrice') }}" required pattern="^\d+(\.\d{1,2})?$" title="Chỉ cho phép nhập số">
-</fieldset>
-                                              @if ($errors->has('SalePrice'))
-            <div class="text-tiny" style="color: brown; font-weight: bold;">
-                {{ $errors->first('SalePrice') }}
-            </div>
-        @endif
+                                                <div class="body-title mb-10">Giá gốc <span class="tf-color-1">*</span>
+                                                </div>
+                                                <input class="mb-10" type="text" placeholder="Nhập giá..."
+                                                    name="Price" tabindex="0" value="{{ old('Price') }}"
+                                                     title="Chỉ cho phép nhập số">
+                                                @if ($errors->has('Price'))
+                                                    <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                        {{ $errors->first('Price') }}
+                                                    </div>
+                                                @endif
+                                            </fieldset>
+                                            <fieldset class="male">
+                                                <div class="body-title mb-10">Giá giảm <span class="tf-color-1">*</span>
+                                                </div>
+                                                <input class="mb-10" type="text" placeholder="Nhập giá giảm..."
+                                                    name="SalePrice" tabindex="0" value="{{ old('SalePrice') }}"
+                                                     title="Chỉ cho phép nhập số">
+                                                @if ($errors->has('SalePrice'))
+                                                    <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                        {{ $errors->first('SalePrice') }}
+                                                    </div>
+                                                @endif
+                                            </fieldset>
+
                                         </div>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Kích thước<span class="tf-color-1">*</span>
                                             </div>
-                                            <input required class="mb-10" type="text" placeholder="Nhập kích thước"
-                                                name="Size" tabindex="0" value="{{ old('Size') }}"
-                                                >
+                                            <input class="mb-10" type="text" placeholder="Nhập kích thước"
+                                                name="Size" tabindex="0" value="{{ old('Size') }}">
+                                            @if ($errors->has('Size'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Size') }}
+                                                </div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Màu sắc<span class="tf-color-1">*</span>
                                             </div>
-                                            <input required class="mb-10" type="text" placeholder="Nhập màu sắc..."
-                                                name="Color" tabindex="0" value="{{ old('Color') }}"
-                                                >
+                                            <input class="mb-10" type="text" placeholder="Nhập màu sắc..."
+                                                name="Color" tabindex="0" value="{{ old('Color') }}">
+                                            @if ($errors->has('Color'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Color') }}
+                                                </div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Chất liệu<span class="tf-color-1">*</span>
-                                            </div>
-                                            <input required class="mb-10" type="text" placeholder="Nhập chất liệu..."
-                                                name="Material" tabindex="0" value="{{ old('Material') }}"
-                                                >
+                                            <div class="body-title mb-10">Chất liệu
+                                                <input class="mb-10" type="text" placeholder="Nhập chất liệu..."
+                                                    name="Material" tabindex="0" value="{{ old('Material') }}">
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Khối lượng (kg)<span class="tf-color-1">*</span>
+                                            <div class="body-title mb-10">Khối lượng (kg)
                                             </div>
-                                            <input required class="mb-10" type="text" placeholder="Nhập khối lượng..."
-                                                name="Weigh" tabindex="0" value="{{ old('Weigh') }}"
-                                                >
+                                            <input class="mb-10" type="text" placeholder="Nhập khối lượng..."
+                                                name="Weigh" tabindex="0" value="{{ old('Weigh') }}">
                                         </fieldset>
                                     </div>
                                     <div class="wg-box">
@@ -137,7 +145,7 @@
                                                         <span class="text-tiny">Drop your images here or select <span
                                                                 class="tf-color">click to browse</span></span>
                                                         <input type="file" id="myFile" name="Image"
-                                                            accept="image/*" style="display: none;" > </label>
+                                                            accept="image/*" style="display: none;"> </label>
                                                 </div>
                                                 <div class="item">
                                                     <img id="previewImage" src="" alt="Image Preview"
@@ -146,17 +154,18 @@
                                             </div>
                                         </fieldset>
                                         <fieldset class="name">
-                                            <div class="body-title mb-10">Nhà cung cấp<span class="tf-color-1">*</span>
+                                            <div class="body-title mb-10">Nhà cung cấp
                                             </div>
-                                            <input required class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
-                                                name="Brand" tabindex="0" value="{{ old('Brand') }}"
-                                                >
+                                            <input class="mb-10" type="text" placeholder="Nhập tên nhà cung cấp..."
+                                                name="Brand" tabindex="0" value="{{ old('Brand') }}">
                                         </fieldset>
                                         <fieldset class="category">
-                                            <div class="body-title mb-10">Danh mục sản phẩm <span class="tf-color-1">*</span></div>
+                                            <div class="body-title mb-10">Danh mục sản phẩm <span
+                                                    class="tf-color-1">*</span></div>
                                             <select name="CategoryID" required>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->CategoryID }}" {{ old('CategoryID') == $category->CategoryID ? 'selected' : '' }}>
+                                                    <option value="{{ $category->CategoryID }}"
+                                                        {{ old('CategoryID') == $category->CategoryID ? 'selected' : '' }}>
                                                         {{ $category->CategoryName }}
                                                     </option>
                                                 @endforeach
@@ -165,7 +174,7 @@
                                         <div class="cols gap10">
                                             <button class="tf-button w-full" type="submit">Lưu </button>
                                             <a class="tf-button style-1 w-full"
-                                            href="{{ route('managers.m_product.manager_product') }}">Hủy</a>
+                                                href="{{ route('managers.m_product.manager_product') }}">Hủy</a>
                                         </div>
                                     </div>
                                 </form>
@@ -219,18 +228,6 @@
                 }
             });
         });
-        // không cho phép nhập giá bằng kí tự khác số
-        document.addEventListener('DOMContentLoaded', function() {
-    const priceInput = document.querySelector('input[name="Price"]');
-    const salePriceInput = document.querySelector('input[name="SalePrice"]');
 
-    priceInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
-    });
-
-    salePriceInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9.]/g, ''); // Chỉ cho phép số và dấu chấm
-    });
-});
     </script>
 @endsection
