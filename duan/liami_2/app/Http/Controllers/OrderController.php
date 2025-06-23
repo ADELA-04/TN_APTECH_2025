@@ -246,7 +246,15 @@ public function edit($id)
 }
 //thanh toán bằng nút mua ngay
 public function checkout2(Request $request)
-{
+{ // Lấy người dùng đã xác thực
+        $user = Auth::guard('customer')->user();
+
+        // Kiểm tra nếu người dùng chưa đăng nhập
+        if (!$user) {
+            session(['intended_url' => url()->current()]);
+            return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để mua hàng.');
+        }
+
     // Kiểm tra số lượng sản phẩm
     $quantity = $request->input('quantity');
 

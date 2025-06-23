@@ -32,7 +32,12 @@ class LoginController extends Controller
         $request->validate([
             'Email' => 'required|email',
             'Password' => 'required',
-        ]);
+        ],
+    [
+        'Email.email'=>'Enail không hợp lệ.',
+        'Email.required'=>'Email là bắt buộc.',
+        'Password.required'=>'Mật khẩu là bắt buộc',
+    ]);
 
         // Debug: Kiểm tra giá trị của request
         Log::info($request->all());

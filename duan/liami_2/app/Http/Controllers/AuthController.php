@@ -21,7 +21,7 @@ class AuthController extends Controller
         'Email' => 'required|string|email|max:255|unique:customers',
         'Password' => 'required|string|min:8|confirmed', // Đảm bảo có trường xác nhận
     ], [
-        'FullName.required' => 'Tên đầy đủ là bắt buộc.',
+        'FullName.required' => 'Họ và tên là bắt buộc.',
         'Email.required' => 'Địa chỉ email là bắt buộc.',
         'Email.email' => 'Địa chỉ email không hợp lệ.',
         'Email.unique' => 'Địa chỉ email đã tồn tại trong bảng khách hàng.',

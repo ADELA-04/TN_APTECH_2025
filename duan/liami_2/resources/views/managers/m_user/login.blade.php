@@ -76,12 +76,20 @@ input[type="password"] {
 
                     <div class="field-box v2 position-relative w-100">
                         <label>Email</label>
-                        <input type="email" name="Email" required placeholder="Nhập email...">
+                        <input type="email" name="Email"  placeholder="Nhập email..." value="{{ old('Email') }}">
+                         @if ($errors->has('Email'))
+                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                {{ $errors->first('Email') }}</div>
+                        @endif
                     </div>
                     <div class="field-box v2 position-relative w-100">
                         <label>Mật khẩu</label>
-                        <input type="password" name="Password" required id="password" placeholder="Nhập mật khẩu...">
+                        <input type="password" name="Password"  id="password" placeholder="Nhập mật khẩu..." value="{{ old('Password') }}">
                         <button type="button" id="toggle-password" class="toggle-password"><i class="fas fa-eye"></i></button>
+                         @if ($errors->has('Password'))
+                            <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                {{ $errors->first('Password') }}</div>
+                        @endif
                     </div>
                     <div class="field-btn d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
                         <button class="theme-btn bg-color1" type="submit">Đăng nhập<span></span><span></span><span></span><span></span></button>
@@ -91,15 +99,7 @@ input[type="password"] {
                         </div>
 
                     </div>
-                    @if ($errors->any())
-    <p>
 
-            @foreach ($errors->all() as $error)
-                <p style="color: brown; font-weight: bold;"">{{ $error }}</p>
-            @endforeach
-
-    </p>
-@endif
                 </form>
             </div>
         </div>

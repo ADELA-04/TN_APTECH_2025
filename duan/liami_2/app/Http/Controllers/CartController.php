@@ -77,7 +77,7 @@ class CartController extends Controller
         // Kiểm tra nếu người dùng chưa đăng nhập
         if (!$user) {
             session(['intended_url' => url()->current()]);
-            return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng hoặc mua hàng.');
+            return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để thêm sản phẩm vào giỏ hàng.');
         }
 
         // Tạo hoặc lấy giỏ hàng của người dùng
