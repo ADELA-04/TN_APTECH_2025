@@ -42,14 +42,14 @@ class UserController extends Controller
         Log::info($request->all());
         // Xác thực dữ liệu
         $request->validate([
-            'Username' => 'required|string|max:20',
+            'Username' => 'required|string|max:12',
             'Email' => 'required|email|unique:users,email',
             'Password' => 'required|string|min:8',
             'Role' => 'required|in:Admin,Staff_Order,Staff_Product',
             'Phone' => 'nullable|numeric|max:10',
         ], [
             'Username.required' => 'Tên tài khoản là bắt buộc.',
-            'Username.max' => 'Tên tài không vượt quá 20 kí tự.',
+            'Username.max' => 'Tên tài không vượt quá 12 kí tự.',
             'Password.required' => 'Mật khẩu là bắt buộc.',
             'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'Email.required' => 'Địa chỉ email là bắt buộc.',
@@ -96,14 +96,14 @@ class UserController extends Controller
 
         // Xác thực dữ liệu
          $request->validate([
-            'Username' => 'required|string|max:20',
+            'Username' => 'required|string|max:12',
             'Email' => 'required|email|unique:users,email',
             'Password' => 'required|string|min:8',
             'Role' => 'required|in:Admin,Staff_Order,Staff_Product',
             'Phone' => 'nullable|numeric|max:10',
         ], [
             'Username.required' => 'Tên tài khoản là bắt buộc.',
-            'Username.max' => 'Tên tài không vượt quá 20 kí tự.',
+            'Username.max' => 'Tên tài không vượt quá 12 kí tự.',
             'Password.required' => 'Mật khẩu là bắt buộc.',
             'Password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
             'Email.required' => 'Địa chỉ email là bắt buộc.',
@@ -161,13 +161,17 @@ class UserController extends Controller
     {
         // Xác thực dữ liệu
         $request->validate([
-            'Username' => 'required',
+            'Username' => 'required|max:12',
             'Email' => 'required|email',
-            'Phone' => 'nullable|numeric|max:10',
+            'Phone' => 'nullable|numeric|digits:10',
             'Avartar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // Kiểm tra hình ảnh
         ],[
+            'Username.max'=>'Tên không vượt quá 12 kí tự!',
             'Phone.numeric'=>'Điện thoại phải là kí tự số!',
-            'Phone.max'=>'Điện thoại không vượt quá 10 kí tự!',
+            'Phone.digits'=>'Điện thoại không vượt quá 10 kí tự!',
+            'Email.required' => 'Email là bắt buộc!', // Thông báo lỗi nếu email không được cung cấp
+    'Email.email' => 'Email không đúng định dạng!',
+    'Username.required' => 'Username là bắt buộc!',
         ]
     );
 

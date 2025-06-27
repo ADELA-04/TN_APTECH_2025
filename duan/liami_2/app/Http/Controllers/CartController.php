@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -24,7 +23,7 @@ class CartController extends Controller
         if ($user) {
             $cart = Cart::where('CustomerID', $user->CustomerID)->first();
             if ($cart) {
-                $cartItems = $cart->cartItems;
+                $cartItems = $cart->cartItems()->paginate(10);
 
                 foreach ($cartItems as $item) {
                     $totalAmount += $item->Quantity * $item->product->SalePrice; // Sử dụng SalePrice
@@ -109,20 +108,20 @@ class CartController extends Controller
 
     public function removeFromCart(Request $request, $cartItemId)
     {
-        // Ensure the user is authenticated
+        // kiểm tra đăng nhập
         $user = Auth::guard('customer')->user();
         if (!$user) {
             return redirect()->route('login')->with('error', 'Bạn phải đăng nhập để xóa sản phẩm khỏi giỏ hàng.');
         }
 
-        // Find the cart item by ID
+        // Tìm kiếm
         $cartItem = CartItem::find($cartItemId);
 
         if ($cartItem) {
-            // Check if the item belongs to the user's cart
+            // kiểm tra
             $cart = Cart::where('CustomerID', $user->CustomerID)->first();
             if ($cart && $cart->CartID === $cartItem->CartID) {
-                // Delete the cart item
+                // xóa item
                 $cartItem->delete();
                 return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng!');
             } else {

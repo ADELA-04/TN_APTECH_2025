@@ -65,23 +65,30 @@
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Tên đang nhập <span class="tf-color-1">*</span>
                                             </div>
-                                            <input readonly class="mb-10" type="text"
-                                                placeholder="Nhập tên đăng nhập..." name="Username" tabindex="0"
-                                                value="{{ $user->Username }}" aria-required="true" required="">
-
+                                            <input class="mb-10" type="text" placeholder="Nhập tên đăng nhập..."
+                                                name="Username" tabindex="0" value="{{ $user->Username }}"
+                                                >
+                                            @if ($errors->has('Username'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Username') }}
+                                                </div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Email <span class="tf-color-1">*</span></div>
-                                            <input readonly class="mb-10" type="text" placeholder="Nhập email..."
-                                                name="Email" tabindex="0" value="{{ $user->Email }}"
-                                                aria-required="true" required="">
-
+                                            <input class="mb-10" type="text" placeholder="Nhập email..." name="Email"
+                                                tabindex="0" value="{{ $user->Email }}" >
+                                            @if ($errors->has('Email'))
+                                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                                    {{ $errors->first('Email') }}
+                                                </div>
+                                            @endif
                                         </fieldset>
                                         <fieldset class="name">
                                             <div class="body-title mb-10">Điện thoại <span class="tf-color-1"></span></div>
                                             <input class="mb-10" type="text" placeholder="Nhập điện thoại..."
                                                 name="Phone" tabindex="0" value="{{ $user->Phone }}"
-                                                aria-required="true">
+                                               >
                                             @if ($errors->has('Phone'))
                                                 <div class="text-tiny" style="color: brown; font-weight: bold;">
                                                     {{ $errors->first('Phone') }}

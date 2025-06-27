@@ -58,7 +58,7 @@
         <div class="lg-rg-wrap d-flex flex-wrap align-items-center position-relative w-100">
             <div class="lg-rg-img position-relative">
                 <!-- Background Image -->
-                <div class="fixed-bg" style="background-image: url('{{ asset('assets/images/lg-rg-bg.jpg') }}');"></div>
+                <div class="fixed-bg" style="background-image: url('{{ asset('assets/images/logo_signup.jpg') }}');"></div>
                 <!-- Logo -->
                 <div class="logo">
                     <h1 class="mb-0">
@@ -77,48 +77,48 @@
                         @csrf
                         <div class="field-box v2 position-relative w-100">
                             <label>Họ và Tên</label>
-                            <input placeholder="Nhập họ tên..." type="text" name="FullName" value="{{ old('FullName') }}" >
-                             @if ($errors->has('FullName'))
-                            <div class="text-tiny" style="color: brown; font-weight: bold;">
-                                {{ $errors->first('FullName') }}</div>
-                        @endif
+                            <input placeholder="Nhập họ tên..." type="text" name="FullName"
+                                value="{{ old('FullName') }}">
+                            @if ($errors->has('FullName'))
+                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                    {{ $errors->first('FullName') }}</div>
+                            @endif
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Email</label>
-                            <input placeholder="Nhập email..." type="email" name="Email" value="{{ old('Email') }}" >
-                             @if ($errors->has('Email'))
-                            <div class="text-tiny" style="color: brown; font-weight: bold;">
-                                {{ $errors->first('Email') }}</div>
-                        @endif
+                            <input placeholder="Nhập email..." type="email" name="Email" value="{{ old('Email') }}">
+                            @if ($errors->has('Email'))
+                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                    {{ $errors->first('Email') }}</div>
+                            @endif
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Mật khẩu</label>
-                            <input placeholder="Nhập mật khẩu..." type="password" name="Password"  id="password">
+                            <input placeholder="Nhập mật khẩu..." type="password" name="Password" id="password">
                             <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
                             @if ($errors->has('Password'))
-                            <div class="text-tiny" style="color: brown; font-weight: bold;">
-                                {{ $errors->first('Password') }}</div>
-                        @endif
+                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                    {{ $errors->first('Password') }}</div>
+                            @endif
                         </div>
                         <div class="field-box v2 position-relative w-100">
                             <label>Nhập lại mật khẩu</label>
-                            <input placeholder="Nhập lại mật khẩu" type="password" name="Password_confirmation"  id="password_confirmation">
+                            <input placeholder="Nhập lại mật khẩu" type="password" name="Password_confirmation"
+                                id="password_confirmation">
                             <button type="button" class="toggle-password"><i class="fas fa-eye"></i></button>
                             @if ($errors->has('Password_confirmation'))
-                            <div class="text-tiny" style="color: brown; font-weight: bold;">
-                                {{ $errors->first('Password_confirmation') }}</div>
-                        @endif
+                                <div class="text-tiny" style="color: brown; font-weight: bold;">
+                                    {{ $errors->first('Password_confirmation') }}</div>
+                            @endif
                         </div>
                         <div
                             class="field-btn d-flex flex-wrap align-items-center justify-content-between position-relative w-100">
                             <button class="theme-btn bg-color1" type="submit">Đăng kí</button>
-                             <div>
-
-                        <a class="d-inline-block simple-btn" href="{{ route('login') }}" title="">Quay lại trang đăng nhập ?</a>
+                            <div>
+                                <a class="d-inline-block simple-btn" href="{{ route('login') }}" title="">Quay lại
+                                    trang đăng nhập ?</a>
+                            </div>
                         </div>
-                        </div>
-
-
                     </form>
                 </div>
             </div>

@@ -40,8 +40,8 @@
                 </div>
                 <!-- order-list -->
                 <div class="wg-box">
-                    <div class="flex items-center justify-between gap10 flex-wrap">
-                        <div class="wg-filter flex-grow">
+                    <div class="flex items-center justify-start gap10 flex-wrap">
+                        <div class="flex-grow">
                             <form class="form-search" method="GET" action="{{ route('orders.index2') }}">
                                 <fieldset class="name">
                                     <input type="text" placeholder="Tìm kiếm theo số điện thoại..." name="name"
@@ -51,7 +51,31 @@
                                     <button type="submit"><i class="icon-search"></i></button>
                                 </div>
                             </form>
+
                         </div>
+                        <div class="wg-filter flex-grow">
+                            <form class="form-search" method="GET" action="{{ route('orders.index2') }}">
+                                <fieldset class="order-status">
+                                    <select name="order_status">
+                                        <option value="">Tất cả trạng thái đơn hàng</option>
+                                        <option value="Chờ xác nhận">Chờ xác nhận</option>
+                                        <option value="Đã xác nhận">Đã xác nhận</option>
+                                        <option value="Chờ đơn vị vận chuyển">Chờ đơn vị vận chuyển</option>
+                                        <option value="Đã giao cho đơn vị vận chuyển">Đã giao cho đơn vị vận chuyển</option>
+                                        <option value="Đang giao hàng">Đang giao hàng</option>
+                                        <option value="Giao hàng thành công">Giao hàng thành công</option>
+                                        <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                                        <option value="Hoàn trả">Hoàn trả</option>
+                                        <option value="Đã hết hàng">Đã hết hàng</option>
+                                        <option value="Đã hết hàng">Hủy</option>
+                                    </select>
+                                </fieldset>
+                                <div class="button-submit">
+                                    <button type="submit" class="btn " title="Lọc">
+                                        <i class="icon-filter"></i> <!-- Sử dụng biểu tượng lọc -->
+                                    </button>
+                                </div>
+                            </form></div>
                     </div>
                     <div class="wg-table table-all-category">
                         <ul class="table-title flex gap20 mb-14">
@@ -59,19 +83,19 @@
                                 <div class="body-title">Đơn hàng</div>
                             </li>
                             <li>
-                                <div class="body-title">Ngày đặt</div>
+                                <div class="body-title text-center">Ngày đặt</div>
                             </li>
                             <li>
-                                <div class="body-title">Khách hàng</div>
+                                <div class="body-title text-center">Khách hàng</div>
                             </li>
                             <li>
-                                <div class="body-title">Tổng tiền</div>
+                                <div class="body-title text-center">Tổng tiền</div>
                             </li>
                             <li>
-                                <div class="body-title">Trạng thái</div>
+                                <div class="body-title text-center">Trạng thái</div>
                             </li>
                             <li>
-                                <div class="body-title">Thanh toán</div>
+                                <div class="body-title text-center">Thanh toán</div>
                             </li>
                             <li>
                                 <div class="body-title">Hành động</div>
@@ -93,13 +117,25 @@
                                                 class="body-title-2">#{{ $order->OrderID }}
                                                 #{{ $order->ShippingCode }}</a></div>
 
-                                        <div class="body-text">{{ $order->created_at->format('d/m/Y') }}</div>
+                                        <div class="body-text text-center">{{ $order->created_at->format('d/m/Y') }}</div>
+                                        <div class="body-text text-center">{{ $order->customer->FullName }}</div>
 
-                                        <div class="body-text">{{ number_format($order->TotalAmount, 0) }} VNĐ</div>
-                                        <div class="body-text">{{ $order->customer->FullName }}</div>
-                                        <div class="body-text">{{ $order->OrderStatus }}</div>
-                                        <div class="body-text">{{ $order->PaymentMethod }}</div>
-                                        <div class="list-icon-function">
+                                        <div class="body-text text-center">{{ number_format($order->TotalAmount, 0) }} VNĐ
+                                        </div>
+                                        <div
+                                            class="body-text text-center
+                                                {{ $order->OrderStatus == 'Chờ xác nhận'
+                                                    ? 'text-warning'
+                                                    : ($order->OrderStatus == 'Giao hàng thất bại' ||
+                                                    $order->OrderStatus == 'Hoàn trả' ||
+                                                    $order->OrderStatus == 'Đã hết hàng' ||
+                                                    $order->OrderStatus == 'Hủy'
+                                                        ? 'text-danger'
+                                                        : 'text-success') }}">
+                                            {{ $order->OrderStatus }}
+                                        </div>
+                                        <div class="body-text text-center">{{ $order->PaymentMethod }}</div>
+                                        <div class="list-icon-function ">
                                             <div class="item edit">
                                                 <a href="{{ route('order.edit', $order->OrderID) }}"> <i
                                                         class="icon-edit-3"></i></a>

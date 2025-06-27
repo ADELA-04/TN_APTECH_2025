@@ -22,17 +22,29 @@
 @section('content')
     <section>
         <div class="w-100 position-relative">
+            @if (session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
             <div class="container">
-                <div
-                    class="mt-20 sec-title2  position-relative w-100 ">
+
+                <div class="mt-20 sec-title2  position-relative w-100 ">
                     <span><a href="{{ route('orders.index') }}">Theo dõi đơn hàng ></a></span>
-                    <span class="mb-0" > <a style="font-family: 'Roboto';" >Chi tiết đơn hàng</a></span>
+                    <span class="mb-0"> <a style="font-family: 'Roboto';">Chi tiết đơn hàng</a></span>
                 </div>
 
             </div>
         </div>
+
         <div class="cart-wrap position-relative w-100">
-            <form>
+
+            <form action="{{ route('orders.updateStatus2', $order->OrderID) }}" method="POST"
+                onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');">
+                @csrf
+                @method('POST')
                 <table class="cart-table w-100">
                     <thead>
                         <tr>
@@ -59,8 +71,9 @@
 
                                         </div>
                                         <p style="font-family: 'Roboto';" class="mb-0">
-                                            <a style="font-size: 15px" href="{{ route('product.detail', $detail->ProductID) }}"
-                                                title="">   {{ Str::limit($detail->product->ProductName, 30) }}</a>
+                                            <a style="font-size: 15px"
+                                                href="{{ route('product.detail', $detail->ProductID) }}" title="">
+                                                {{ Str::limit($detail->product->ProductName, 30) }}</a>
                                         </p>
                                     </div>
 
@@ -86,25 +99,28 @@
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <div class="cart-total v2 w-100" style="border-radius: 0px;">
                         <div style="text-align:right;">
-                            <h4 style="color:tomato;font-family: 'Roboto';" >Hóa đơn</h4>
+                            <h4 style="color:tomato;font-family: 'Roboto';">Hóa đơn</h4>
                         </div>
 
                         <table>
-<tr style="border-bottom: none">
+                            <tr style="border-bottom: none">
                                 <td style="font-family: 'Roboto';">Tổng tiền hàng</td>
-                               <td><span class="price">{{ number_format($order->TotalAmount-40000, 0, ',', '.') }} VNĐ</span></td>
+                                <td><span class="price">{{ number_format($order->TotalAmount - 40000, 0, ',', '.') }}
+                                        VNĐ</span></td>
                             </tr>
                             <tr>
                                 <td style="font-family: 'Roboto';">Phí vận chuyển</td>
                                 <td><span class="price">40.000 VNĐ</span></td>
                             </tr>
-                              <tr>
+                            <tr>
                                 <td style="font-family: 'Roboto';">Tổng tiền</td>
-                                <td><strong class="price">{{ number_format($order->TotalAmount, 0, ',', '.') }} VNĐ</strong></td>
+                                <td><strong class="price">{{ number_format($order->TotalAmount, 0, ',', '.') }}
+                                        VNĐ</strong></td>
                             </tr>
                             <tr>
                                 <td style="font-family: 'Roboto';">Phương thức thanh toán</td>
-                                <td><span class="price" style="font-family: 'Roboto';" >{{ $order->PaymentMethod }}</span></td>
+                                <td><span class="price" style="font-family: 'Roboto';">{{ $order->PaymentMethod }}</span>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="font-family: 'Roboto';">Ngày đặt hàng</td>
@@ -114,17 +130,39 @@
                                 <td style="font-family: 'Roboto';">Ghi chú</td>
                                 <td><span class="price" style="font-family: 'Roboto';">{{ $order->Notes }}</span></td>
                             </tr>
-<tr>
+                            <tr>
                                 <td style="font-family: 'Roboto';">Mã vận đơn</td>
-                                <td><span  class="price">{{ $order->ShippingCode }}</span></td>
+                                <td><span class="price">{{ $order->ShippingCode }}</span></td>
                             </tr>
-                             <tr>
+                            <tr>
                                 <td style="font-family: 'Roboto';">Trang thái đơn hàng</td>
-                                <td><span class="price" style="color: rgb(13, 183, 13);font-family: 'Roboto';">{{ $order->OrderStatus }}</span></td>
+                                <td>
+                                    <span
+                                        class="price
+                                        {{ $order->OrderStatus == 'Chờ xác nhận'
+                                            ? 'text-warning'
+                                            : ($order->OrderStatus == 'Giao hàng thất bại' ||
+                                            $order->OrderStatus == 'Hoàn trả' ||
+                                            $order->OrderStatus == 'Đã hết hàng'||
+                                            $order->OrderStatus == 'Hủy'
+                                                ? 'text-danger'
+                                                : 'text-success') }}"
+                                        style="font-family: 'Roboto';">
+                                        {{ $order->OrderStatus }}
+                                    </span>
+                                </td>
                             </tr>
 
                         </table>
-
+                        <div class=" mt-3  text-center">
+                            @if ($order->OrderStatus === 'Chờ xác nhận')
+                                <!-- Thay đổi thành POST -->
+                                <input type="hidden" name="OrderStatus" value="Hủy">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-times"></i> Hủy Đơn
+                                </button>
+                            @endif
+                        </div>
 
                     </div>
                 </div>

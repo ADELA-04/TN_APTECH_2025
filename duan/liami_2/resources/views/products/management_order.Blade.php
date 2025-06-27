@@ -37,7 +37,7 @@
                                     <th class="text-center" style="font-family: 'Roboto';">Ngày đặt</th>
                                     <th class="text-center" style="font-family: 'Roboto';">Thành tiền</th>
                                     <th class="text-center" style="font-family: 'Roboto';">Trạng thái đơn</th>
-                                    <th></th>
+                                    <th class="text-center" style="font-family: 'Roboto';">Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,8 +52,17 @@
 
                                     </td>
                                     <td class="text-center"><span class="price ">{{  number_format($order->TotalAmount,0)}} VNĐ</span></td>
-                                    <td class="text-center">
-                                        <span class="">{{ $order->OrderStatus }}</span>
+                                    <td class="text-center
+                                        {{ $order->OrderStatus == 'Chờ xác nhận'
+                                            ? 'text-warning'
+                                            : ($order->OrderStatus == 'Giao hàng thất bại' ||
+                                            $order->OrderStatus == 'Hoàn trả' ||
+                                            $order->OrderStatus == 'Đã hết hàng'||
+                                            $order->OrderStatus == 'Hủy'
+                                                ? 'text-danger'
+                                                : 'text-success') }}">
+                                        <span class=class="
+                                        style="font-family: 'Roboto';">{{ $order->OrderStatus }}</span>
                                     </td>
                                     <td class="text-center"><a href="{{ route('orders.detail',$order->OrderID) }}" class="text-color21">Chi tiết</a></td>
                                 </tr>
@@ -65,6 +74,29 @@
 
                     </form>
                 </div><!-- Cart Wrap -->
+                <div class="text-center mt-40">
+    <div class="">
+        @if ($orders->onFirstPage())
+            <span class="page-numbers disabled border border-secondary p-2"><i class="icon fa fa-angle-left" aria-hidden="true"></i></span>
+        @else
+            <a href="{{ $orders->previousPageUrl() }}" class="page-numbers border border-secondary p-2"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+        @endif
+
+        @foreach ($orders->getUrlRange(1, $orders->lastPage()) as $page => $url)
+            @if ($page == $orders->currentPage())
+                <span class="page-numbers current border border-secondary bg-color4 text-color5 p-2">{{ $page }}</span>
+            @else
+                <a href="{{ $url }}" class="border border-secondary p-2 page-numbers">{{ $page }}</a>
+            @endif
+        @endforeach
+
+        @if ($orders->hasMorePages())
+            <a href="{{ $orders->nextPageUrl() }}" class="page-numbers"><i class="border border-secondary p-2 icon fa fa-angle-right" aria-hidden="true"></i></a>
+        @else
+            <span class="border border-secondary p-2 page-numbers disabled"><i class="icon fa fa-angle-right"></i></span>
+        @endif
+    </div>
+</div>
             </div>
         </div>
     </section>

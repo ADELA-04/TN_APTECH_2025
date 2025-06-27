@@ -29,6 +29,7 @@ Route::post('/checkout-pay-2', [OrderController::class, 'store2'])->name('checko
 Route::post('/checkout-pay', [OrderController::class, 'store'])->name('checkout.store');
 Route::get('/orders/{id}', [OrderController::class, 'edit'])->name('order.edit');
 Route::post('/orders/{id}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::post('/orders/{id}/update-status-cus', [OrderController::class, 'updateStatus2'])->name('orders.updateStatus2');
 Route::post('/orders/{id}/update-shippingcode', [OrderController::class, 'updateShippingCode'])->name('orders.updateShippingCode');
 
 // cart

@@ -36,7 +36,7 @@
                 <div class="wg-box">
                     <div class="flex items-center justify-between gap10 flex-wrap">
                         <div class="wg-filter flex-grow">
-@if (session('success'))
+                            @if (session('success'))
                                 <div class="alert alert-success">
                                     {{ session('success') }}
                                 </div>
@@ -52,13 +52,35 @@
                                 </div>
                             @endif
                             <form class="form-search" method="GET" action="{{ route('manager_customer') }}">
-    <fieldset class="name">
-        <input type="text" placeholder="Tìm kiếm bằng mã khách hàng..." name="customer_id" required>
-    </fieldset>
-    <div class="button-submit">
-        <button type="submit"><i class="icon-search"></i></button>
-    </div>
-</form>
+                                <fieldset class="name">
+                                    <input type="text" placeholder="Tìm kiếm bằng mã khách hàng..." name="customer_id"
+                                        required>
+                                </fieldset>
+                                <div class="button-submit">
+                                    <button type="submit"><i class="icon-search"></i></button>
+                                </div>
+                            </form>
+                             <form class="form-search" method="GET" action="{{ route('manager_customer') }}">
+        <fieldset class="order-status">
+            <select name="order_status">
+                <option value="">Tất cả trạng thái đơn hàng</option>
+                <option value="Chờ xác nhận">Chờ xác nhận</option>
+                <option value="Đã xác nhận">Đã xác nhận</option>
+                <option value="Chờ đơn vị vận chuyển">Chờ đơn vị vận chuyển</option>
+                <option value="Đã giao cho đơn vị vận chuyển">Đã giao cho đơn vị vận chuyển</option>
+                <option value="Đang giao hàng">Đang giao hàng</option>
+                <option value="Giao hàng thành công">Giao hàng thành công</option>
+                <option value="Giao hàng thất bại">Giao hàng thất bại</option>
+                <option value="Hoàn trả">Hoàn trả</option>
+                <option value="Đã hết hàng">Đã hết hàng</option>
+                 <option value="Đã hết hàng">Hủy</option>
+            </select>
+        </fieldset>
+        <div class="button-submit">
+ <button type="submit" class="btn " title="Lọc">
+                <i class="icon-filter"></i> <!-- Sử dụng biểu tượng lọc -->
+            </button>        </div>
+    </form>
                         </div>
 
                     </div>
@@ -75,7 +97,10 @@
                                 <div class="body-title text-center">Số điện thoại</div>
                             </li>
                             <li>
-                                <div class="body-title text-center"> Số đơn hàng</div>
+                                <div class="body-title text-center"> Đơn mua thành công</div>
+                            </li>
+                             <li>
+                                <div class="body-title text-center"> Đơn hủy</div>
                             </li>
 
                             <li>
@@ -91,8 +116,7 @@
                                         </div>
                                         <div class="flex items-center justify-between gap20 flex-grow">
                                             <div class="name">
-                                                <a
-                                                    class="body-title-2">{{ $customer->FullName }}</a>
+                                                <a class="body-title-2">{{ $customer->FullName }}</a>
                                             </div>
                                             <div class="body-text text-center">{{ $customer->Email }}</div>
                                             <div class="body-text text-center">
@@ -102,8 +126,12 @@
                                                     Không có số điện thoại
                                                 @endif
                                             </div>
-                                            <div class="body-text text-center">{{ $customer->orders_count }} Đơn hàng</div>
-                                            <div class="list-icon-function">
+                                          <div class="body-text text-center">
+    {{ $customer->successful_orders ?? 0 }} Đơn hàng thành công
+</div>
+<div class="body-text text-center">
+    {{ $customer->canceled_orders ?? 0 }} Đơn hàng hủy
+</div>                        <div class="list-icon-function">
 
                                                 <div class="user-item">
                                                     <form action="{{ route('customer.destroy', $customer->CustomerID) }}"
@@ -120,7 +148,7 @@
                                     </li>
                                 @endforeach
                             @else
-                               <div class="alert alert-warning">Không tìm thấy.</div>
+                                <div class="alert alert-warning">Không tìm thấy.</div>
                             @endif
                         </ul>
                     </div>

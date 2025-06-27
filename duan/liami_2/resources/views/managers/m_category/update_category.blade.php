@@ -32,12 +32,14 @@
                 <div class="main-content">
                     <div class="main-content-inner">
                         <div class="main-content-wrap">
+                            <div class="flex items-center flex-wrap justify-between gap20 mb-27">
                             <h3>Chỉnh sửa danh mục sản phẩm</h3>
                             <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
                                 <li><i class="icon-chevron-left"></i></li>
-                                <li><a href="{{ route('managers.m_category.manager_category') }}"><div class="text-tiny">Quay lại</div></a></li>
+                                <li><a href="{{ route('managers.m_category.manager_category') }}">
+                                    <div class="text-tiny">Quay lại</div></a></li>
                             </ul>
-
+                            </div>
                             @if (session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif

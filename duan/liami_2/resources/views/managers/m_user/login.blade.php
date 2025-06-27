@@ -50,7 +50,7 @@ input[type="password"] {
 
     <div class="lg-rg-wrap d-flex flex-wrap align-items-center position-relative w-100">
         <div class="lg-rg-img position-relative">
-            <div class="fixed-bg" style="background-image: url('{{ asset('assets/images/lg-rg-bg.jpg') }}');"></div>
+            <div class="fixed-bg" style="background-image: url('{{ asset('assets/images/logo_login.jpg') }}');"></div>
             <div class="logo">
                 <h1 class="mb-0">
                     <a href="{{ route('index')  }}" title="Home"><img src="{{ asset('assets/images/logo.svg') }}" alt="Logo"></a>

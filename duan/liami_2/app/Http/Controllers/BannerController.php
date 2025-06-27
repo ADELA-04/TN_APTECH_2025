@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BannerController extends Controller
@@ -74,8 +73,6 @@ class BannerController extends Controller
             Log::warning("No file uploaded.");
         }
 
-        $currentDate = now(); // Lấy thời gian hiện tại
-        $status = ($currentDate >= $request->StartDate && $currentDate <= $request->EndDate) ? 'active' : 'in_active';
         $banner = Banner::create([
             'Title' => $request->Title,
             'subTitle' => $request->subTitle,
@@ -137,6 +134,7 @@ class BannerController extends Controller
 
         return redirect()->route('settings_banner.edit', $id)->with('success', 'Sửa thành công');
     }
+
 
     // Xóa banner
     public function destroy($id)

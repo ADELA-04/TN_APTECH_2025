@@ -16,17 +16,25 @@ use App\Models\OrderDetail;
 class OrderController extends Controller
 {
     //hiển thị bên trang admin
- public function index2(Request $request)
+public function index2(Request $request)
 {
     // Lấy từ khóa tìm kiếm từ request
     $searchTerm = $request->input('name');
+    $orderStatus = $request->input('order_status'); // Lấy trạng thái đơn hàng
 
     // Lấy tất cả đơn hàng cùng với thông tin khách hàng
     $query = Order::with(['customer', 'orderDetails.product']);
 
     // Nếu có từ khóa tìm kiếm, thêm điều kiện vào truy vấn
     if ($searchTerm) {
-        $query->where('OrderID', 'like', "%{$searchTerm}%");
+        $query->whereHas('customer', function($q) use ($searchTerm) {
+            $q->where('Phone', 'like', "%{$searchTerm}%");
+        });
+    }
+
+    // Nếu có trạng thái đơn hàng, thêm điều kiện vào truy vấn
+    if ($orderStatus) {
+        $query->where('OrderStatus', $orderStatus);
     }
 
     // Sắp xếp theo ngày tạo mới nhất
@@ -39,7 +47,7 @@ class OrderController extends Controller
     }
 
     // Kiểm tra nếu không tìm thấy đơn hàng nào
-    $notFound = $orders->isEmpty() && $searchTerm ? true : false;
+    $notFound = $orders->isEmpty() && ($searchTerm || $orderStatus);
 
     return view('managers.order.order_List', compact('orders', 'notFound'));
 }
@@ -60,6 +68,22 @@ class OrderController extends Controller
 
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Trạng thái đơn hàng đã được cập nhật thành công!');
+    }
+    public function updateStatus2(Request $request, $id)
+    {
+        // Xác thực dữ liệu
+         $order = Order::findOrFail($id);
+
+    // Kiểm tra trạng thái hiện tại
+    if ($order->OrderStatus === 'Chờ xác nhận') {
+        // Cập nhật trạng thái thành "Hủy"
+        $order->OrderStatus = $request->input('OrderStatus');
+        $order->save();
+
+        return redirect()->back()->with('success', 'Đơn hàng đã được hủy thành công!');
+    } else {
+        return redirect()->back()->with('error', 'Không thể hủy đơn hàng này.');
+    }
     }
 
     // Cập nhật mã vận đơn
@@ -85,33 +109,39 @@ class OrderController extends Controller
 
     //danh sách đơn hàng
     public function index()
-    {
-        $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
-        $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
-        $allProduct = Product::all();
-        $settings = Setting::all();
-        $banners = Banner::all();
-        $currentUrl = url()->current();
-        $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
-        $categories = Category::with('children')->whereNull('parent_id')->get();
-        $user = Auth::guard('customer')->user();
-        // Lấy danh sách đơn hàng
-        $orders = Order::with('orderDetails.product')->orderBy('created_at', 'desc')->get();
-        return view('products.management_order', compact(
+{
+    $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
+    $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
+    $allProduct = Product::all();
+    $settings = Setting::all();
+    $banners = Banner::all();
+    $currentUrl = url()->current();
+    $topViewedProducts = Product::orderBy('View', 'desc')->take(6)->get();
+    $categories = Category::with('children')->whereNull('parent_id')->get();
+    $user = Auth::guard('customer')->user();
 
-
-            'categories',
-            'settings',
-            'banners',
-            'allProduct',
-            'newProduct',
-            'blogs',
-            'topViewedProducts',
-            'currentUrl',
-            'user',
-            'orders',
-        ));
+    // Lấy danh sách đơn hàng của khách hàng đang đăng nhập
+    $orders = [];
+    if ($user) {
+        $orders = Order::with('orderDetails.product')
+                       ->where('CustomerID', $user->CustomerID) // Lọc theo CustomerID
+                       ->orderBy('created_at', 'desc')
+                        ->paginate(5);
     }
+
+    return view('products.management_order', compact(
+        'categories',
+        'settings',
+        'banners',
+        'allProduct',
+        'newProduct',
+        'blogs',
+        'topViewedProducts',
+        'currentUrl',
+        'user',
+        'orders',
+    ));
+}
     //chi tiết đơn hàng bên khách hàng
     public function index_detail($id)
     {

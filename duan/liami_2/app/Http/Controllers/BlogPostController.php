@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BlogPost;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -103,7 +102,7 @@ class BlogPostController extends Controller
     public function update(Request $request, $PostID)
     {
         try {
-            // Validate the request data
+
             $request->validate([
                 'Title' => 'required|max:65500',
                 'Summary' => 'required|max:65500',
@@ -121,26 +120,26 @@ class BlogPostController extends Controller
                 'ImageURL.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
             ]);
 
-            $blog = BlogPost::findOrFail($PostID); // Find the blog post
+            $blog = BlogPost::findOrFail($PostID);
 
-            // Handle image upload
+
             if ($request->hasFile('ImageURL')) {
                 $file = $request->file('ImageURL');
 
                 if ($file->isValid()) {
                     $originalName = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path('assets/images3'), $originalName);
-                    $blog->ImageURL = 'assets/images3/' . $originalName; // Update the image URL
+                    $blog->ImageURL = 'assets/images3/' . $originalName;
                 }
             }
 
-            // Update blog post fields
+
             $blog->Title = $request->Title;
             $blog->Summary = $request->Summary;
             $blog->Content = $request->Content;
 
 
-            $blog->save(); // Save changes
+            $blog->save();
 
             return redirect()->route('managers.m_blog.edit_blog',$PostID)->with('success', 'Sửa thành công!');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -148,6 +147,7 @@ class BlogPostController extends Controller
             return redirect()->route('managers.m_blog.edit_blog',$PostID)->withErrors($e->validator)->withInput();
         }
     }
+
     public function destroy($PostID)
     {
         $blog = BlogPost::find($PostID);

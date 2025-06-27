@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -10,17 +9,18 @@ class AuthController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('managers.m_user.sign_up'); // Ensure this points to your registration view
+        return view('managers.m_user.sign_up');
     }
 
  public function register(Request $request)
 {
     // Xác thực yêu cầu
     $request->validate([
-        'FullName' => 'required|string|max:255',
+        'FullName' => 'required|string|max:20',
         'Email' => 'required|string|email|max:255|unique:customers',
         'Password' => 'required|string|min:8|confirmed', // Đảm bảo có trường xác nhận
     ], [
+        'FullName.max' => 'Họ và tên không vượt quá 20 kí tự.',
         'FullName.required' => 'Họ và tên là bắt buộc.',
         'Email.required' => 'Địa chỉ email là bắt buộc.',
         'Email.email' => 'Địa chỉ email không hợp lệ.',

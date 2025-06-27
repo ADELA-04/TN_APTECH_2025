@@ -162,9 +162,11 @@
                                         <option value="Đang giao hàng"
                                             {{ $order->OrderStatus == 'Đang giao hàng' ? 'selected' : '' }}>Đang giao hàng
                                         </option>
-                                        <option value="Giao thành công"
-                                            {{ $order->OrderStatus == 'Giao thành công' ? 'selected' : '' }}>Giao thành
+                                        <option value="Giao hàng thành công"
+                                            {{ $order->OrderStatus == 'Giao hàng thành công' ? 'selected' : '' }}>Giao hàng thành
                                             công</option>
+                                             <option value="Giao hàng thất bại"
+                                            {{ $order->OrderStatus == 'Giao hàng thất bại' ? 'selected' : '' }}>Giao hàng thất bại</option>
                                         <option value="Hoàn trả"
                                             {{ $order->OrderStatus == 'Hoàn trả' ? 'selected' : '' }}>Hoàn trả</option>
                                             <option value="Đã hết hàng"

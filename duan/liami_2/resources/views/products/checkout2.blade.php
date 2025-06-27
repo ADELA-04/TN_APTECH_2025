@@ -76,11 +76,10 @@
                                         <div class="col-md-12 col-sm-12 col-lg-12">
 
                                             <div class="field-box v2  position-relative w-100">
-                                                <label>Ghi chú cho cửa hàng*</label>
+                                                <label>Ghi chú cho cửa hàng</label>
                                                 <textarea name="notes" placeholder="Nhập ghi cho cho cửa hàng..."></textarea>
                                             </div>
                                         </div>
-
 
                                         <div class="col-md-12 col-sm-12 col-lg-12">
                                             <div class="field-box v2 position-relative w-100">

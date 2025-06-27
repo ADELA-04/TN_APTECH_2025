@@ -2,34 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
 use App\Models\Customer;
-use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
     // Hiển thị danh sách khách hàng
-    public function index(Request $request)
-    {
-        $query = Customer::withCount('orders')
-            ->with(['orders' => function ($query) {
-                $query->select('OrderID', 'CustomerID', 'Phone');
-            }])
-            ->orderBy('created_at', 'desc');
+public function index(Request $request)
+{
+    $query = Customer::withCount(['orders as successful_orders' => function ($q) {
+        $q->where('OrderStatus', 'Giao hàng thành công');
+    }, 'orders as canceled_orders' => function ($q) {
+        $q->where('OrderStatus', 'Hủy');
+    }])
+    ->orderBy('successful_orders', 'desc'); // Sắp xếp theo số đơn hàng thành công
 
-        // Kiểm tra xem có tìm kiếm không
-        if ($request->filled('customer_id')) {
-            $query->where('CustomerID', $request->input('customer_id'));
-        }
-
-        $customers = $query->paginate(10);
-
-        return view('managers.m_customer.managerCustomer', compact('customers'));
+    // Kiểm tra xem có tìm kiếm mã khách hàng không
+    if ($request->filled('customer_id')) {
+        $query->where('CustomerID', $request->input('customer_id'));
     }
+
+    // Kiểm tra xem có lọc theo trạng thái đơn hàng không
+    if ($request->filled('order_status')) {
+        $query->whereHas('orders', function ($q) use ($request) {
+            $q->where('OrderStatus', $request->input('order_status'));
+        });
+    }
+
+    $customers = $query->paginate(10);
+
+    return view('managers.m_customer.managerCustomer', compact('customers'));
+}
 
     public function destroy($CustomerID)
     {

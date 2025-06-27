@@ -85,9 +85,34 @@
                                 Mua hàng<span></span><span></span><span></span><span></span>
                             </button>
                         </div>
+
                     </form>
                 </div><!-- Cart Wrap -->
+                <div class="text-center mt-50">
+    <div class="">
+        @if ($cartItems->onFirstPage())
+            <span class="page-numbers disabled border border-secondary p-2"><i class="icon fa fa-angle-left" aria-hidden="true"></i></span>
+        @else
+            <a href="{{ $cartItems->previousPageUrl() }}" class="page-numbers border border-secondary p-2"><i class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+        @endif
+
+        @foreach ($cartItems->getUrlRange(1, $cartItems->lastPage()) as $page => $url)
+            @if ($page == $cartItems->currentPage())
+                <span class="page-numbers current border border-secondary bg-color4 text-color5 p-2">{{ $page }}</span>
+            @else
+                <a href="{{ $url }}" class="border border-secondary p-2 page-numbers">{{ $page }}</a>
+            @endif
+        @endforeach
+
+        @if ($cartItems->hasMorePages())
+            <a href="{{ $cartItems->nextPageUrl() }}" class="page-numbers"><i class="border border-secondary p-2 icon fa fa-angle-right" aria-hidden="true"></i></a>
+        @else
+            <span class="border border-secondary p-2 page-numbers disabled"><i class="icon fa fa-angle-right"></i></span>
+        @endif
+    </div>
+</div>
             </div>
+
         </div>
     </section>
 @endsection
@@ -104,19 +129,21 @@
     <script src="{{ asset('assets/js/slick.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom-scripts.js') }}"></script>
     <script>
-        //xóa bằng js
+        //khởi tạo hàm xóa
             function removeFromCart(cartItemId) {
+                // gọi api để xóa, thực hin yc DELETE tới url
             fetch(`/cart/remove/${cartItemId}`, {
                 method: 'DELETE',
                 headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',// thêm token csrf
+                    'Content-Type': 'application/json' // loại nội dung của yêu cầu
                 }
             });
-            location.reload();
+            location.reload();// tải lại trang sau khi xóa
         }
         // lấy id cartiterm được check và đẩy sang form thanh toán
         $(document).ready(function() {
+            //định nghĩa hàm tính toán và lưu ttin tính toán vào mảng
             function calculateSelectedTotals() {
                 let selectedProducts = [];
 

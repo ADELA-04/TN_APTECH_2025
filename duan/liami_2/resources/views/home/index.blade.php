@@ -48,7 +48,8 @@
                             </picture>
                             <div class="slider-cap v2 text-center text-white position-absolute">
                                 <h1 class="mb-0 animated fadeInUp">{{ $banner->Title }}<br> </h1>
-                                <p class="mb-0 animated fadeInUp" style="font-family: 'Roboto';">{{ $banner->subTitle }}<br></p>
+                                <p class="mb-0 animated fadeInUp" style="font-family: 'Roboto';">
+                                    {{ $banner->subTitle }}<br></p>
                                 <div
                                     class="btns-group d-flex flex-wrap justify-content-center align-items-center animated fadeInUp">
                                     <a class="theme-btn bg-color1" href="{{ $banner->Link }}" title="">Xem
@@ -107,7 +108,7 @@
                             style="font-family: 'Roboto';">Sản phẩm </span>yêu thích </h2>
                 </div><!-- Section Title -->
                 <div class="products-wrap res-row position-relative w-100">
-                    <div class="row mrg30" >
+                    <div class="row mrg30">
                         @foreach ($topViewedProducts as $topViewedProduct)
                             <div class="col-md-4 col-sm-6 col-lg-2">
                                 <div class="product-box position-relative w-100">
@@ -116,6 +117,19 @@
                                             href="{{ route('product.detail', $topViewedProduct->ProductID) }}"
                                             title=""><img class="img-fluid w-100"
                                                 src="{{ asset($topViewedProduct->Image) }}" alt="Product Image 7"></a>
+                                        @if ($topViewedProduct->Price > $topViewedProduct->SalePrice)
+                                            @php
+                                                $discountPercentage = round(
+                                                    (($topViewedProduct->Price - $topViewedProduct->SalePrice) /
+                                                        $topViewedProduct->Price) *
+                                                        100,
+                                                );
+                                            @endphp
+                                            <div class="discount-badge"
+                                                style="position: absolute; top: 10px; right: 10px; background-color: #e76458; color: white; padding: 5px; border-radius: 5px;">
+                                                -{{ $discountPercentage }}%
+                                            </div>
+                                        @endif
 
                                     </div>
                                     <div class="product-info w-100">
@@ -124,17 +138,20 @@
                                                 title="">{{ $topViewedProduct->ProductName }}</a></h4>
                                         <div style="display: flex; justify-content: center;margin-top:10px">
                                             <div style="margin-right: 10px"><span class="price"
-                                                    style="text-decoration: line-through; font-size: 14px;">  {{ number_format($topViewedProduct->Price, 0, ',', '.') }}
+                                                    style="text-decoration: line-through; font-size: 14px;">
+                                                    {{ number_format($topViewedProduct->Price, 0, ',', '.') }}
                                                     VND</span></div>
                                             <div><span class="price"
-                                                    style="color: #ff0003;font-weight:bold; font-size: 14px;">  {{ number_format($topViewedProduct->SalePrice, 0, ',', '.') }}
+                                                    style="color: #ff0003;font-weight:bold; font-size: 14px;">
+                                                    {{ number_format($topViewedProduct->SalePrice, 0, ',', '.') }}
                                                     VND</span></div>
                                         </div>
                                         <div style="text-align: center;" class="mt-20">
                                             <a class=""
                                                 href="{{ route('product.detail', $topViewedProduct->ProductID) }}"
                                                 title="">
-                                                <button class="theme-btn bg-color1" style="padding: 8px; margin-bottom: 5px;" type="submit">Xem
+                                                <button class="theme-btn bg-color1"
+                                                    style="padding: 8px; margin-bottom: 5px;" type="submit">Xem
                                                     ngay<span></span><span></span><span></span><span></span></button>
                                             </a>
                                         </div>
@@ -203,9 +220,23 @@
                                         <a href="{{ route('product.detail', $newproduct->ProductID) }}"
                                             title=""><img class="img-fluid w-100"
                                                 src="{{ asset($newproduct->Image) }}" alt="Product Image 7"></a>
+                                                 @if ($newproduct->Price > $newproduct->SalePrice)
+                                            @php
+                                                $discountPercentage = round(
+                                                    (($newproduct->Price - $newproduct->SalePrice) /
+                                                        $newproduct->Price) *
+                                                        100,
+                                                );
+                                            @endphp
+                                            <div class="discount-badge"
+                                                style="position: absolute; top: 10px; right: 10px; background-color: #e76458; color: white; padding: 5px; border-radius: 5px;">
+                                                -{{ $discountPercentage }}%
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="product-info w-100">
-                                        <h4 class="mb-0"><a href="{{ route('product.detail', $newproduct->ProductID) }}"
+                                        <h4 class="mb-0"><a
+                                                href="{{ route('product.detail', $newproduct->ProductID) }}"
                                                 title="">{{ $newproduct->ProductName }}</a></h4>
                                         <div style="display: flex; justify-content: center;margin-top:10px">
                                             <div style="margin-right: 10px"><span class="price"
@@ -219,7 +250,8 @@
                                             <a class=""
                                                 href="{{ route('product.detail', $newproduct->ProductID) }}"
                                                 title="">
-                                                <button class="theme-btn bg-color1" style="padding: 8px; margin-bottom: 5px;" type="submit">Xem
+                                                <button class="theme-btn bg-color1"
+                                                    style="padding: 8px; margin-bottom: 5px;" type="submit">Xem
                                                     ngay<span></span><span></span><span></span><span></span></button>
                                             </a>
                                         </div>
