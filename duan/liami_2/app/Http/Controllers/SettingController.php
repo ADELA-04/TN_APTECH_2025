@@ -19,8 +19,6 @@ public function update(Request $request)
 {
     // Xác thực dữ liệu nhập vào
     $validatedData = $request->validate([
-        'Logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-        'Favicon' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         'NavigationLink' => 'nullable|string',
         'LinkFB' => 'nullable|url',
         'LinkIN' => 'nullable|url',
@@ -36,29 +34,6 @@ public function update(Request $request)
     // Lấy cài đặt hiện tại
     $setting = Setting::first();
 
-    // Cập nhật Logo
-    if ($request->hasFile('Logo')) {
-        $logoFile = $request->file('Logo');
-        if ($logoFile->isValid()) {
-            $originalName = time() . '_' . $logoFile->getClientOriginalName();
-            $logoFile->move(public_path('assets/images3'), $originalName);
-            $validatedData['Logo'] = 'assets/images3/' . $originalName;
-        }
-    } else {
-        $validatedData['Logo'] = $setting->Logo; // Giữ nguyên nếu không có tệp mới
-    }
-
-    // Cập nhật Favicon
-    if ($request->hasFile('Favicon')) {
-        $file = $request->file('Favicon');
-        if ($file->isValid()) {
-            $originalName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('assets/images3'), $originalName);
-            $validatedData['Favicon'] = 'assets/images3/' . $originalName;
-        }
-    } else {
-        $validatedData['Favicon'] = $setting->Favicon; // Giữ nguyên nếu không có tệp mới
-    }
 
     // Cập nhật các trường còn lại
     $setting->fill($validatedData); // Cập nhật tất cả các trường từ validatedData

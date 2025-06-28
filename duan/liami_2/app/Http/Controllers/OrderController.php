@@ -207,7 +207,13 @@ public function index2(Request $request)
         } else {
             return redirect()->back()->with('error', 'Không có sản phẩm nào để thanh toán.');
         }
+$latestOrder = Order::where('CustomerID', $user->CustomerID)
+                        ->where('OrderStatus', 'Giao hàng thành công')
+                        ->orderBy('created_at', 'desc')
+                        ->first();
 
+    $address = $latestOrder ? $latestOrder->Address : '';
+    $phone = $latestOrder ? $latestOrder->Phone : '';
         return view('products.checkout', compact(
             'selectedProducts',
             'cartItems',
@@ -222,7 +228,9 @@ public function index2(Request $request)
             'totalAmount',
             'shippingFee',
             'finalAmount',
-            'user'
+            'user',
+             'address',
+        'phone'
         ));
     }
 
@@ -291,7 +299,14 @@ public function checkout2(Request $request)
     if ($quantity < 1) {
         return redirect()->back()->withErrors(['quantity' => 'Số lượng phải lớn hơn hoặc bằng 1.']);
     }
+ // Lấy địa chỉ và số điện thoại từ đơn hàng gần nhất có trạng thái "Giao hàng thành công"
+    $latestOrder = Order::where('CustomerID', $user->CustomerID)
+                        ->where('OrderStatus', 'Giao hàng thành công')
+                        ->orderBy('created_at', 'desc')
+                        ->first();
 
+    $address = $latestOrder ? $latestOrder->Address : '';
+    $phone = $latestOrder ? $latestOrder->Phone : '';
     // Lấy thông tin từ các mô hình
     $blogs = BlogPost::orderBy('created_at', 'desc')->paginate(3);
     $newProduct = Product::orderBy('created_at', 'desc')->paginate(8);
@@ -312,7 +327,9 @@ public function checkout2(Request $request)
         'blogs',
         'topViewedProducts',
         'currentUrl',
-        'user'
+        'user',
+         'address',
+        'phone'
     ));
 }
     //thực hiện lưu vào csdl

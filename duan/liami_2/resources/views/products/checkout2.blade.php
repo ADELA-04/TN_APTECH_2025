@@ -38,7 +38,8 @@
 
                                 <form action="{{ route('checkout2.store') }}" method="POST">
                                     @csrf <input type="hidden" name="total_amount" value="">
-                                    <input type="hidden" name="product_price" value="{{ request()->input('product_price') }}">
+                                    <input type="hidden" name="product_price"
+                                        value="{{ request()->input('product_price') }}">
                                     <input type="hidden" name="total_amount"
                                         value="{{ request()->input('product_price') * request()->input('quantity') + 40000 }}">
                                     <input type="hidden" name="product_id" value="{{ request()->input('product_id') }}">
@@ -59,15 +60,14 @@
                                         <div class="col-md-12 col-sm-12 col-lg-12">
                                             <div class="field-box v2 position-relative w-100">
                                                 <label>Địa chỉ nhận hàng *</label>
-                                                <input required name="address" type="text" value="{{ $user->Address }}">
-
+                                                <input required name="address" type="text" value="{{ $address }}">
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-sm-12 col-lg-12">
                                             <div class="field-box v2 position-relative w-100">
                                                 <label>Số điện thoại *</label>
                                                 <input placeholder="Số điện thoại phải là số và không quá 10 số" required
-                                                    name="phone" type="text" value="{{ $user->Phone }}"
+                                                    name="phone" type="text" value="{{ $phone }}"
                                                     pattern="^[0-9]{10}$" maxlength="10"
                                                     title="Số điện thoại phải là 10 chữ số"
                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '');">

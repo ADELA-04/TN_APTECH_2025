@@ -54,51 +54,13 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT') <!-- Dòng này là cần thiết -->
-
                                     <div class="wg-box">
-                                        <fieldset class="name">
-
-                                            <div class="body-title mb-10">Logo đại diện</div>
-                                            <div class="upload-image style-2">
-                                                <div class="item up-load">
-                                                    <label class="uploadfile" for="logoFile">
-                                                        <span class="icon"><i class="icon-upload-cloud"></i></span>
-                                                        <span class="text-tiny">Drop your images here or select <span
-                                                                class="tf-color">click to browse</span></span>
-                                                        <input type="file" id="logoFile" name="Logo" accept="image/*"
-                                                            style="display: none;">
-                                                    </label>
-                                                </div>
-                                                <div class="item">
-                                                    <img id="previewImage" src="{{ asset($setting->Logo) }}"
-                                                        style="max-width: 100%; height: auto;">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="mb-24">
-                                            <div class="body-title mb-10">Favicon</div>
-                                            <div class="upload-image style-2">
-                                                <div class="item up-load">
-                                                    <label class="uploadfile" for="faviconFile">
-                                                        <span class="icon"><i class="icon-upload-cloud"></i></span>
-                                                        <span class="text-tiny">Drop your images here or select <span
-                                                                class="tf-color">click to browse</span></span>
-                                                        <input type="file" id="faviconFile" name="Favicon"
-                                                            accept="image/*" style="display: none;">
-                                                    </label>
-                                                </div>
-                                                <div class="item">
-                                                    <img id="previewImage2" src="{{ asset($setting->Favicon) }}">
-                                                </div>
-                                            </div>
-                                        </fieldset>
 
                                         <fieldset class="title mb-24">
                                             <div class="body-title mb-10">Liên kết điều hướng</div>
-                                            <input class="flex-grow" type="text" placeholder="Nhập liên kết điều hướng..."
-                                                name="NavigationLink" tabindex="0"
-                                                value="{{ $setting->NavigationLink }}">
+                                            <input class="flex-grow" type="text"
+                                                placeholder="Nhập liên kết điều hướng..." name="NavigationLink"
+                                                tabindex="0" value="{{ $setting->NavigationLink }}">
                                         </fieldset>
                                         <fieldset class="title mb-24">
                                             <div class="body-title mb-10">Liên kết facebook</div>
@@ -170,41 +132,5 @@
     <script src="{{ asset('assets/js2/theme-settings.js') }}"></script>
     <script src="{{ asset('assets/js2/main.js') }}"></script>
     <script src="{{ asset('assets/js2/custom.js') }}"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoInput = document.getElementById('logoFile');
-            const logoPreview = document.getElementById('previewImage');
 
-            const faviconInput = document.getElementById('faviconFile');
-            const faviconPreview = document.getElementById('previewImage2');
-
-            logoInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                const reader = new FileReader();
-
-                reader.onload = function() {
-                    logoPreview.src = reader.result;
-                    logoPreview.style.display = 'block'; // Hiển thị ảnh
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file); // Đọc ảnh
-                }
-            });
-
-            faviconInput.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                const reader = new FileReader();
-
-                reader.onload = function() {
-                    faviconPreview.src = reader.result;
-                    faviconPreview.style.display = 'block'; // Hiển thị ảnh
-                }
-
-                if (file) {
-                    reader.readAsDataURL(file); // Đọc ảnh
-                }
-            });
-        });
-    </script>
 @endsection

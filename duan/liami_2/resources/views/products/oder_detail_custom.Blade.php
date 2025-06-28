@@ -127,6 +127,14 @@
                                 <td><span class="price">{{ $order->created_at }}</span></td>
                             </tr>
                             <tr>
+                                <td style="font-family: 'Roboto';">Địa chỉ nhận hàng</td>
+                                <td><span class="price">{{ $order->Address }}</span></td>
+                            </tr>
+                            <tr>
+                                <td style="font-family: 'Roboto';">Số điện thoại nhận hàng</td>
+                                <td><span class="price">{{ $order->Phone }}</span></td>
+                            </tr>
+                            <tr>
                                 <td style="font-family: 'Roboto';">Ghi chú</td>
                                 <td><span class="price" style="font-family: 'Roboto';">{{ $order->Notes }}</span></td>
                             </tr>
